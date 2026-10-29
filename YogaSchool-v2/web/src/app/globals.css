@@ -428,7 +428,6 @@ button {
   border-color: rgba(255, 255, 255, 0.45);
   color: var(--c-white);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 .btn--glass:hover {
   background: var(--c-white);
@@ -533,76 +532,16 @@ button {
   background: linear-gradient(90deg, var(--c-secondary), var(--c-accent));
 }
 
-/* Top band (as on the old site): tagline left, FAQs and New Student Offer right. It scrolls away with the page. */
-:root {
-  --topbar-h: 40px;
-}
-.topbar {
-  height: var(--topbar-h);
-  background: var(--c-primary);
-  color: var(--c-white);
-}
-.topbar__inner {
-  max-width: calc(1440px + var(--gutter) * 2);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-2);
-}
-.topbar__tagline {
-  margin: 0;
-  font-family: var(--f-brand);
-  font-size: 1.0625rem;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--c-secondary-300);
-}
-.topbar__links {
-  display: flex;
-  gap: 8px;
-}
-.topbar__links a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 14px;
-  border: 1.5px solid var(--c-accent);
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  color: var(--c-accent);
-  text-decoration: none;
-  transition:
-    background-color var(--t),
-    color var(--t);
-}
-.topbar__links a:hover,
-.topbar__links a[aria-current="page"] {
-  background: var(--c-accent);
-  color: var(--c-primary);
-}
-@media (max-width: 599px) {
-  .topbar__tagline {
-    display: none;
-  }
-  .topbar__inner {
-    justify-content: center;
-  }
-}
-
-/* --topbar-shift: how much of the top band is still on screen (set while scrolling; the full band before that) */
 .site-header {
   position: fixed;
   inset: 12px 0 auto;
-  top: calc(12px + var(--topbar-shift, var(--topbar-h)));
   z-index: 200;
   pointer-events: none;
   transition: transform 0.45s var(--ease-out);
 }
 @media (min-width: 768px) {
   .site-header {
-    top: calc(16px + var(--topbar-shift, var(--topbar-h)));
+    top: 16px;
   }
 }
 /* The bar may run wider than the page content so the full menu fits */
@@ -621,7 +560,6 @@ button {
   background: rgba(7, 26, 56, 0.28);
   border: 1px solid rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
   transition:
     background-color var(--t) var(--ease),
     box-shadow var(--t),
@@ -863,7 +801,6 @@ button {
   inset: 0;
   background: rgba(7, 26, 56, 0.55);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   opacity: 0;
   transition: opacity 0.45s var(--ease);
 }
@@ -1427,7 +1364,6 @@ body.is-locked {
   background: var(--glass-dark);
   border: 1px solid rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   animation: fadeUp 1s 0.6s var(--ease-out) both;
 }
 .hero__offer {
@@ -2484,7 +2420,6 @@ button:hover .play {
   border-radius: var(--radius-pill);
   background: var(--glass);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: var(--c-heading);
   font-size: var(--fs-xs);
   font-weight: 700;
@@ -4018,7 +3953,6 @@ details[open] > summary .plus::after {
   height: 44px;
   background: var(--glass);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: var(--c-heading);
   opacity: 0;
   pointer-events: none;
@@ -4069,7 +4003,6 @@ details[open] > summary .plus::after {
 .sheet::backdrop {
   background: rgba(7, 26, 56, 0.6);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 @keyframes sheetIn {
   from {
@@ -4106,7 +4039,6 @@ details[open] > summary .plus::after {
   border: 0;
   background: var(--glass);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: var(--c-heading);
   display: grid;
   place-items: center;
@@ -4477,7 +4409,6 @@ details[open] > summary .plus::after {
 .offer::backdrop {
   background: rgba(7, 26, 56, 0.6);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 /* The dialog takes focus on opening (OfferPopup.tsx); it isn't a control, so no ring */
 .offer:focus-visible {
@@ -4492,7 +4423,6 @@ details[open] > summary .plus::after {
   z-index: 1;
   background: rgba(14, 50, 103, 0.06);
   backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   box-shadow: none;
   color: var(--c-primary);
   transition:
@@ -4592,6 +4522,7 @@ details[open] > summary .plus::after {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
@@ -4861,7 +4792,6 @@ body::after {
   box-shadow: none;
   color: var(--c-white);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 @media (min-width: 768px) {
   .page-hero .arch__badge {
@@ -6799,7 +6729,6 @@ body:not(.no-js) .reveal:not(.is-visible) .home-eyebrow::before {
   background: var(--glass-dark);
   border: 1px solid rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 .home-hero::before {
   content: "";
@@ -6813,7 +6742,7 @@ body:not(.no-js) .reveal:not(.is-visible) .home-eyebrow::before {
   .home-hero {
     align-items: center;
     /* Most of the window below the top band and header, leaving the next section peeking in (capped on tall screens) */
-    min-height: clamp(560px, calc(100svh - var(--topbar-h) - var(--nav-h) - 140px), 720px);
+    min-height: clamp(560px, calc(100svh - var(--nav-h) - 140px), 720px);
     margin-top: calc(var(--nav-h) + 32px);
     padding: var(--s-8) 0 120px;
   }
@@ -6823,19 +6752,35 @@ body:not(.no-js) .reveal:not(.is-visible) .home-eyebrow::before {
     right: max(var(--gutter), calc((100% - var(--max-w)) / 2));
   }
   .home-hero::before {
-    background: linear-gradient(90deg, #000 33%, #07122400 54%, #07122400 1%);
+    background: linear-gradient(90deg, #000000bf 40%, #07122400 51% 25%);
   }
 }
-/* Fixed banner height on every screen (set from the first paint, not only once "is-ready", so nothing below jumps) */
+/* Phones: the banner fills the screen below the header, the photo clear at the top and the heading, line, text and
+   buttons stacked at the bottom, with the slide controls under them. The top padding keeps that much photo on short
+   phones too, where the banner grows instead; the bottom padding is the controls' row */
 section.home-hero.on-dark {
-  height: 550px !important;
-  min-height: 550px;
-  padding-top: 60px;
+  height: auto;
+  min-height: max(620px, calc(100svh - var(--nav-h) - 24px));
+  padding-top: 160px;
+  padding-bottom: 90px;
 }
-/* Tablets and up: more room above the text, less below it. Tablets shift it less, as there the buttons sit above the
-   slide controls and must stay clear of them */
+@media (max-width: 767px) {
+  /* Left-aligned with the text and kept clear of the WhatsApp button in the corner */
+  .home-hero__controls {
+    top: auto;
+    right: auto;
+    bottom: 18px;
+    left: var(--gutter);
+    width: min(280px, calc(100% - var(--gutter) * 2 - 76px));
+  }
+}
+/* Tablets and up: a fixed banner height (set from the first paint, not only once "is-ready", so nothing below jumps),
+   more room above the text, less below it. Tablets shift it less, as there the buttons sit above the slide controls and
+   must stay clear of them */
 @media (min-width: 768px) {
   section.home-hero.on-dark {
+    height: 550px !important;
+    min-height: 550px;
     padding-top: 96px;
     padding-bottom: 84px;
   }
@@ -7069,7 +7014,6 @@ section.home-hero.on-dark {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 @media (min-width: 640px) {
   .why__item {
@@ -7612,8 +7556,8 @@ body:not(.no-js) .reveal:not(.is-visible) .eyebrow::before {
     box-shadow: var(--shadow);
   }
 }
-/* …while they play in on the inner pages (Motion.tsx data-cm="in"), they also keep the entrance timing, which the rule
-   above would otherwise replace (it comes later than [data-cm="in"]), so they fade and rise instead of popping in */
+/* …while they play in on the inner pages (Motion.tsx data-cm="in", whose entrance timing :root [data-cm="in"] already
+   keeps), they keep these hover transitions too, so a hover during the entrance lifts smoothly instead of snapping */
 :is(.info-card, .event, .vcard, .tile, .pass-card, .partner, .faq)[data-cm="in"] {
   transition:
     opacity 0.7s var(--ease-out) var(--cm-d),
@@ -7622,6 +7566,10 @@ body:not(.no-js) .reveal:not(.is-visible) .eyebrow::before {
     transform var(--t) var(--ease),
     box-shadow var(--t) var(--ease),
     border-color var(--t) var(--ease);
+}
+/* Once settled, a card's reveal stagger (.reveal[data-delay]) no longer holds back its hover lift */
+.reveal[data-delay][data-cm="shown"] {
+  transition-delay: 0s;
 }
 
 /* =====================================================================
@@ -8396,8 +8344,9 @@ body:has(.home-hero) .site-header.is-scrolled .island {
   .home-hero__text.is-swap .home-hero__tagline {
     animation: homeUp 0.7s 0.18s var(--ease-out) both;
   }
+  /* The sub line only fades: rising from below, it would pass behind the buttons that sit just under it */
   .home-hero__text.is-swap .home-hero__sub {
-    animation: homeUp 0.7s 0.28s var(--ease-out) both;
+    animation: homeFade 0.7s 0.28s var(--ease-out) both;
   }
   .home-hero__text.is-swap .home-hero__tagline::after {
     animation: homeRule 0.6s 0.32s var(--ease-out) both;
@@ -9469,6 +9418,20 @@ body:has(#book) .info-card .feature__icon svg {
 .home-why .om-corner {
   background: var(--c-accent);
 }
+/* Until the page content sits well in from the left edge, a left corner mark lands right above the section label's
+   own Om and reads as a second one, so it takes the right corner like the other sections */
+@media (max-width: 1365px) {
+  .om-corner--left {
+    left: auto;
+    right: var(--gutter);
+  }
+}
+/* Phones: every section label already carries the Om, so the corner mark is left out (one Om per section) */
+@media (max-width: 767px) {
+  .om-corner {
+    display: none;
+  }
+}
 @media (min-width: 1024px) {
   .om-corner {
     top: 24px;
@@ -9676,7 +9639,6 @@ body:has(#book) .info-card .feature__icon svg {
 .mp--b .mp__card {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.05);
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 .mp--b .mp__icon {

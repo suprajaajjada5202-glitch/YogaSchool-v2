@@ -27,6 +27,7 @@ const I = {
   gift: "M4 8h16v12H4zM12 8v12M4 12h16M12 8S10.5 3 8 3.8C5.8 4.5 7 8 12 8zm0 0s1.5-5 4-4.2C18.2 4.5 17 8 12 8z",
   ticket: "M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM14 7v10",
   video: "M4 6h12v12H4zM16 10l4-2v8l-4-2",
+  offer: "M12 3l2.6 5.6 6.1.7-4.5 4.1 1.2 6L12 16.8l-5.4 2.6 1.2-6-4.5-4.1 6.1-.7z",
 };
 export const MOMENCE_VIDEOS = "https://momence.com/video/plugin/23652";
 /** Membership Terms & Conditions (2026 V2 PDF, applies to all three memberships), as linked from the live site's
@@ -70,9 +71,10 @@ export const NAV: NavEntry[] = [
   N("/pages/contact-us", "Contact", "Visit or call us", I.contact),
 ];
 
-/** Always in "More": pages the old menu didn't list */
+/** Always in "More": pages the old menu didn't list, and the new student offer (Momence, in a new tab) */
 export const MORE: NavItem[] = [
   N("/pages/faqs", "FAQs", "Good to know", I.faqs),
+  N(OFFER_URL, "New Student Offer", "30 days unlimited for $99", I.offer),
   N("/workplace-wellbeing", "Workplace", "Team wellbeing", I.workplace),
   N("/gift-vouchers", "Gift vouchers", "Give the gift of yoga", I.gift),
 ];

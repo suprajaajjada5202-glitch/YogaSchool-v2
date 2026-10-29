@@ -18,9 +18,6 @@ export function Header() {
   const current = HOME_PATHS.includes(pathname) ? "/pages/home" : pathname;
   const isCurrent = (href: string) => href === current;
 
-  // The bar sits below the top band until the band scrolls away (null until measured: CSS places it then)
-  const [shift, setShift] = useState<number | null>(null);
-  const topbar = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   // Once the page has moved: the bar can firm up (styled on the home page only)
@@ -103,7 +100,6 @@ export function Header() {
     const update = () => {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setShift(Math.max(0, (topbar.current?.offsetHeight ?? 0) - y));
       setProgress(max > 0 ? y / max : 0);
       setShowTop(y > window.innerHeight);
       setScrolled(y > 24);
@@ -158,8 +154,7 @@ export function Header() {
   }, [menuOpen]);
 
   const shown = fit ?? NAV.length;
-  // FAQs is left out here because the top band already links to it (the phone menu still lists it)
-  const moreItems = flatNav([...NAV.slice(shown), ...MORE.filter((m) => m.href !== "/pages/faqs")]);
+  const moreItems = flatNav([...NAV.slice(shown), ...MORE]);
   const moreActive = moreItems.some((m) => isCurrent(m.href));
   const navEntry = (n: NavEntry, i: number) => {
     const cls = i >= shown ? "is-overflow" : undefined;
@@ -219,26 +214,11 @@ export function Header() {
 
   return (
     <>
-      {/* The old site's top band: tagline, FAQs and the new student offer */}
-      <div className="topbar on-dark" ref={topbar}>
-        <div className="container topbar__inner">
-          <p className="topbar__tagline">Stretch your body, calm your mind</p>
-          <nav className="topbar__links" aria-label="Quick links">
-            <Link href="/pages/faqs" aria-current={isCurrent("/pages/faqs") ? "page" : undefined}>
-              FAQs
-            </Link>
-            <a href={OFFER_URL} target="_blank" rel="noopener">
-              New Student Offer<span className="sr-only"> (opens Momence in a new tab)</span>
-            </a>
-          </nav>
-        </div>
-      </div>
-
       <div className="progress" aria-hidden="true">
         <span style={{ transform: `scaleX(${progress})` }}></span>
       </div>
 
-      <header className={headerCls} style={shift === null ? undefined : ({ "--topbar-shift": `${shift}px` } as CSSProperties)}>
+      <header className={headerCls}>
         <div className="container">
           <div className={`island${compact ? " is-compact" : ""}`}>
             <Link className="brand" href="/pages/home" aria-label="The Yoga School, home">
