@@ -1,6 +1,7 @@
 /* Converted from the static page; interactive parts are React components. */
 import { MomenceWidget } from "@/components/MomenceWidget";
 import { Reveal } from "@/components/Reveal";
+import { ScheduleMotion } from "@/components/ScheduleMotion";
 import { Timetable } from "@/components/Timetable";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
@@ -73,7 +74,8 @@ export default async function TimetablePage() {
           <Timetable rows={timetable} />{" "}
           <Reveal className="schedule" id="book" tabIndex={0} role="region" aria-label="Live class timetable, scrollable">
             {" "}
-            <MomenceWidget />{" "}
+            <MomenceWidget />
+            <ScheduleMotion />{" "}
             <noscript>
               <p>The live timetable needs JavaScript. Please call 0412 499 700.</p>
             </noscript>{" "}
@@ -156,39 +158,6 @@ export default async function TimetablePage() {
             </Reveal>{" "}
           </div>{" "}
         </div>{" "}
-      </section>{" "}
-      <section className="section cta-band" aria-labelledby="cta-title">
-        {" "}
-        <div className="cta-band__rings" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>{" "}
-        <Reveal className="container">
-          {" "}
-          <p className="breath">Breathe in · Breathe out</p>{" "}
-          <h2 id="cta-title">
-            Start your <em>journey</em>
-          </h2>{" "}
-          <p>Yoga is for everyone. Beginners are always welcome. Just bring yourself and a towel.</p>{" "}
-          <div className="row-actions">
-            {" "}
-            <a
-              className="btn btn--primary"
-              href="https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989"
-              target="_blank"
-              rel="noopener"
-            >
-              Claim the New Student Offer{" "}
-              <svg aria-hidden="true">
-                <use href="#i-arrow" />
-              </svg>
-            </a>{" "}
-            <Link className="btn btn--outline" href="/pages/timetable">
-              See the timetable
-            </Link>{" "}
-          </div>{" "}
-        </Reveal>{" "}
       </section>{" "}
       <JsonLd data={seo("timetable").jsonLd} />
     </>

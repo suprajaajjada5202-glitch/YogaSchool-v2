@@ -3,6 +3,7 @@ import { ClassJump, ClassRows } from "@/components/ClassRows";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { Wave } from "@/components/Wave";
 import { seo } from "@/lib/seo";
 import { getClasses } from "@/lib/data";
 
@@ -130,9 +131,7 @@ export default async function ClassesPage() {
           <ClassRows classes={classes} />{" "}
         </div>{" "}
       </section>{" "}
-      <svg className="wave " viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true">
-        <path fill="currentColor" d="M0 48h1440V20c-120 18-240 28-360 20S840 6 720 6 480 30 360 34 120 22 0 12z" />
-      </svg>{" "}
+      <Wave />{" "}
       <section className="section section--tint" style={{ paddingTop: "var(--s-6)" }} aria-labelledby="prog-title">
         {" "}
         <div className="container split split--even">
@@ -154,39 +153,6 @@ export default async function ClassesPage() {
             </p>
           </Reveal>{" "}
         </div>{" "}
-      </section>{" "}
-      <section className="section cta-band" aria-labelledby="cta-title">
-        {" "}
-        <div className="cta-band__rings" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>{" "}
-        <Reveal className="container">
-          {" "}
-          <p className="breath">Breathe in · Breathe out</p>{" "}
-          <h2 id="cta-title">
-            Start your <em>journey</em>
-          </h2>{" "}
-          <p>Yoga is for everyone. Beginners are always welcome. Just bring yourself and a towel.</p>{" "}
-          <div className="row-actions">
-            {" "}
-            <a
-              className="btn btn--primary"
-              href="https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989"
-              target="_blank"
-              rel="noopener"
-            >
-              Claim the New Student Offer{" "}
-              <svg aria-hidden="true">
-                <use href="#i-arrow" />
-              </svg>
-            </a>{" "}
-            <Link className="btn btn--outline" href="/pages/timetable">
-              See the timetable
-            </Link>{" "}
-          </div>{" "}
-        </Reveal>{" "}
       </section>{" "}
       <JsonLd data={seo("classes").jsonLd} />
     </>

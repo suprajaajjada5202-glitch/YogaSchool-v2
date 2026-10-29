@@ -1,8 +1,10 @@
 /* Converted from the static page; interactive parts are React components. */
+import { BlogMotion } from "@/components/BlogMotion";
 import { PostGrid } from "@/components/PostGrid";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { SplitWords } from "@/components/SplitWords";
 import { seo } from "@/lib/seo";
 import { getPosts } from "@/lib/data";
 
@@ -11,7 +13,7 @@ export default async function BlogPage() {
   return (
     <>
       {" "}
-      <section className="page-hero">
+      <section className="page-hero blog-hero">
         {" "}
         <svg className="blob blob--a" viewBox="0 0 500 500" aria-hidden="true">
           <path
@@ -39,7 +41,10 @@ export default async function BlogPage() {
             </nav>{" "}
             <p className="eyebrow">From the blog</p>{" "}
             <h1>
-              Reflections on <em>practice</em>
+              <SplitWords text="Reflections on" />{" "}
+              <em>
+                <SplitWords text="practice" start={2} />
+              </em>
             </h1>{" "}
             <p className="lead">
               Thoughts on yoga, the body and the mind from Nicky Knoff, James Bryan and The Yoga School.
@@ -59,46 +64,14 @@ export default async function BlogPage() {
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" aria-label="Articles">
+      <section className="section blog-list" aria-label="Articles">
         {" "}
         <div className="container">
           {" "}
           <PostGrid posts={posts} feature />{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section cta-band" aria-labelledby="cta-title">
-        {" "}
-        <div className="cta-band__rings" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>{" "}
-        <Reveal className="container">
-          {" "}
-          <p className="breath">Breathe in · Breathe out</p>{" "}
-          <h2 id="cta-title">
-            Start your <em>journey</em>
-          </h2>{" "}
-          <p>Yoga is for everyone. Beginners are always welcome. Just bring yourself and a towel.</p>{" "}
-          <div className="row-actions">
-            {" "}
-            <a
-              className="btn btn--primary"
-              href="https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989"
-              target="_blank"
-              rel="noopener"
-            >
-              Claim the New Student Offer{" "}
-              <svg aria-hidden="true">
-                <use href="#i-arrow" />
-              </svg>
-            </a>{" "}
-            <Link className="btn btn--outline" href="/pages/timetable">
-              See the timetable
-            </Link>{" "}
-          </div>{" "}
-        </Reveal>{" "}
-      </section>{" "}
+      <BlogMotion />
       <JsonLd data={seo("blog1").jsonLd} />
     </>
   );

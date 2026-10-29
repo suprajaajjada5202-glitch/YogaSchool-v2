@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { Motion } from "@/components/Motion";
 import { OfferPopup } from "@/components/OfferPopup";
 import { Sprite } from "@/components/Sprite";
 
@@ -15,6 +16,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main id="main">{children}</main>
       <Footer />
       <OfferPopup />
+      <Motion />
     </>
   );
 }

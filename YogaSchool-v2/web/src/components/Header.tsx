@@ -23,6 +23,8 @@ export function Header() {
   const topbar = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
+  // Once the page has moved: the bar can firm up (styled on the home page only)
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleBtn = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
@@ -104,6 +106,7 @@ export function Header() {
       setShift(Math.max(0, (topbar.current?.offsetHeight ?? 0) - y));
       setProgress(max > 0 ? y / max : 0);
       setShowTop(y > window.innerHeight);
+      setScrolled(y > 24);
       ticking = false;
     };
     const onScroll = () => {
@@ -212,7 +215,7 @@ export function Header() {
     );
   };
   // Light, solid bar on every page (the home page photo starts below it, as on the inner pages' light heroes)
-  const headerCls = "site-header is-light is-solid";
+  const headerCls = `site-header is-light is-solid${scrolled ? " is-scrolled" : ""}`;
 
   return (
     <>
@@ -386,6 +389,7 @@ export function Header() {
           className={`fab__top${showTop ? " is-visible" : ""}`}
           href="#"
           aria-label="Back to top"
+          style={{ "--progress": progress } as CSSProperties}
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({

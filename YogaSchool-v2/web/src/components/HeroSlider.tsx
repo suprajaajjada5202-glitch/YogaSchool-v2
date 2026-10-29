@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { heroSlides } from "@/data/content";
 import { OFFER_URL } from "@/lib/site";
 
-const DURATION = 5000; // time per hero slide (ms)
+const DURATION = 3500; // time per hero slide (ms)
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /** Home page hero: headline and buttons over a slideshow of photos or videos (heroSlides in data/content.ts),
@@ -43,6 +43,22 @@ export function HeroSlider() {
     return () => window.removeEventListener("load", onLoad);
   }, []);
 
+  // The text builds in once the first photo is decoded and on screen, so the entrance is seen instead of being spent
+  // while the page is still loading (CSS holds it until "is-ready"; a timer makes sure it never waits long)
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const img = document.querySelector<HTMLImageElement>(".home-hero .hero__slide.is-active img");
+    let done = false;
+    const start = () => {
+      if (done) return;
+      done = true;
+      requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)));
+    };
+    (img?.decode ? img.decode() : Promise.resolve()).then(start, start);
+    const t = setTimeout(start, 1200);
+    return () => clearTimeout(t);
+  }, []);
+
   // A video plays only while its slide shows and the slideshow runs; with reduced motion its photo stays instead
   useEffect(() => {
     const still = paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -55,7 +71,7 @@ export function HeroSlider() {
 
   return (
     <section
-      className={`home-hero on-dark${paused ? " is-paused" : ""}`}
+      className={`home-hero on-dark${paused ? " is-paused" : ""}${ready ? " is-ready" : ""}`}
       aria-roledescription="carousel"
       aria-label="The Yoga School studio"
       style={{ "--hero-dur": `${DURATION}ms` } as CSSProperties}
@@ -100,12 +116,26 @@ export function HeroSlider() {
       </div>
 
       <div className="container">
-        <div className="home-hero__text">
-          <h1 id="home-title">
-            <span>Move Better.</span> <span>Feel Stronger.</span>
+        {/* With each new photo the heading, tagline and line play in again (keyed by cycle, so they remount; the
+            buttons keep their place and focus) */}
+        <div className={`home-hero__text${cycle ? " is-swap" : ""}`}>
+          {/* Each line rises out from behind its own edge (.home-hero__line clips, the inner span moves) */}
+          <h1 id="home-title" key={`h-${cycle}`}>
+            <span className="home-hero__line">
+              <span>
+                <em>Move</em> Better.
+              </span>
+            </span>{" "}
+            <span className="home-hero__line">
+              <span>
+                Feel <em>Stronger.</em>
+              </span>
+            </span>
           </h1>
-          <p className="home-hero__tagline">Yoga. Strength. Mobility. Wellbeing.</p>
-          <p className="home-hero__sub">
+          <p className="home-hero__tagline" key={`t-${cycle}`}>
+            Yoga. Strength. Mobility. Wellbeing.
+          </p>
+          <p className="home-hero__sub" key={`s-${cycle}`}>
             <span>One studio. 5 approaches.</span> <span>More ways to move better.</span>
           </p>
           <div className="home-hero__actions">
@@ -117,6 +147,8 @@ export function HeroSlider() {
             </a>
           </div>
         </div>
+        {/* Scroll cue down to the classes (large screens only, see .hero__scroll) */}
+        <a className="hero__scroll" href="#classes-title" aria-label="Scroll down to our classes"></a>
       </div>
 
       <div className="home-hero__controls">

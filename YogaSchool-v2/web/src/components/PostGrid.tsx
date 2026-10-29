@@ -39,7 +39,9 @@ export function PostCard({ post }: { post: Post }) {
       </div>
       <div className="post__body">
         <p className="post__by">{post.author}</p>
-        <h3>{post.title}</h3>
+        <h3>
+          <span className="post__title">{post.title}</span>
+        </h3>
         <p>{cardText(post)}</p>
         <Link className="link-arrow stretch" href={postHref(post.slug)}>
           Read article <Use id="i-arrow" />

@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
 import { OFFER_URL } from "@/lib/site";
@@ -6,6 +7,9 @@ import { OFFER_URL } from "@/lib/site";
 const BANNER = "/images/offer-banner.png";
 const SEEN_KEY = "tys-offer-seen";
 const DELAY_MS = 1500;
+// The home page waits until its hero has built in, so the popup doesn't cover the entrance
+const HOME_PATHS = ["/", "/home", "/pages/home"];
+const HOME_DELAY_MS = 4500;
 
 /** New-student offer popup: opens shortly after the first page of a visit loads, once per visit
     (browser session), so it doesn't return on every page. Native <dialog>: Esc, focus trap and backdrop built in. */
@@ -13,6 +17,7 @@ export function OfferPopup() {
   const ref = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   useBodyLock(open);
+  const delayMs = HOME_PATHS.includes(usePathname() ?? "/") ? HOME_DELAY_MS : DELAY_MS;
 
   useEffect(() => {
     try {
@@ -27,7 +32,7 @@ export function OfferPopup() {
       img.onload = img.onerror = () => resolve();
     });
     img.src = BANNER;
-    const delay = new Promise<void>((resolve) => setTimeout(resolve, DELAY_MS));
+    const delay = new Promise<void>((resolve) => setTimeout(resolve, delayMs));
     Promise.all([banner, delay]).then(() => {
       if (!live) return;
       setOpen(true);
@@ -40,7 +45,7 @@ export function OfferPopup() {
     return () => {
       live = false;
     };
-  }, []);
+  }, [delayMs]);
 
   useEffect(() => {
     const d = ref.current;

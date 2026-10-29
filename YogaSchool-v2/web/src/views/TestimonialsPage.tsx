@@ -7,11 +7,22 @@ import { StoryText } from "@/components/StoryText";
 import { featuredTestimonial as cecelia, testimonialChapters as chapters } from "@/data/content";
 import { seo } from "@/lib/seo";
 import type { Testimonial } from "@/lib/types";
+import type { CSSProperties } from "react";
 
-/** Short stories are shown whole as the quote; long ones open with their highlight line, then the story. */
+/** Two letters for the name badge: first and last word, skipping "and" ("Tanya and Quinn" → TQ) */
+function initials(name: string) {
+  const words = name.split(/\s+/).filter((w) => w && w.toLowerCase() !== "and");
+  return ((words[0]?.[0] ?? "") + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
+}
+
+/** Short stories are shown whole as the quote; long ones open with their highlight line, then the story. Each is a
+    card: a large quote mark, the words, then a name badge. */
 function Story({ story }: { story: Testimonial }) {
   return (
     <figure className="story">
+      <span className="story__mark" aria-hidden="true">
+        “
+      </span>
       {story.highlight ? (
         <>
           <p className="story__pull" aria-hidden="true">
@@ -31,8 +42,13 @@ function Story({ story }: { story: Testimonial }) {
         </blockquote>
       )}
       <figcaption>
-        {story.name}
-        <span>{story.role}</span>
+        <span className="story__avatar" aria-hidden="true">
+          {initials(story.name)}
+        </span>
+        <span className="story__who">
+          {story.name}
+          <span>{story.role}</span>
+        </span>
       </figcaption>
     </figure>
   );
@@ -55,9 +71,15 @@ export default function TestimonialsPage() {
           <h1 id="voices-title">Student stories</h1>
           <figure className="voices-hero__quote">
             <blockquote>
+              {/* Words fill in one after another (--w: each word's place) */}
               <p>
                 <span className="voices-hero__mark">“</span>
-                {cecelia.highlight}”
+                {`${cecelia.highlight}”`.split(" ").map((w, i, all) => (
+                  <span className="voices-hero__word" style={{ "--w": i } as CSSProperties} key={i}>
+                    {w}
+                    {i < all.length - 1 ? " " : ""}
+                  </span>
+                ))}
               </p>
             </blockquote>
             <figcaption>
@@ -72,6 +94,7 @@ export default function TestimonialsPage() {
                   <a href={`#${c.id}`}>
                     {c.title}
                     <span>{c.stories.length} stories</span>
+                    <Use id="i-arrow" />
                   </a>
                 </li>
               ))}
@@ -112,10 +135,13 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {chapters.map((c) => (
+      {chapters.map((c, n) => (
         <section className="chapter" id={c.id} aria-labelledby={`${c.id}-title`} key={c.id}>
           <div className="container chapter__grid">
             <header className="chapter__head">
+              <p className="chapter__count">
+                <span>{String(n + 1).padStart(2, "0")}</span> {c.stories.length} stories
+              </p>
               <h2 id={`${c.id}-title`}>{c.title}</h2>
               <p>{c.intro}</p>
               <div className="arch chapter__photo">
@@ -133,30 +159,6 @@ export default function TestimonialsPage() {
         </section>
       ))}
 
-      <section className="section cta-band" aria-labelledby="cta-title">
-        <div className="cta-band__rings" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div className="container">
-          <h2 id="cta-title">Start your own story</h2>
-          <p>Beginners are always welcome. Just bring yourself and a towel.</p>
-          <div className="row-actions">
-            <a
-              className="btn btn--primary"
-              href="https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989"
-              target="_blank"
-              rel="noopener"
-            >
-              Try 30 days for $99
-            </a>
-            <Link className="btn btn--outline" href="/pages/timetable">
-              See the timetable
-            </Link>
-          </div>
-        </div>
-      </section>
       <JsonLd data={seo("testimonials").jsonLd} />
     </>
   );

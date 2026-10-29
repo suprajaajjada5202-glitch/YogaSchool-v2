@@ -80,31 +80,84 @@ const planLook = (name: string): [string, ReactNode] => {
   return look ? [look[1], look[2]] : PLAN_LOOK_YOGA;
 };
 
-/** Membership tiles for the home page (same plans as MembershipCards): name, description and a link to the full
-    details and prices on /pages/prices. */
+/** Membership price cards for the home page (same plans as MembershipCards): price, terms, what's included and the
+    Momence join link, with the featured plan on navy. */
 export function MembershipTiles({ plans }: { plans: Membership[] }) {
   return (
-    <div className="plan-tiles">
+    <div className="home-plan-grid">
       {plans.map((p, n) => {
         const [tone, icon] = planLook(p.name);
         return (
-          <Reveal as="article" key={p.name} className={`plan-tile plan-tile--${tone}`} delay={n || undefined}>
-            <span className="plan-tile__ic">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                {icon}
-              </svg>
-            </span>
-            <div className="plan-tile__body">
+          <Reveal
+            as="article"
+            key={p.name}
+            className={`home-plan home-plan--${tone}${p.featured ? " home-plan--featured on-dark" : ""}`}
+            delay={n || undefined}
+          >
+            {p.badge && <span className="home-plan__badge">{p.badge}</span>}
+            <header className="home-plan__head">
+              <span className="home-plan__ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  {icon}
+                </svg>
+              </span>
               <h3>{/membership/i.test(p.name) ? p.name : `${p.name} Membership`}</h3>
-              <p>{p.description}</p>
-              <Link className="btn btn--primary btn--sm" href="/pages/prices#memberships">
-                View Membership<span className="sr-only">: {p.name}</span>
-              </Link>
-            </div>
+            </header>
+            <p className="home-plan__desc">{p.description}</p>
+            <p className="home-plan__price">
+              <strong>{p.priceLabel}</strong> {p.period && <span>/ {p.period}</span>}
+            </p>
+            {p.terms && <p className="home-plan__terms">{p.terms}</p>}
+            <ul className="home-plan__features">
+              {p.features.map((f) => (
+                <li key={f}>
+                  <Use id="i-check" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <CtaLink className={`btn ${p.featured ? "btn--teal" : "btn--primary"}`} href={p.ctaUrl}>
+              {p.ctaLabel}
+              {/^https?:/.test(p.ctaUrl) && <span className="sr-only"> (opens Momence in a new tab)</span>}
+            </CtaLink>
           </Reveal>
         );
       })}
     </div>
+  );
+}
+
+/** Home page, under the memberships: the pay-as-you-go prices (adult drop-in, 5 and 20 class passes) and a link to
+    every pass on /pages/prices. Passes not found under these names are left out. */
+export function PassesTeaser({ groups }: { groups: PassGroup[] }) {
+  const find = (title: string, name: RegExp) => groups.find((g) => g.title === title)?.items.find((i) => name.test(i.name));
+  const prices = (
+    [
+      ["Drop-in", find("Drop in", /adult/i)],
+      ["5 classes", find("Class passes", /^5\b/)],
+      ["20 classes", find("Class passes", /^20\b/)],
+    ] as const
+  ).filter(([, item]) => item);
+  return (
+    <Reveal className="home-passes">
+      <div className="home-passes__text">
+        <h3>Not ready to commit?</h3>
+        <p>Pay as you go with a drop-in class or a class pass.</p>
+      </div>
+      {prices.length > 0 && (
+        <ul className="home-passes__prices">
+          {prices.map(([label, item]) => (
+            <li key={label}>
+              <span>{label}</span>
+              <strong>{item?.price}</strong>
+            </li>
+          ))}
+        </ul>
+      )}
+      <Link className="btn btn--primary" href="/pages/prices#passes">
+        View All Passes &amp; Memberships <Use id="i-arrow" />
+      </Link>
+    </Reveal>
   );
 }
 
