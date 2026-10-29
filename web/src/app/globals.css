@@ -2731,6 +2731,30 @@ body {
 .plan .btn {
   margin-top: auto;
 }
+/* Membership Terms & Conditions (PDF), under the button */
+.plan__tc {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  margin-bottom: -10px;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.plan__tc:hover {
+  color: var(--c-secondary-ink);
+  text-decoration-color: currentColor;
+}
+.plan--featured .plan__tc {
+  color: rgba(255, 255, 255, 0.82);
+}
+.plan--featured .plan__tc:hover {
+  color: var(--c-white);
+}
 
 .promo {
   display: grid;

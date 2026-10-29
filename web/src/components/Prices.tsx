@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { MEMBERSHIP_TERMS_PDF } from "@/lib/site";
 import type { Membership, PassGroup } from "@/lib/types";
 import { CtaLink } from "./CtaLink";
 import { TileIcon, Use } from "./Icons";
 import { Reveal } from "./Reveal";
 
-/** Membership cards (Supabase "prices" rows with category = membership, or built-in). */
+/** Membership cards (Supabase "prices" rows with category = membership, or built-in). Each links the membership
+    Terms & Conditions PDF, as the live site's prices page does. */
 export function MembershipCards({ plans }: { plans: Membership[] }) {
   return (
     <div className="pricing">
@@ -28,7 +30,11 @@ export function MembershipCards({ plans }: { plans: Membership[] }) {
           </ul>
           <CtaLink className={`btn ${p.featured ? "btn--teal" : "btn--outline"}`} href={p.ctaUrl}>
             {p.ctaLabel}
+            {/^https?:/.test(p.ctaUrl) && <span className="sr-only"> (opens Momence in a new tab)</span>}
           </CtaLink>
+          <a className="plan__tc" href={MEMBERSHIP_TERMS_PDF} target="_blank" rel="noopener">
+            Terms &amp; Conditions<span className="sr-only">, {p.name} membership (PDF, opens in a new tab)</span>
+          </a>
         </Reveal>
       ))}
     </div>

@@ -29,6 +29,10 @@ const I = {
   video: "M4 6h12v12H4zM16 10l4-2v8l-4-2",
 };
 export const MOMENCE_VIDEOS = "https://momence.com/video/plugin/23652";
+/** Membership Terms & Conditions (2026 V2 PDF, applies to all three memberships), as linked from the live site's
+    prices page. Note: /pages/terms-and-conditions holds the older terms page from the live site. */
+export const MEMBERSHIP_TERMS_PDF =
+  "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/the-yoga-school/Terms_and_conditions_2026_V2.pdf";
 /** The Momence online shop: the menu's "Shop" and "Props & equipment" links and the footer's, in a new tab */
 export const MOMENCE_SHOP_URL = "https://momence.com/The-Yoga-School/products/23652";
 

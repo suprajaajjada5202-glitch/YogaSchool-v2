@@ -891,7 +891,7 @@ export const videos: Video[] = [
 export const sliderTestimonials: ShortTestimonial[] = [
   {
     quote:
-      "Since finding The Yoga School through a friend, my depression and anxiety has improved and I can now self manage my emotions a lot better. The meditation at the start of class is so calming.",
+      "Since finding The Yoga School through a friend, my depression and anxiety has improved and I can now self manage my emotions a lot better. The meditation at the start of class is so calming and has taught me how to focus and ignore my noisy mind.",
     name: "Sarah",
     role: "Regular student",
   },
@@ -1148,7 +1148,8 @@ export const memberships: Membership[] = [
     badge: null,
     featured: false,
     ctaLabel: "Join Yoga Only",
-    ctaUrl: "/pages/contact-us?enquiry=Yoga%20Only%20membership",
+    // Momence checkout, as the live site's "Buy now" (momence.com/m/607575)
+    ctaUrl: "https://momence.com/The-Yoga-School/membership/Yoga-only-Membership-%3A-%2480-fortnightly/607575",
   },
   {
     name: "Everything",
@@ -1165,7 +1166,8 @@ export const memberships: Membership[] = [
     badge: "All access",
     featured: true,
     ctaLabel: "Join Everything",
-    ctaUrl: "/pages/contact-us?enquiry=Everything%20membership",
+    // Momence checkout, as the live site's "Buy now" (momence.com/m/691591)
+    ctaUrl: "https://momence.com/The-Yoga-School/membership/TYS-everything-membership-%3A-%2498-fortnightly/691591",
   },
   {
     name: "Shoshin Only",
@@ -1182,7 +1184,8 @@ export const memberships: Membership[] = [
     badge: null,
     featured: false,
     ctaLabel: "Join Shoshin Only",
-    ctaUrl: "/pages/contact-us?enquiry=Shoshin%20Only%20membership",
+    // Momence checkout, as the live site's "Buy now" (momence.com/m/691590)
+    ctaUrl: "https://momence.com/The-Yoga-School/membership/Shoshin-only-membership-%3A-%2480-fortnightly/691590",
   },
 ];
 
@@ -1233,7 +1236,7 @@ export const passes: PassGroup[] = [
         url: "https://momence.com/The-Yoga-School/membership/20-Class-Pass/54232",
       },
     ],
-    note: "5-class valid 6 months, 20-class valid 12 months from first use. Expiry dates can’t be extended.",
+    note: "5-class valid 6 months, 20-class valid 12 months from first use. Please choose carefully, as we’re unable to extend the expiry date.",
   },
   {
     title: "Unlimited passes",
