@@ -1,0 +1,18 @@
+# The Yoga School: keep the live URLs exactly as they are (Apache / cPanel hosting)
+# /pages/classes is served from /pages/classes.html; the .html is never shown.
+Options -MultiViews
+DirectoryIndex index.html
+RewriteEngine On
+
+# If someone types /pages/classes.html, send them to /pages/classes
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteCond %1 !^index$
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# Serve extensionless URLs from the matching .html file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+ErrorDocument 404 /pages/home

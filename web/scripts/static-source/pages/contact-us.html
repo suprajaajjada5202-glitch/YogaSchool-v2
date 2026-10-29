@@ -1,0 +1,110 @@
+    <section class="page-hero">
+      <svg class="blob blob--a" viewBox="0 0 500 500" aria-hidden="true"><path fill="currentColor" d="M421 316Q387 382 323 413T187 427Q121 381 92 309T79 166Q113 93 186 66T331 74Q402 113 428 181T421 316Z"/></svg>
+      <svg class="blob blob--b" viewBox="0 0 500 500" aria-hidden="true"><path fill="currentColor" d="M421 316Q387 382 323 413T187 427Q121 381 92 309T79 166Q113 93 186 66T331 74Q402 113 428 181T421 316Z"/></svg>
+      <div class="container page-hero__grid">
+        <div class="reveal">
+          <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/pages/home">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+          <p class="eyebrow">Contact</p>
+          <h1>Come and <em>visit us</em></h1>
+          <p class="lead">Questions about classes, passes, training or private sessions? Send us a message, call, or drop in to the studio.</p>
+          <div class="page-hero__actions"><a class="btn btn--primary" href="tel:+61412499700">Call 0412 499 700</a><a class="btn btn--outline" href="mailto:info@theyogaschool.com.au">Email us</a></div>
+        </div>
+        <div class="arch reveal" data-delay="1">
+          <div class="arch__frame"><img decoding="async" src="/images/gallery/DSC00217.jpg" alt="The studio with mats and blocks laid out" width="1000" height="563" fetchpriority="high"></div>
+          <p class="arch__badge"><span><svg aria-hidden="true"><use href="#i-check"/></svg></span>Diagonally opposite Edge Hill Post Office</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:var(--s-4)" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title" class="sr-only">Send us a message</h2>
+        <div class="contact">
+          <!--
+            CONTACT FORM: validates and shows a success message in the browser.
+            To actually receive messages, connect it in assets/js/main.js (Formspree / EmailJS / your backend).
+          -->
+          <form class="form reveal" id="contact-form" novalidate>
+            <div class="form__fields">
+              <div class="form__grid">
+                <div class="field">
+                  <label for="f-name">Name</label>
+                  <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+                  <p class="field__error" id="e-name">Please enter your name.</p>
+                </div>
+                <div class="field">
+                  <label for="f-phone">Phone</label>
+                  <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="^[+()\d\s-]{8,}$" aria-describedby="e-phone">
+                  <p class="field__error" id="e-phone">Please enter a valid phone number.</p>
+                </div>
+                <div class="field field--full">
+                  <label for="f-email">Email</label>
+                  <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+                  <p class="field__error" id="e-email">Please enter a valid email address.</p>
+                </div>
+                <div class="field field--full">
+                  <label for="f-class">Preferred class or enquiry <span class="opt">(optional)</span></label>
+                  <select id="f-class" name="preferred_class">
+                    <option value="">Not sure yet, please advise</option>
+                    <option>Level 1 (Introduction to Yoga)</option>
+                    <option>Level 2</option>
+                    <option>Level 3</option>
+                    <option>Level 4</option>
+                    <option>All Levels / Combined</option>
+                    <option>Yin Yoga</option>
+                    <option>Chair Yoga</option>
+                    <option>Shoshin strength &amp; mobility</option>
+                    <option>Private session</option>
+                    <option>Yoga Only membership</option>
+                    <option>Everything membership</option>
+                    <option>Shoshin Only membership</option>
+                    <option>Teacher training</option>
+                    <option>Workplace wellbeing</option>
+                    <option>Gift vouchers</option>
+                  </select>
+                </div>
+                <div class="field field--full">
+                  <label for="f-message">Message</label>
+                  <textarea id="f-message" name="message" required minlength="10" aria-describedby="e-message"></textarea>
+                  <p class="field__error" id="e-message">Please write a short message (at least 10 characters).</p>
+                </div>
+              </div>
+              <div class="hp" aria-hidden="true"><label for="f-website">Leave this empty</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+              <p class="form__error" role="alert" tabindex="-1" hidden>Sorry, your message could not be sent. Please try again, or call us on <a href="tel:+61412499700">0412 499 700</a>.</p>
+              <div class="form__footer">
+                <small>We’ll only use your details to reply to you.</small>
+                <button class="btn btn--primary" type="submit">Send message <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+            <div class="form__success" role="status" aria-live="polite" tabindex="-1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></g></svg>
+              <h3>Thank you!</h3>
+              <p>Your message has been sent. We’ll be in touch soon.</p>
+            </div>
+          </form>
+          <div class="reveal" data-delay="1">
+            <div class="info-list">
+              <div class="info-item">
+                <span class="info-item__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></g></svg></span>
+                <div><h3>Address</h3><address>Suite 14, 159-161 Pease Street<br>Piccones Village, Edge Hill<br>Cairns, Queensland 4870, Australia</address></div>
+              </div>
+              <div class="info-item">
+                <span class="info-item__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>
+                <div><h3>Phone</h3><p><a href="tel:+61412499700">0412 499 700</a></p></div>
+              </div>
+              <div class="info-item">
+                <span class="info-item__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></svg></span>
+                <div><h3>Email</h3><p><a href="mailto:info@theyogaschool.com.au">info@theyogaschool.com.au</a></p></div>
+              </div>
+            </div>
+            <!-- PLACEHOLDER: WhatsApp number uses the studio mobile (0412 499 700). Confirm it is on WhatsApp or replace. -->
+            <a class="btn btn--primary" href="https://wa.me/61412499700" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg> Chat on WhatsApp</a>
+            <div class="map">
+              <iframe title="Map showing The Yoga School at Piccones Village, Edge Hill, Cairns" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954.6893892806809!2d145.7398414291665!3d-16.91193361616657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x697864372f355dc9:0xb1f69afbf68bcaa2!2sThe+Yoga+School!5e0!3m2!1sen!2sau!4v1534855194268" width="600" height="300" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  

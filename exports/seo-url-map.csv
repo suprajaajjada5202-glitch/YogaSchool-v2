@@ -1,0 +1,99 @@
+Old URL,Status on current site,New site,New URL,Final status,Notes
+https://theyogaschool.com.au/,200,Kept (200),https://theyogaschool.com.au/,200,Page kept at the same address
+https://theyogaschool.com.au/NewStudentRegistration,200,301 redirect,https://theyogaschool.com.au/pages/NewStudentRegistration,200,Duplicate root address of the same page
+https://theyogaschool.com.au/about,200,301 redirect,https://theyogaschool.com.au/pages/about,200,Duplicate root address of the same page
+https://theyogaschool.com.au/apps/mindbody/enrollments,500,301 redirect,https://theyogaschool.com.au/pages/timetable,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2013/04/03/the-yoga-school-test-post-1,500,301 redirect,https://theyogaschool.com.au/pages/blog1,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2013/04/03/the-yoga-school-test-post-2,500,301 redirect,https://theyogaschool.com.au/pages/blog1,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2014/03/23/yoga-is-a-complete-system,200,Kept (200),https://theyogaschool.com.au/blog/2014/03/23/yoga-is-a-complete-system,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/04/08/the-why-of-yoga,200,Kept (200),https://theyogaschool.com.au/blog/2014/04/08/the-why-of-yoga,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/05/08/changing-your-brain-wave-patterns-can-make-you-happier,200,Kept (200),https://theyogaschool.com.au/blog/2014/05/08/changing-your-brain-wave-patterns-can-make-you-happier,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/05/15/life-is-simple,200,Kept (200),https://theyogaschool.com.au/blog/2014/05/15/life-is-simple,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/05/20/yoga-for-controlling-the-wandering-mind,200,Kept (200),https://theyogaschool.com.au/blog/2014/05/20/yoga-for-controlling-the-wandering-mind,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/05/27/yoga-for-balance,200,Kept (200),https://theyogaschool.com.au/blog/2014/05/27/yoga-for-balance,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/06/24/fascia-release-with-yoga,500,301 redirect,https://theyogaschool.com.au/blog/2014/06/24/fascia-release-with-yoga1,200,Duplicate article: redirected to the working copy
+https://theyogaschool.com.au/blog/2014/06/24/fascia-release-with-yoga1,200,Kept (200),https://theyogaschool.com.au/blog/2014/06/24/fascia-release-with-yoga1,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2014/11/21/holiday-yoga-practice,500,301 redirect,https://theyogaschool.com.au/blog/2014/11/21/holiday-yoga-practice1,200,Duplicate article: redirected to the working copy
+https://theyogaschool.com.au/blog/2014/11/21/holiday-yoga-practice1,200,Kept (200),https://theyogaschool.com.au/blog/2014/11/21/holiday-yoga-practice1,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2015/03/04/progress-in-yoga,200,Kept (200),https://theyogaschool.com.au/blog/2015/03/04/progress-in-yoga,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2015/03/04/progress-in-yoga1,500,301 redirect,https://theyogaschool.com.au/blog/2015/03/04/progress-in-yoga,200,Duplicate article: redirected to the working copy
+https://theyogaschool.com.au/blog/2015/04/21/cairns-ironman-challenge,200,Kept (200),https://theyogaschool.com.au/blog/2015/04/21/cairns-ironman-challenge,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2015/05/22/real-yoga-vs-flowpower-yoga,200,Kept (200),https://theyogaschool.com.au/blog/2015/05/22/real-yoga-vs-flowpower-yoga,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2015/09/15/knoff-yoga---5-pillars-of-practice,200,Kept (200),https://theyogaschool.com.au/blog/2015/09/15/knoff-yoga---5-pillars-of-practice,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2016/05/18/yoga-seasons,200,Kept (200),https://theyogaschool.com.au/blog/2016/05/18/yoga-seasons,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/01/29/time-to-take-up-yoga-the-yoga-school-cairns-is-the-place-to-go,200,Kept (200),https://theyogaschool.com.au/blog/2017/01/29/time-to-take-up-yoga-the-yoga-school-cairns-is-the-place-to-go,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/02/11/yoga-fundamentals-workshop---the-perfect-way-to-understand-the-practice-of-yoga,200,Kept (200),https://theyogaschool.com.au/blog/2017/02/11/yoga-fundamentals-workshop---the-perfect-way-to-understand-the-practice-of-yoga,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/03/12/the-inner-thoughts-of-a-relecutant-yogi-by-kay-green,200,Kept (200),https://theyogaschool.com.au/blog/2017/03/12/the-inner-thoughts-of-a-relecutant-yogi-by-kay-green,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/06/20/events,500,301 redirect,https://theyogaschool.com.au/pages/events,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2017/06/20/healthy-vs-stagnant,200,Kept (200),https://theyogaschool.com.au/blog/2017/06/20/healthy-vs-stagnant,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/06/25/events,500,301 redirect,https://theyogaschool.com.au/pages/events,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2017/06/25/how-has-yoga-changed-your-relationship-with-your-body---james-bryan,200,Kept (200),https://theyogaschool.com.au/blog/2017/06/25/how-has-yoga-changed-your-relationship-with-your-body---james-bryan,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2017/06/25/how-has-yoga-changed-your-relationship-with-your-body---nicky-knoff,200,Kept (200),https://theyogaschool.com.au/blog/2017/06/25/how-has-yoga-changed-your-relationship-with-your-body---nicky-knoff,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2018/02/07/events,500,301 redirect,https://theyogaschool.com.au/pages/events,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2018/02/07/you-cant-stop-the-waves,200,Kept (200),https://theyogaschool.com.au/blog/2018/02/07/you-cant-stop-the-waves,200,Article kept at its original address
+https://theyogaschool.com.au/blog/2019/11/07/events,500,301 redirect,https://theyogaschool.com.au/pages/events,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/blog/2019/11/07/why-yoga-why-not-yoga,200,Kept (200),https://theyogaschool.com.au/blog/2019/11/07/why-yoga-why-not-yoga,200,Article kept at its original address
+https://theyogaschool.com.au/blog/feed,200,301 redirect,https://theyogaschool.com.au/pages/blog1,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/blog1,200,301 redirect,https://theyogaschool.com.au/pages/blog1,200,Duplicate root address of the same page
+https://theyogaschool.com.au/classes,200,301 redirect,https://theyogaschool.com.au/pages/classes,200,Duplicate root address of the same page
+https://theyogaschool.com.au/contact-us,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Duplicate root address of the same page
+https://theyogaschool.com.au/email,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/email-2,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/events,200,301 redirect,https://theyogaschool.com.au/pages/events,200,Duplicate root address of the same page
+https://theyogaschool.com.au/events-copy1,200,301 redirect,https://theyogaschool.com.au/pages/events,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/faqs,200,301 redirect,https://theyogaschool.com.au/pages/faqs,200,Duplicate root address of the same page
+https://theyogaschool.com.au/gift-vouchers,200,Kept (200),https://theyogaschool.com.au/gift-vouchers,200,Page kept at the same address
+https://theyogaschool.com.au/home,200,Kept (200),https://theyogaschool.com.au/home,200,Page kept at the same address
+https://theyogaschool.com.au/location-map,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/meditation-seats,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/online-store,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/our-friends,200,301 redirect,https://theyogaschool.com.au/pages/teacher-training,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pages/NewStudentRegistration,200,Kept (200),https://theyogaschool.com.au/pages/NewStudentRegistration,200,Page kept at the same address
+https://theyogaschool.com.au/pages/about,200,Kept (200),https://theyogaschool.com.au/pages/about,200,Page kept at the same address
+https://theyogaschool.com.au/pages/blog1,200,Kept (200),https://theyogaschool.com.au/pages/blog1,200,Page kept at the same address
+https://theyogaschool.com.au/pages/classes,200,Kept (200),https://theyogaschool.com.au/pages/classes,200,Page kept at the same address
+https://theyogaschool.com.au/pages/contact-us,200,Kept (200),https://theyogaschool.com.au/pages/contact-us,200,Page kept at the same address
+https://theyogaschool.com.au/pages/events,200,Kept (200),https://theyogaschool.com.au/pages/events,200,Page kept at the same address
+https://theyogaschool.com.au/pages/faqs,200,Kept (200),https://theyogaschool.com.au/pages/faqs,200,Page kept at the same address
+https://theyogaschool.com.au/pages/feedback,404,301 redirect,https://theyogaschool.com.au/pages/testimonials,200,Already broken on the current site (404); now goes to a working page
+https://theyogaschool.com.au/pages/home,200,Kept (200),https://theyogaschool.com.au/pages/home,200,Page kept at the same address
+https://theyogaschool.com.au/pages/location-map,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pages/online-store,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pages/our-friends,200,301 redirect,https://theyogaschool.com.au/pages/teacher-training,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pages/photo-gallery,200,Kept (200),https://theyogaschool.com.au/pages/photo-gallery,200,Page kept at the same address
+https://theyogaschool.com.au/pages/prices,200,Kept (200),https://theyogaschool.com.au/pages/prices,200,Page kept at the same address
+https://theyogaschool.com.au/pages/pricess,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pages/teacher-training,200,Kept (200),https://theyogaschool.com.au/pages/teacher-training,200,Page kept at the same address
+https://theyogaschool.com.au/pages/teachers,200,Kept (200),https://theyogaschool.com.au/pages/teachers,200,Page kept at the same address
+https://theyogaschool.com.au/pages/terms-and-conditions,200,Kept (200),https://theyogaschool.com.au/pages/terms-and-conditions,200,Page kept at the same address
+https://theyogaschool.com.au/pages/testimonials,200,Kept (200),https://theyogaschool.com.au/pages/testimonials,200,Page kept at the same address
+https://theyogaschool.com.au/pages/timetable,200,Kept (200),https://theyogaschool.com.au/pages/timetable,200,Page kept at the same address
+https://theyogaschool.com.au/pages/videos,200,Kept (200),https://theyogaschool.com.au/pages/videos,200,Page kept at the same address
+https://theyogaschool.com.au/photo-gallery,200,301 redirect,https://theyogaschool.com.au/pages/photo-gallery,200,Duplicate root address of the same page
+https://theyogaschool.com.au/prices,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Duplicate root address of the same page
+https://theyogaschool.com.au/prices-copy,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/prices-copy1,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/pricess,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/products,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/products/back-rollers,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/products/events,404,301 redirect,https://theyogaschool.com.au/pages/shop,200,Already broken on the current site (404); now goes to a working page
+https://theyogaschool.com.au/products/new-products,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/products/new-products/back-rollers,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/products/new-products/events,404,301 redirect,https://theyogaschool.com.au/pages/shop,200,Already broken on the current site (404); now goes to a working page
+https://theyogaschool.com.au/promotions,200,301 redirect,https://theyogaschool.com.au/pages/prices,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/service/events,200,301 redirect,https://theyogaschool.com.au/pages/events,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/service/store,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/service/store/checkoutconfirm,500,301 redirect,https://theyogaschool.com.au/pages/shop,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/service/store/checkoutinfo,500,301 redirect,https://theyogaschool.com.au/pages/shop,200,Already broken on the current site (500); now goes to a working page
+https://theyogaschool.com.au/service/store/checkoutreceipt,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/service/store/events,404,301 redirect,https://theyogaschool.com.au/pages/shop,200,Already broken on the current site (404); now goes to a working page
+https://theyogaschool.com.au/shop,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Duplicate root address of the same page
+https://theyogaschool.com.au/shop1,200,301 redirect,https://theyogaschool.com.au/pages/shop,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/teacher-training,200,301 redirect,https://theyogaschool.com.au/pages/teacher-training,200,Duplicate root address of the same page
+https://theyogaschool.com.au/teachers,200,301 redirect,https://theyogaschool.com.au/pages/teachers,200,Duplicate root address of the same page
+https://theyogaschool.com.au/terms-and-conditions,200,301 redirect,https://theyogaschool.com.au/pages/terms-and-conditions,200,Duplicate root address of the same page
+https://theyogaschool.com.au/testimonials,200,301 redirect,https://theyogaschool.com.au/pages/testimonials,200,Duplicate root address of the same page
+https://theyogaschool.com.au/thank-you,200,301 redirect,https://theyogaschool.com.au/pages/contact-us,200,Retired page: redirected to the closest current page
+https://theyogaschool.com.au/timetable,200,301 redirect,https://theyogaschool.com.au/pages/timetable,200,Duplicate root address of the same page
+https://theyogaschool.com.au/videos,200,301 redirect,https://theyogaschool.com.au/pages/videos,200,Duplicate root address of the same page
+https://theyogaschool.com.au/workplace-wellbeing,200,Kept (200),https://theyogaschool.com.au/workplace-wellbeing,200,Page kept at the same address
