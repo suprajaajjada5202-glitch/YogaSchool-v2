@@ -45,7 +45,11 @@ export function OfferPopup() {
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
-    if (open && !d.open) d.showModal();
+    if (open && !d.open) {
+      d.showModal();
+      // Start on the dialog itself, not the close button, so it opens without a focus ring; Tab reaches the button
+      d.focus();
+    }
     if (!open && d.open) d.close();
   }, [open]);
 
@@ -54,6 +58,7 @@ export function OfferPopup() {
     <dialog
       ref={ref}
       className="offer"
+      tabIndex={-1}
       aria-labelledby="offer-title"
       onClose={close}
       onClick={(e) => e.target === e.currentTarget && close()}
