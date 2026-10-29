@@ -1,0 +1,1242 @@
+{
+  "home": {
+    "path": "/pages/home",
+    "title": "The Yoga School Cairns | Authentic Knoff Yoga in Edge Hill",
+    "description": "The Yoga School is Cairns' most affordable and friendly yoga studio. Authentic Knoff Yoga with Master Teachers, 4 levels of study and 20 classes a week. Beginners are always welcome.",
+    "canonical": "https://theyogaschool.com.au/pages/home",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": false,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "workplace-wellbeing": {
+    "path": "/workplace-wellbeing",
+    "title": "Workplace Wellbeing | The Yoga School Cairns",
+    "description": "Workplace yoga, breath work and meditation programs for Cairns companies, government bodies and private groups.",
+    "canonical": "https://theyogaschool.com.au/workplace-wellbeing",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "gift-vouchers": {
+    "path": "/gift-vouchers",
+    "title": "Gift Vouchers | The Yoga School Cairns",
+    "description": "Buy yoga gift vouchers for The Yoga School Cairns online or at our Edge Hill studio.",
+    "canonical": "https://theyogaschool.com.au/gift-vouchers",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "path": "/pages/about",
+    "title": "About | The Yoga School Cairns",
+    "description": "The only yoga school in Cairns with true Master Teachers. Learn about Knoff Yoga, our teachers and our air-purified Edge Hill studio.",
+    "canonical": "https://theyogaschool.com.au/pages/about",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "blog-healthy-vs-stagnant": {
+    "path": "/pages/blog-healthy-vs-stagnant",
+    "title": "Healthy vs. Stagnant | The Yoga School Blog",
+    "description": "Injuries and trauma to the body become long-term sites for future degeneration.",
+    "canonical": "https://theyogaschool.com.au/pages/blog-healthy-vs-stagnant",
+    "ogType": "article",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/1.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Healthy vs. Stagnant",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/1.jpg",
+        "author": {
+          "@type": "Organization",
+          "name": "The Yoga School"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Yoga School",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png"
+          }
+        },
+        "mainEntityOfPage": "https://theyogaschool.com.au/blog-healthy-vs-stagnant.html"
+      }
+    ]
+  },
+  "blog-james-bryan-yoga-and-the-body": {
+    "path": "/pages/blog-james-bryan-yoga-and-the-body",
+    "title": "How has yoga changed your relationship with your body? | The Yoga School Blog",
+    "description": "Before studying Yoga with Nicky Knoff in Auckland, NZ in 1982, I was running marathons as an antidote to sitting on my ass all day in an office job.  I found the…",
+    "canonical": "https://theyogaschool.com.au/pages/blog-james-bryan-yoga-and-the-body",
+    "ogType": "article",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/James.png",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How has yoga changed your relationship with your body?",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/James.png",
+        "author": {
+          "@type": "Person",
+          "name": "James Bryan"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Yoga School",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png"
+          }
+        },
+        "mainEntityOfPage": "https://theyogaschool.com.au/blog-james-bryan-yoga-and-the-body.html"
+      }
+    ]
+  },
+  "blog-nicky-knoff-yoga-and-the-body": {
+    "path": "/pages/blog-nicky-knoff-yoga-and-the-body",
+    "title": "How has yoga changed your relationship with your body? | The Yoga School Blog",
+    "description": "When young I was into exercise of all types: swimming, skiing, field hockey, baseball, tennis, squash, javelin throwing, and bush walking.",
+    "canonical": "https://theyogaschool.com.au/pages/blog-nicky-knoff-yoga-and-the-body",
+    "ogType": "article",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Nicky.png",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How has yoga changed your relationship with your body?",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Nicky.png",
+        "author": {
+          "@type": "Person",
+          "name": "Nicky Knoff"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Yoga School",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png"
+          }
+        },
+        "mainEntityOfPage": "https://theyogaschool.com.au/blog-nicky-knoff-yoga-and-the-body.html"
+      }
+    ]
+  },
+  "blog-why-yoga": {
+    "path": "/pages/blog-why-yoga",
+    "title": "Why Yoga? Why not Yoga? | The Yoga School Blog",
+    "description": "Ask anyone who has a regular Yoga practice that if they have time away from their regular practice, the difference of how they feel.",
+    "canonical": "https://theyogaschool.com.au/pages/blog-why-yoga",
+    "ogType": "article",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/yoga-mind_copy.png",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Why Yoga? Why not Yoga?",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/yoga-mind_copy.png",
+        "author": {
+          "@type": "Organization",
+          "name": "The Yoga School"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Yoga School",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png"
+          }
+        },
+        "mainEntityOfPage": "https://theyogaschool.com.au/blog-why-yoga.html"
+      }
+    ]
+  },
+  "blog-you-cant-stop-the-waves": {
+    "path": "/pages/blog-you-cant-stop-the-waves",
+    "title": "You can't stop the waves | The Yoga School Blog",
+    "description": "The Taoist Yin Yang symbol incorporates two intertwined snakes, one white and one black and the eyes of these snakes contain the opposite colour, i.e. the white…",
+    "canonical": "https://theyogaschool.com.au/pages/blog-you-cant-stop-the-waves",
+    "ogType": "article",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Newsletter.png",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "You can't stop the waves",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Newsletter.png",
+        "author": {
+          "@type": "Person",
+          "name": "James E. Bryan"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Yoga School",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png"
+          }
+        },
+        "mainEntityOfPage": "https://theyogaschool.com.au/blog-you-cant-stop-the-waves.html"
+      }
+    ]
+  },
+  "blog1": {
+    "path": "/pages/blog1",
+    "title": "Blog | The Yoga School Cairns",
+    "description": "Articles on yoga practice, the body and the mind from The Yoga School Cairns and Knoff Yoga.",
+    "canonical": "https://theyogaschool.com.au/pages/blog1",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "classes": {
+    "path": "/pages/classes",
+    "title": "Classes | The Yoga School Cairns",
+    "description": "Knoff Yoga Levels 1–4, All Levels, Yin Yoga, Chair Yoga, Shoshin strength & mobility, and private sessions in Cairns.",
+    "canonical": "https://theyogaschool.com.au/pages/classes",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "contact-us": {
+    "path": "/pages/contact-us",
+    "title": "Contact | The Yoga School Cairns",
+    "description": "Contact The Yoga School: Suite 14, 159-161 Pease Street, Piccones Village, Edge Hill, Cairns QLD 4870. Phone 0412 499 700.",
+    "canonical": "https://theyogaschool.com.au/pages/contact-us",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "events": {
+    "path": "/pages/events",
+    "title": "Events & Workshops | The Yoga School Cairns",
+    "description": "Upcoming yoga workshops and events at The Yoga School Cairns. Book online.",
+    "canonical": "https://theyogaschool.com.au/pages/events",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": true,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "faqs": {
+    "path": "/pages/faqs",
+    "title": "FAQs | The Yoga School Cairns",
+    "description": "Answers to common questions about classes, parking, pregnancy yoga, what to wear and teacher training at The Yoga School Cairns.",
+    "canonical": "https://theyogaschool.com.au/pages/faqs",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "I don't have a yoga mat or equipment.",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Included in your class passes at The Yoga School are all the mats and equipment (props) that you will need. So all you need to bring is a towel and a bottle of water. All of our equipment is of the highest studio quality with large mats for you to feel comfortable on."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is parking like?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The parking is free and some of it is undercover. There are lots of options at Piccones Shopping Village. From parking your car to being in the studio the average time is less than 60 seconds, and no parking wardens :)"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I'm pregnant. Should I do yoga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our teachers are trained in pregnancy yoga and we have many students who attend public classes while pregnant. Please let the teacher know if you are pregnant when signing in. We also offer private pregnancy yoga sessions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "My back is stiff and my hips hurt. Should I do yoga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many students have exactly these same issues and enjoy the way that yoga opens the body up to let the energy flow, which helps to ease these pains. If you have severe conditions please call us to make a free appointment to help us understand your challenges."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I'm not really into group classes. What are my options?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We offer private sessions and can also cater for small private groups."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I have trouble climbing stairs.",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our studio is street level with easy access for both able and differently abled students. We are fully wheelchair accessible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If I am late, will the door be locked?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. But please plan to arrive ten minutes before class starts. We understand not every day runs to plan. If you arrive after class has started, please be mindful of the other students, quietly find a mat and enjoy your practice. The door will be open."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do I wear?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Men: loose-fitting shorts and a t-shirt or singlet. Women: active wear works, and so do yoga pants."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I need to go to the toilet during class?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No problem, this is not uncommon in class due to the movements your body will do. Quietly move off your mat and carefully walk to the toilet."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How about eating before class?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A light snack 1 or 2 hours before class should be OK, and it always depends on the student."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the history of yoga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yoga started around 5000 years ago in Northern India, which is why the poses (Asanas) are pronounced in both English and Sanskrit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is yoga religious?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yoga is non-religious, more of a belief system. Many of the world's religious leaders practise yoga, and so do many successful business leaders. They say it helps with making clear and non-emotional decisions during their day."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I become a yoga teacher?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Firstly you must practise yoga and have a keen interest in knowledge development. We run teacher training courses with our Knoff Yoga partners. Teacher training varies from one week to one month and is all conducted at our well-equipped, fully air-conditioned Cairns studio at Piccones Shopping Village on Pease Street."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "photo-gallery": {
+    "path": "/pages/photo-gallery",
+    "title": "Gallery | The Yoga School Cairns",
+    "description": "Photos from inside The Yoga School studio in Edge Hill, Cairns.",
+    "canonical": "https://theyogaschool.com.au/pages/photo-gallery",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "path": "/pages/post",
+    "title": "Blog | The Yoga School Cairns",
+    "description": "An article from The Yoga School Cairns blog.",
+    "canonical": "https://theyogaschool.com.au/pages/post",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "prices": {
+    "path": "/pages/prices",
+    "title": "Prices & Memberships | The Yoga School Cairns",
+    "description": "Yoga memberships from $80 per fortnight, class passes, drop-in classes, private sessions and gift vouchers at The Yoga School Cairns.",
+    "canonical": "https://theyogaschool.com.au/pages/prices",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "shop": {
+    "path": "/pages/shop",
+    "title": "Shop | The Yoga School Cairns",
+    "description": "Meditation seats, yoga props and equipment from The Yoga School Cairns.",
+    "canonical": "https://theyogaschool.com.au/pages/shop",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "teacher-training": {
+    "path": "/pages/teacher-training",
+    "title": "Teacher Training | The Yoga School Cairns",
+    "description": "Yoga Alliance registered (RYS200 and RYS300) Knoff Yoga teacher training in Cairns with Master Teachers Nicky Knoff and James Bryan.",
+    "canonical": "https://theyogaschool.com.au/pages/teacher-training",
+    "ogType": "website",
+    "ogImage": "https://i.ytimg.com/vi/X9W4SDA4m8Q/maxresdefault.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "teachers": {
+    "path": "/pages/teachers",
+    "title": "Teachers | The Yoga School Cairns",
+    "description": "Meet the Knoff Yoga trained teachers at The Yoga School Cairns, guided by Master Teachers Nicky Knoff and James Bryan.",
+    "canonical": "https://theyogaschool.com.au/pages/teachers",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "path": "/pages/testimonials",
+    "title": "Testimonials | The Yoga School Cairns",
+    "description": "Read real stories from students of The Yoga School Cairns about pain relief, better sleep, calmer minds and community.",
+    "canonical": "https://theyogaschool.com.au/pages/testimonials",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "timetable": {
+    "path": "/pages/timetable",
+    "title": "Timetable | The Yoga School Cairns",
+    "description": "Live class timetable for The Yoga School Cairns. Book Knoff Yoga, Yin, Chair, Shoshin strength and mobility classes online.",
+    "canonical": "https://theyogaschool.com.au/pages/timetable",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": true,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  },
+  "videos": {
+    "path": "/pages/videos",
+    "title": "Videos | The Yoga School Cairns",
+    "description": "Free yoga videos from Knoff Yoga and The Yoga School Cairns: dolphin pose, chair yoga, Tadasana, Bhumi Namaskar and more.",
+    "canonical": "https://theyogaschool.com.au/pages/videos",
+    "ogType": "website",
+    "ogImage": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+    "headerLight": true,
+    "momence": false,
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": [
+          "HealthClub",
+          "LocalBusiness"
+        ],
+        "name": "The Yoga School",
+        "alternateName": "The Yoga School Cairns",
+        "url": "https://theyogaschool.com.au/",
+        "logo": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png",
+        "image": "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/updated/DSC00182.jpg",
+        "description": "Authentic Knoff Yoga school in Cairns with Master Teachers Nicky Knoff and James Bryan. 4 levels of study and 20 classes a week. Beginners are always welcome.",
+        "telephone": "+61 412 499 700",
+        "email": "info@theyogaschool.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Suite 14, Piccones Village, 159-161 Pease Street",
+          "addressLocality": "Edge Hill",
+          "addressRegion": "QLD",
+          "postalCode": "4870",
+          "addressCountry": "AU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.9119336,
+          "longitude": 145.7398414
+        },
+        "sameAs": [
+          "https://www.facebook.com/theyogaschoolaustralia/",
+          "https://www.instagram.com/theyogaschoolcairns/",
+          "https://www.youtube.com/@theyogaschoolcairns5508"
+        ]
+      }
+    ]
+  }
+}

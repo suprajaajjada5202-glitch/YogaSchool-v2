@@ -1,0 +1,659 @@
+-- =====================================================================
+-- The Yoga School: starting content (taken from the current website)
+-- Run after schema.sql. Safe to re-run: existing rows with the same slug are updated.
+-- =====================================================================
+
+insert into public.classes (slug, name, level, duration, summary, description, tag, image_url, sort) values
+  ('l1', 'Level 1', 'Beginners', null, 'Introduction to Yoga. Perfect for absolute beginners and anyone wanting a slower practice.', 'The perfect way to start yoga, this entry level class is suitable for absolute beginners and anyone wanting a slower practice with time to explore the postures and foundations of yoga in detail.  Move up to the higher levels whenever you feel ready, or stay here for as long as you like.  You will often see some regulars and more advanced yogis in this class, as coming back to the fundamentals of this practice is essential for progression.', 'Start here', '/images/gallery/DSC00112.jpg', 0),
+  ('l2', 'Level 2', 'Some experience', '60–75 min', 'A quicker pace using Vinyasa to build upper-body strength, create heat and focus the mind.', 'These classes move at a quicker pace than level 1 and expand on the use of Vinyasa (linking techniques) to build upper body strength, create heat and improve mental focus.  We introduce some stronger postures but you are welcome to modify when you need to, students at this level need to be able to self regulate and some experience of yoga is recommend.', null, '/images/gallery/DSC00140.jpg', 10),
+  ('l3', 'Level 3', 'Intermediate', '90 min', 'More demanding postures to increase your proficiency and skill in every area of practice.', 'As you progress, the postures become more demanding. This level is recommended when you are comfortable with the level 2 classes and feel ready to challenge yourself. Here you will learn how to increase your proficiency and skill in all areas of your yoga practice.', null, '/images/gallery/DSC00183.jpg', 20),
+  ('l4', 'Level 4', 'Advanced', null, 'Inversions and stronger versions of the other Asana groups. Level 3 competency recommended.', 'At this level we study a number of inversions as well as stronger versions of the other Asana groups.  Competency with Level 3 is recommended before attending.', null, '/images/gallery/DSC00075edit.jpg', 30),
+  ('all', 'All Levels & Combined', 'All levels', '60–75 min', 'Easier Asanas first, with more challenging options. Practise at the level that suits you today.', 'Designed to accommodate different levels of yoga experience and all students (including beginners) are welcome. Easier Asanas and vinyasas will be given first with more challenging options offered for more experienced students.  You are invited to practice at a level that suits your ability and energy level on any given day.
+
+Combined level classes: Blends the two levels together, the class is predominantly taught at the lower level but we introduce some higher level postures as an option for more experienced students and those wishing to progress.', 'Everyone welcome', '/images/gallery/DSC00131.jpg', 40),
+  ('yin', 'Yin Yoga', 'All levels', '60 min', 'A quiet, passive practice targeting deep connective tissues, fascia, joints and bones.', 'Yin Yoga is a quiet and passive practice. Targeting deep connective tissues, fascia, ligaments, joints and bones.  It’s slow and meditative, allowing you time and space to turn inwards and tune into both your mind and the physical sensations of your body.', null, '/images/gallery/DSC00193.jpg', 50),
+  ('chair', 'Chair Yoga', 'Gentle', null, 'For seniors and students with limited mobility, balance or joint challenges, or in recovery.', 'For seniors and physically challenged students with disabilities, lack of mobility, balance problems, joint challenges, recovering from illness, accidents and operations. As you build up your strength, stamina and balance, progression to our general mat classes can sometimes become and option.', null, '/images/gallery/DSC00203.jpg', 60),
+  ('shoshin', 'Shoshin Strength & Mobility', 'All levels', '60 min', 'Strength classes and mobility classes, included in Shoshin Only and Everything memberships.', 'Shoshin strength and mobility classes run alongside our yoga timetable. Unlimited access is included in the Shoshin Only ($80 per fortnight) and Everything ($98 per fortnight) memberships, and in the 180- and 365-day unlimited passes.', 'New', '/images/gallery/DSC00184.jpg', 70),
+  ('private', 'Private Sessions', 'Tailored', '60 or 90 min', 'One-on-one and small-group sessions for technique and specific health challenges.', '60 or 90 minute, one-on-one (and small group) classes are designed to deepen your understanding and speed up your progress. Ideal for improving technique and for specific health challenges such as: back-pain, posture improvement, structural imbalances, scoliosis, anxiety, insomnia, constipation, depression, headaches, pregnancy etc. Discounts are available for group bookings.', 'One-on-one', '/images/gallery/DSC00019edit.jpg', 80)
+on conflict (slug) do update set name = excluded.name, level = excluded.level, duration = excluded.duration, summary = excluded.summary,
+  description = excluded.description, tag = excluded.tag, image_url = excluded.image_url, sort = excluded.sort;
+
+-- Remove the 3 temporary slugs used by an earlier version of this file (safe if absent)
+delete from public.blog_posts where slug in ('why-yoga', 'james-bryan-yoga-and-the-body', 'nicky-knoff-yoga-and-the-body');
+
+-- Blog: all 21 articles from the live site. The slug matches the original URL
+-- (/blog/YYYY/MM/DD/<slug>), so the website keeps linking to the original addresses.
+insert into public.blog_posts (slug, title, author, excerpt, body, image_url, published_at) values
+  ('why-yoga-why-not-yoga', 'Why Yoga? Why not Yoga?', 'The Yoga School', 'Ask anyone who has a regular Yoga practice that if they have time away from their regular practice, the difference of how they feel.', 'Ask anyone who has a regular Yoga practice that if they have time away from their regular practice, the difference of how they feel.
+
+This difference is not usually a positive difference. The mind can get lazy, more easily irritated and the bodies energy flow gets blocked which can show up in the form of pain, or unwanted sensations in certain areas of the body.
+
+The breathwork involved with Yoga and the Asanas work together for the full body mind connection. The common cry from people when you ask them about starting Yoga is ''I''m not flexible enough to practice yoga'', that''s why we do Yoga:)
+
+If you never start you will never have the calmer mind, flexibility with the strength you are seeking, along with the awareness to utilise the tools that Yoga gives you.
+
+Yoga helps to promote the calm mind, and the mind can be a complete minefield sometimes. Imagine the mind being a wide open and un-touched field, now it becomes a ''mindfield'' where anything is possible.
+
+These tools from Yoga range from conscious breathing when an apparent crisis arrives, to getting up out of a chair or out of a car and engaging the correct muscles to perform these tasks.
+
+Yoga teaches us many, many useful tools which are to be utilised daily for skillfull living.
+
+Why Yoga?
+
+Why not Yoga?', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/yoga-mind_copy.png', '2019-11-07T22:44:21+10:00'),
+  ('you-cant-stop-the-waves', 'You can''t stop the waves', 'James E. Bryan', 'The Taoist Yin Yang symbol incorporates two intertwined snakes, one white and one black and the eyes of these snakes contain the opposite colour, i.e. the white…', 'The Taoist Yin Yang symbol incorporates two intertwined snakes, one white and one black and the eyes of these snakes contain the opposite colour, i.e. the white snake has a black eye and the black snake has a white eye.
+
+The Yin Yang symbol is static, but implies tremendous and continuous flux between order and chaos. Everything in this world is on this continuum between control and out of control. Nothing will ever be perfect because, like the snake''s eye, it contains the seed of the opposite.
+
+An infantile approach to life, when things are not perfect is to have a hissy fit – a temper tantrum and spit the dummy. When things are not going your way, when others disagree with you, when you rub up against ideas you don''t like, you could scream, smash a few things and start calling people names.
+
+If you step back for a moment, before soiling your pants, you will see that nothing is ever perfect forever. Imagine you have just spent a full day of your precious time carefully mowing the lawns and manicuring the gardens. From the very second you finish the lawn and gardens will do their natural thing and start changing, and within a short period of time, you have to apply control again to balance the increasing chaos.
+
+I realised a long time ago it is better to embrace the change and the image of the surfer represents this well. The waves are the continuous ups and downs of life – you can''t stop them, nor do you want to, because then there will be nothing to ride and no fun. The idea is to learn how to skilfully ride the waves. At first you will not be able to stand up for more than a few seconds. With practice you get better, and eventually you actually enjoy the waves and actively seek out bigger ones for more of a thrill.
+
+If we bring all this back to Yoga practice, then our mat is the surfboard and the asana are the waves. The skill, understanding and expertise we gain learning how to ride the postures carries over into all other aspects of our lives.
+
+And like the garden, the moment we finish our practice, the need to do another practice arises.
+
+Hatha Yoga – any style of yoga that incorporates asana, contains this control / out of control dichotomy. Ha = Sun and Tha = Moon and is pretty much the same concept as Yin Yang.
+
+Learn to see your practice as an opportunity to cultivate your personal garden, to gain the skills to ride the waves of life, and to bring balance into the world. It is a journey not a destination.
+
+Namaste
+
+James E. Bryan E.R.Y.T. 500', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Newsletter.png', '2018-02-07T04:52:27+10:00'),
+  ('how-has-yoga-changed-your-relationship-with-your-body---james-bryan', 'How has yoga changed your relationship with your body?', 'James Bryan', 'Before studying Yoga with Nicky Knoff in Auckland, NZ in 1982, I was running marathons as an antidote to sitting on my ass all day in an office job.  I found the…', 'James E. Bryan, Knoff Yoga
+
+Before studying Yoga with Nicky Knoff in Auckland, NZ in 1982, I was running marathons as an antidote to sitting on my ass all day in an office job.  I found the long-distance training meditative, as I used to focus on my heartbeat and turned running into meditation.
+
+I started attending yoga classes three times per week for the first three months and then seven days per week for the next four years, before attending a Teacher Training Course at the Iyengar Institute in Pune, India in 1986.
+
+When you practice intensively, you quickly discover that your body is connected to your mind and your mind is connected to your body.  It was very obvious to me that if I practiced in the mornings, my days went much more smoothly.
+
+Over time, my relationship with my body deepened as I explored the extremes of asana practice and I found there were edges you needed to be careful with and not over-step.  I found that it was not the shape of the asana that was the goal of practice, but the mind-state from the practice itself.  My long term practice has confirmed the body is the temple of the spirit.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/James.png', '2017-06-25T01:02:03+10:00'),
+  ('how-has-yoga-changed-your-relationship-with-your-body---nicky-knoff', 'How has yoga changed your relationship with your body?', 'Nicky Knoff', 'When young I was into exercise of all types: swimming, skiing, field hockey, baseball, tennis, squash, javelin throwing, and bush walking.', 'Nicky Knoff, Knoff Yoga
+
+When young I was into exercise of all types: swimming, skiing, field hockey, baseball, tennis, squash, javelin throwing, and bush walking.
+
+I was living in Japan and travelling the world when I started practicing yoga in October 1970. The more I practiced and learned, the more I appreciated the art and science of yoga.
+
+Yoga changed my relationship with my body because it taught me the importance of a holistic and balanced practice. To get the full benefit of yoga, I needed to include all the limbs of yoga.  Asana is great, but incomplete without Pranayama and Meditation.  Asana, Pranayama and Meditation are incomplete without the understanding and application of Yoga Philosophy.
+
+Our bodies change over time.  As we age we lose much of what we took for granted.  The beauty of a holistic practice is that as one area contracts another expands.  As asana becomes restricted, pranayama and meditation offer more.
+
+Long-term yoga practice has taught me that we are much more than a body.  When we are young we focus on the physical, but as we mature we can continue to expand our consciousness and grow into our potential as spiritual beings.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Nicky.png', '2017-06-25T00:56:48+10:00'),
+  ('healthy-vs-stagnant', 'Healthy vs. Stagnant', 'The Yoga School', 'Injuries and trauma to the body become long-term sites for future degeneration.', 'Injuries and trauma to the body become long-term sites for future degeneration.
+
+Imagine a clear stream of water flowing smoothly over rocks.  The water is clean, healthy and refreshing to drink.  This is also how the flow of blood, lymph and nerve energy are meant to be in the human body.
+
+Now imagine placing a log across the stream and blocking some of the water flow.  The water down-stream will be impeded and become stagnant; resulting in green scum, mosquitoes and general yuckiness.
+
+Injuries, operations and trauma to the body, which damage tissues: muscle/blood/lymph/nerve (meridians and nadis) likewise cause stagnation and impede the healthy flow of these streams – setting the scene for degeneration and disease.
+
+It becomes more important to practice yoga after an injury or operation, than it was before!
+
+Of course, it has to be the right type of yoga, with appropriate techniques for revitalizing energy flow.  To rehabilitate the practice has to be gentle, progressive and intelligent.  For example, after a hip replacement or traumatic childbirth, it would be the height of stupidity to jump back into a strong asana practice.  But, it is equally inappropriate to do long holds as in Yin Yoga.
+
+Yoga Therapy is a term that is being suppressed because of its'' ''medical'' association, but it describes the right approach to heal the body and to regain full functionality.  Yoga Therapy taps into the tools of Yoga (asana, relaxation, pranayama and meditation) to ease the body back into functionality and health – to be the best it can be given the changed circumstances.  A hip prosthetic is never going to have the range of mobility and stability of a real one.
+
+Because of the Yoga Alliance (www.yogaalliance.org) restrictions, we have had to change the term ''Yoga Therapy'' to ''Yoga – Holistic Healing''.  The name has changed, but the approach has not.
+
+In the Knoff Yoga Teacher Training program we offer two levels of Yoga Therapy:
+
+Yoga – Holistic Healing A
+
+Yoga – Holistic Healing B
+
+See www.knoffyoga.com for more information.  These two Courses are extremely useful for yoga teachers to learn the techniques and skills necessary to help their students with injuries and trauma.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/1.jpg', '2017-06-20T03:23:59+10:00'),
+  ('the-inner-thoughts-of-a-relecutant-yogi-by-kay-green', 'The Inner Thoughts of a Reluctant Yogi - By Kay Green', 'The Yoga School', 'I used to think that people who practised yoga were all a bit ‘peace and love’, that to get the most out of it I should be a calm soul who serenely floats through…', 'I used to think that people who practised yoga were all a bit ‘peace and love’, that to get the most out of it I should be a calm soul who serenely floats through the day until it’s time to get back on my yoga mat.  I’m none of those things, I’m boisterous and noisy and can’t really remember a time my soul was anything but hectic.
+
+Yoga always intrigued me but I felt like I wouldn’t be suited to the practice, and if I’m honest I was a little bit intimidated by the impression I had of it all. I realise I’m the same as most people who sit on the outside looking in and I want to take this opportunity to encourage anyone who may be interested in giving it a go, to give it a go.  I’m sure you won’t regret it.
+
+I try and make at least one class a week, and I can genuinely say I can feel the difference it’s made to my body and my mind. My posture is better, I walk taller after class, and I feel stronger.  There are even times outside of my lesson when I can capture my meditation practice and still my mind by concentrating on my breath; I find this useful in stressful situations or the odd occasion when I need to ‘bite my tongue’.  I feel more together than I have, and my body is much more flexible.
+
+There are times after a class that I feel a calmness I rarely have any other time, it’s a sense of inner peace, almost a glow from the inside out. I understand that the release of endorphins after many types of exercise will create a feeling of wellbeing, I used to leave the gym mentally patting myself on the back for having been, and I enjoyed the euphoria it created for a while afterwards. For me yoga induces a different kind of ‘high’ a physical strength that emanates from my core, my posture is better, my shoulders are back, and I stand more upright, that in turn seems to give me a physical presence and creates a greater confidence of my place in the world.
+
+I suppose what I’m saying is I do feel the peace and love!
+
+Don’t be fooled into thinking that yoga classes are easy because they’re not.  It requires concentration on breath and movement and fitting the two together, it is physically and mentally challenging.  There are times when I’m in a difficult pose that I want it to be over so badly I have to grit my teeth to find the determination to carry on.
+
+Don’t misunderstand me, the pressure to improve my skills doesn’t come from my teacher, it comes from me.  We are encouraged to work within ourselves during our lessons, only to do what we feel we are able, but personally, that’s what makes me want to do better, and when my teacher comes to me to help me improve the depth or balance of a pose I accept her help gratefully.
+
+Often I can start my class worrying about how I’m going to get the most out of it because all I can think about during meditation is what I need to get from the supermarket or my next deadline at work.  I berate myself for not being able to concentrate on my breath and then the next thing I know my focus has shifted and my yoga brain clicks in.  I’m applying Mula Bandha (pelvic floor lift) and my Ujjayi (controlled and expanded) breath even before I’m instructed to do so.
+
+I’m not a perfect yogi by any stretch of the imagination I usually get to the end of my class and realise at some point I forgot all about my pelvic floor muscles when I moved my concentration onto something else.  I frequently get half way through the class and wish it would be over so I can stop the ache in my body.  When my teacher tells us that we are about to do our last downward dog of the day I mentally celebrate the end of the lesson being so close. (I’ve even been known to ‘woo hoo’ out loud in class.)
+
+I don’t practice yoga at home because to be honest I don’t have the commitment or fortitude to make it happen.  I prefer to go to classes at The Yoga School in Cairns where I meet like minded novice yogis and am guided through the practice by their skillful teachers.
+
+Chatting to fellow students makes me realise that I’m not alone, we all have our limitiations, our challenges and our occassional wins where we feel like we are finally beginning to understand this mystical practice.  I’ve learnt how the most difficult part of yoga is getting on the mat, i.e. actually leaving the house and making that short drive to the studio and having the determination to walk through the door!
+
+After class the general consensus is always the same, we all feel better, more energised, more peaceful, more alive.  “I really regret that yoga class.” said no one EVER.
+
+My life is busy and I don’t get to practice as much as I would like, however it is an essential part of my weekly routine.  I’ve made this commitment because I can feel the benefits in both my body and my mind, I enjoy it immensely and it generates a huge contentment in me.
+
+In the words of Yoga’s most famous teacher BKS lyengar “Yoga teaches us to cure what need not be endured and endure what cannot be cured.”
+
+Come and join me at The Yoga School, if you’re new take advantage of their new student special (also available to returning students who have been absent for 12 months) 14 days of unlimited yoga for $40.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Screen_Shot_2017-03-13_at_1_16_01_pm.png', '2017-03-12T22:10:23+10:00'),
+  ('yoga-fundamentals-workshop---the-perfect-way-to-understand-the-practice-of-yoga', 'Yoga Fundamentals Workshop - The Perfect way to understand the Practice of Yoga', 'The Yoga School', 'Meditation, breath work, balance, strength, flexibility, movement, alignment, mindfulness - there are many aspects to a yoga practice; it can take a while to fully…', 'Meditation, breath work, balance, strength, flexibility, movement, alignment, mindfulness - there are many aspects to a yoga practice; it can take a while to fully understand what they are and how they all tie together. Taking the journey to learn how they combine with each other and experiencing the benefits when they do is exceptionally rewarding.
+
+An excellent yoga teacher will ensure that their students are aware of the importance of each discipline and how to get the most from their practice. However, even the most attentive of us forget what we’ve been taught or unintentionally slip into bad habits.
+
+At The Yoga School in the heart of Cairns, we understand how daunting it can be to start a new form of exercise, or if you have been taking regular yoga lessons to admit you are not quite sure what you should be doing. That’s why we run our Yoga Fundamentals class every so often to encourage new and seasoned yogis to get the most from their practice.
+
+Meditation Dedication
+
+At the Yoga School, we start our practice with meditation; the beginning of our time on the yoga mat is an excellent way to focus your thoughts in order to make the most of your class.
+
+Starting your practice with a brain that won’t be still can be deeply frustrating and even experienced yogis can have trouble trying to quieten their mind. Like the rest of this ancient form of exercise, meditation requires dedication and determination.
+
+Nicola and Ross will take you through the mind centering techniques that allow you to still your thoughts and bring them under your control creating a beneficial mind space for you to appreciate the balance and strength throughout your body.
+
+Breath and Movement
+
+This particular skill can be quite a challenge to get right; often we can get part way through a class and realise that we’ve forgotten whether we were supposed to be breathing in or out. We may have had it explained to us a dozen times, but when we’re concentrating on so many things at once, it’s easy to let things slide.
+
+Breathwork compliments our movement and in turn, continues to focus our minds on our bodies and what we are doing physically.  Whether you are a complete beginner or have had the benefit of regular yoga lessons, reinforcement of the breathing technique through our fundamentals class will help to create a deeper understanding and appreciation for the synchronicity it brings.
+
+Strength and Flexibility
+
+We all bring something different with us when we start yoga (and we don’t mean the colour of our leggings). Some of us have strong bodies while others have a flexible one, many have neither of these things. The complete joy of yoga isn’t how you start, but how you progress along your journey and even the most well practised dedicated students and teachers at our school in Cairns have room for improvement.
+
+The sense of achievement that comes from seeing and feeling yourself become stronger and more flexible will feed your spirits and nourish your determination.
+
+The fundamentals workshop will explore and explain the difference between being strong and being flexible, and how to adjust and adapt each pose depending on your body shape and size.
+
+Correct Alignment
+
+Yoga is wonderfully challenging, which is what makes it such a unique and wholly rewarding way to exercise.  In our yoga fundamentals workshop, working with correct alignment, we will show you how just the slightest adjustment can make all the difference to how the pose feels.
+
+Mindfulness
+
+In a recent blog post, we talked about considering a yoga class as your ‘me time’ and mindfulness is a vital part of achieving this.  It is the part of the practice that breaks down the barriers between our actions and ourselves; we learn to think and feel within the moment allowing us to become fully aware of what we are doing with our body.
+
+Mindfulness is about the ability to turn our thoughts inwards and observe and appreciate our internal space. This skill is invaluable and can teach us how to regulate our emotions and in turn, reduce stress and bring a deeper focus into our everyday lives – and let’s be honest who wouldn’t appreciate the chance to improve the way we handle our thoughts.
+
+It’s Never too Late to Learn
+
+Whether you are a brand-new student or a yogi seeking a deeper understanding of your practice and your abilities everything taught in the Fundamentals Workshop is designed to make your exploration into yoga an enjoyable and rewarding experience.
+
+To book your place at the workshop call The Yoga School Cairns now on 0421 011892 or book online.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/blog/Bird_on_a_Wire.jpg', '2017-02-11T00:12:17+10:00'),
+  ('time-to-take-up-yoga-the-yoga-school-cairns-is-the-place-to-go', 'Time to take up yoga? The Yoga School Cairns is the Place to go.', 'The Yoga School', 'Time to take up yoga? The Yoga School Cairns is the Place to go.', 'Time to take up yoga? The Yoga School Cairns is the Place to go.
+
+If procrastination were a yoga pose, it would be the easiest of all yoga poses to get into, but almost impossible to get out of.
+
+We are all guilty of making up excuses to relieve ourselves of the pressure of doing something we know we should but don’t.  Exercise is probably one of the most common things we put off because we don’t feel like it, or we worry that we won’t be able to do it, that we might look foolish or fail at it.
+
+If you feel like this, then be assured you are most definitely not on your own.  Most of us feel the same; the funny thing is once we’ve finally run out of excuses and done some form of activity we feel so much better for it and wonder why it took us so long to get round to it.
+
+We wanted to give you a gentle reminder that the time for putting yourself last on your long list of priorities is nearly over.  The kids are back at school, we’ve had our Australia Day blowout, and hopefully things will be starting to feel ‘normal’ again (whatever that is!)
+
+Was ‘to get fit’ on your list of New Year resolutions?
+
+Research shows that in 2016 over half of the nation’s new year’s resolutions were based on health and fitness. It also shows that most of the January impetus begins to wear off within three months and the determination we felt after Christmas becomes less and less as the year goes on.
+
+Maybe it doesn’t need to be that way, perhaps all it takes is thinking about things in a slightly different way.  Instead of putting ourselves under pressure to go to the gym and pound the treadmill three times a week, maybe we should combine our exercise with some much needed ‘me time’.  That sounds like much more fun, doesn’t it?
+
+Yoga – Possibly the best me time EVER!
+
+This is where the team at The Yoga School Cairns can help. Whether you have attended a yoga class before or are brand new to yoga, we are here to inspire and encourage you to take time out of your busy days to experience the physical, mental and spiritual benefits of yoga practice.
+
+The influence that this type of exercise can have on your life is extremely positive; it contains a mixture of meditation, controlled breathing and poses that challenge your body and your mind.  This unique combination creates physical and mental strength that remains with you long after your practice is over.
+
+During a yoga class we are concentrating so deeply on our breathing and our physical movements that there is little room in our minds for any other thoughts; how many times can we say we achieve that precious and very important space in our lives?
+
+Imagine how good it feels to have stepped away from the stresses of everyday life for a while.
+
+Yoga classes to suit all levels
+
+Our instructors at The Yoga School Cairns are all Knoff Yoga certificated teachers who are dedicated to bringing the joy of yoga practice to all our students.  We understand how hard it can be to break yourself out of your comfort zone and come to a class, and we assure you our beginner''s classes are tailored to all fitness levels and abilities.
+
+We have an extensive range of yoga classes to suit complete beginners to advanced practitioners, and a timetable that includes early morning and evening practice, the yoga school is open 7 days a week.
+
+Could we be making it any easier for you?  Well actually yes, you don’t even need to bring anything with you.  We provide top quality mats and props, we sell water and coconut water and there is even a shower for your use if needed.
+
+Our message is simple.  Slip yourself out of the procrastination pose, into some comfortable clothing, and come and join us for a stress-busting, mind calming, body tingling yoga class. You won’t regret it.
+
+For enquiries or advice about any of our classes call us now on 07 4053 5857.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/IMG_2251.jpg', '2017-01-29T00:41:35+10:00'),
+  ('yoga-seasons', 'Yoga Seasons', 'The Yoga School', 'In our yoga practice there are re-occurring seasons spring/summer/autumn/winter and these recycle endlessly.', 'In our yoga practice there are re-occurring seasons spring/summer/autumn/winter and these recycle endlessly.
+
+When you are in the winter period everything feels heavy and dull and uninspiring.  But, the seasons turn and if you can take the long-term view, this will pass.
+
+The winter is when most people give up.  All you need to do is to keep things ticking over, with a little yoga practice, and allow time to move on.  Spring is coming!
+
+Winter is the time to consolidate and minimize extraneous activities - curtail non-essential expenditure of energy.  Keep your core essence alive with a healing/recuperative practice (e.g. Knoff Yoga Discovery syllabus).
+
+Don’t criticize yourself for being on the material plane and subject to nature’s laws.  This is much bigger than us.
+
+Each time you step on your mat (which is the hardest part of yoga), read the Knoff Yoga ‘Intention for Practice’ aloud and with real understanding.
+
+“I come to honour and respect myself through my body.  I come to nourish, nurture, strengthen, and purify my body through the practices of asana and pranayama and still my mind through meditation.  I am not here to beat myself up or force my body into pain.  I am not here to criticize or judge myself or anyone else”.
+
+On earth as it is in heaven, we are wrapped in the possibility of ‘Isvara Pranidhana’ - to access our inner divinity.  But, to generate love we must give love.  And as yoga teachers, we are in the best possible position to channel Shakti.  Shakti is both responsible for creation and the agent of all change.
+
+You fan the flame of love/energy by sharing with others… go teach yoga with an open heart and your inner conflict will dissipate as you allow Shakti to flow through you - creating the change we want, but remember we are all subject to the laws of nature and honouring nature is mandatory for a yogi.
+
+By the time I have done my practice and then set in front of a computer for hours, I often have zero desire or interest in cycling into The Yoga School to teach a class.  But, I always feel re-connected to myself, yoga and life when I do.  You will have heard the saying “fake it until you make it”.  Put on your happy face and make the effort, for without effort (Tapas) there is no improvement.
+
+Progress in yoga is subjective.  Improvement in asana reflects physicality, not necessarily spirituality.  You can be an amazing yoga asana-ist and still be self-centered and unhappy.
+
+Knoff Yoga is Hatha Yoga, i.e. we honour the body as our temple, and use it for spiritual growth.  When practicing spiritual alignment and teaching with an open heart, we allow Shakti to flow through us.  To increase this flow of energy, we need to share it with others.
+
+When you are in the winter-time of your practice, when everything feels too much, simply back off, slow down and consolidate.  Find your centre.  It is always there, otherwise you would be dead!
+
+To fan the ember of our essence, to increase it’s size and strength, we simply share our love of yoga (and the Knoff Yoga techniques); allowing love to grow and expand into the world, and we are re-energized in the process.
+
+Yoga is a journey, not a destination.  Knoff Yoga is a road map created to give you clarity and direction.  If you are not following the map, you can easily get lost.
+
+Namaste
+
+James E. Bryan E.R.Y.T. 500', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Screen_Shot_2016-05-18_at_4_52_30_PM_copy2.png', '2016-05-18T02:01:20+10:00'),
+  ('knoff-yoga---5-pillars-of-practice', 'Knoff Yoga - 5 Pillars of Practice', 'The Yoga School', 'Knoff Yoga practice has a sound neurological basis where we learn to modulate the Autonomic Nervous System (ANS) between two opposite poles:', 'Knoff Yoga practice has a sound neurological basis where we learn to modulate the Autonomic Nervous System (ANS) between two opposite poles:
+
+• Sympathetic (Fight or Flight Response)
+
+• Parasympathetic (Relaxation Response)
+
+Think of the ANS as a continuum between these two poles, like the negative and positive ends of a battery.
+
+Using a car as an analogy, the Sympathetic Response is the accelerator and the Parasympathetic is the brake.
+
+Our busy lifestyles drive us towards the high revving Fight or Flight Response and floods our bodies with stress hormones: cortisol, adrenalin and norephedrine – we live in a constant state of threat or panic. Most of us run on adrenalin all the time and it is slowly killing us.
+
+Long-term stress is corrosive and carcinogenic and leads to poor health and poor performance, like revving a car in the garage until the fumes overwhelm you.
+
+When yoga is practiced correctly - with all of its component parts, in the right place and in the right amounts, it acts like a circuit breaker and turns on the Relaxation Response.
+
+The moment you step on the mat and focus on alignment, breath and bandhas your heart starts to calm down and you turn on anti-stress enzymes and hormones, such as prolactin, vasopressin, oxytocin and serotonin.
+
+As you apply the Knoff Yoga ''5 Pillars of Practice'', aligning your body and turning your mind inwards, you shift your brain wave patterns from Beta to Alpha. As you concentrate on technique and slow down your brain wave patterns further, you move deeper into the Relaxation Response – even while you are working strongly in your practice.
+
+Yoga makes many promises, but it has to be done correctly. Incorrect practice can harm.
+
+Everyone wants health and well-being. Everyone wants to be happy. The 5 Pillars of Practice are the tools required to keep your car in tune and running smoothly.
+
+THE 5 PILLARS OF PRACTICE
+
+1: ASANA – focusing on the physical structure using correct anatomical alignment.
+
+2: BANDHA – muscular and energetic locks to transform internal energy creating heat.
+
+3: DRISHTI – specific focal points for directing the eyes and composing the mind.
+
+4: PRANAYAMA – controlled expansion of the life-force.
+
+5: VINYASA – connecting techniques synchronizing movement with breath.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/James_Cairns_Post.jpg', '2015-09-15T06:09:30+10:00'),
+  ('real-yoga-vs-flowpower-yoga', 'Real Yoga vs. Flow/Power Yoga', 'The Yoga School', 'Flow and Power Yoga are very popular at the moment and with good reason.  They are the most “physical exercise” like styles and are excellent for people making the…', 'Flow and Power Yoga are very popular at the moment and with good reason.  They are the most “physical exercise” like styles and are excellent for people making the transition from the gym to “real yoga”.
+
+Real yoga is any style that includes the traditional 8 Limbs of Yoga, which are:
+
+Yama
+
+Niyama
+
+Asana
+
+Pranayama
+
+Pratyahara
+
+Dharana
+
+Dhyana
+
+Samadhi
+
+Flow and Power Yoga tend to emphasize the physical benefits of yoga, which are many and good to be had, but Real Yoga opens us to the bigger picture that the ancient Rishis mapped out in their search for enlightenment or Samadhi.
+
+Flow and Power Yoga are recent concoctions and their short history stems from Ashtanga Vinyasa Yoga – a very powerful style of yoga.
+
+Nicky Knoff and I were in Mysore, India studying Ashtanga Vinyasa Yoga with Sri Pattabhi Jois in 1989, at the same time as an American who went on to become one of the most popular Power Yoga teachers in the USA.
+
+Traditional Ashtanga Vinyasa Yoga, as taught by Pattabhi Jois, is sequential and incremental.  With this system you learn one pose at a time and are only taught the next one, when you can comfortably do the ones you have been given.  If you find a pose difficult and cannot perform it, you are not allowed to progress.
+
+Because Nicky and I had been doing Iyengar Yoga for many years before going to Mysore, and could do the poses of the 1st, 2nd and 3rd Series, we quickly progressed under Pattabhi Jois''s watchful eye and guidance.
+
+The famous L.A. Yoga Teacher got stuck half way through 1st Series with Kurmasana and Supta Kurmasana and Pattabhi Jois would not let him have any more poses, so after 6 months he departed in frustration and went back to the States.
+
+About a year later we were surprised to see a video program on Power Yoga taught by “Yoga Master” (same L.A. Yoga Teacher).  He went on to become one of the highest paid yoga teachers in L.A.
+
+What we saw with the Power Yoga program was that it included the strength building aspects of Vinyasa Yoga, i.e. Sun Salutations and Vinyasa but none of the challenging postures with no mention of anything beyond the physical.  It was a stripped down and diluted version of Ashtanga.
+
+Flow Yoga is just another name for Power Yoga and both have proved to be very popular.  In some cities these styles of yoga dominate, especially when you include the many versions of Hot Yoga, which falls into the same category of the “physical exercise” approach to yoga.
+
+Real Yoga with its 8 Limbs incorporates Pranayama (breath-work and not just Ujjayi), Pratyahara (sense withdrawal as a precursor to mind-work), Meditation (various techniques) and of course it is based on the ethical foundations of the Yamas and Niyamas.
+
+Obviously Flow, Power, Hot Yoga have a valid place in contemporary yoga and have adequately proved this by their popularity.  But these styles of yoga do not convey the bigger picture, or provide the tools for enlightenment – the original and real purpose of yoga.
+
+Here is an interesting comment by one of Nicky Knoff''s student, “I enjoy an occasional flow-ey class, the movement element of it, the music, etc... it''s yoga dessert. Too much fluff, not enough substance. Too much distraction, not enough opportunity to really connect with what is happening in your body on a physical, emotional and spiritual level. Moving between the asana without having the chance to really ground yourself and experience the integrity and energy of the pose doesn''t give me the depth I need in my yoga practice.”
+
+Skipping a stone across the water takes skill and it is fun, but there is no depth to it.  We can make a similar comparison about styles of yoga which skip the 8 Limbs of Yoga.
+
+Flow, Power and Hot Yoga have a lot to offer, but there is more – much more and by including Pranayama, Meditation and the yoga philosophy of the Yamas and Niyamas you will discover that the ancient Yogis of India were doing more than just sitting on their asanas.
+
+James Bryan
+
+Program Director & Master Teacher', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/_DSC6322/_DSC6322_gallery.jpg', '2015-05-22T01:31:22+10:00'),
+  ('cairns-ironman-challenge', 'Cairns Ironman Challenge', 'The Yoga School', 'The more pounding you do on your body, the more kilometers you rack up on your legs and arms, the more repetitive movements you make, the more you need to…', 'The more pounding you do on your body, the more kilometers you rack up on your legs and arms, the more repetitive movements you make, the more you need to incorporate yoga into your regime.
+
+With all the hard training for the Ironman Challenge, it is super easy to create imbalances, which will negatively affect your times. And of course you want to avoid long-term injuries!
+
+Hi, James Bryan here the Program Director from the Yoga School at the Piccones Village on Pease St.
+
+I used to run Marathons and found there were many similarities when I eventually moved across to a full-time yoga practice. I loved the inward focus of long distance running. I listened to the beating of my heart and used it as a meditation to eat up the miles. I loved being fit and having big lungs. My resting heart rate was 43 beats per minute and it was strong – rocked me back and forth when lying in bed.
+
+But, after some long runs I had blood in my urine and it struck me that these hard sessions were not necessarily good for my health!
+
+At the gym our coach had us doing 20 minutes of stretching after runs. I thought this was hugely excessive, but it made me feel great.
+
+One day there was an ex English soldier in his 70s doing some interesting movements and I asked him what was it was. He explained that he had been posted to India and learned yoga. He looked fantastic, had lots of energy and was particularly calm and centered, so I decided to check this yoga thing out.
+
+To make a long story short, yoga was indeed worthwhile and I have now been doing it for 34 years!
+
+With my experience I can tell you that the inherently balancing aspects of yoga are highly beneficial. This balance spills across into all aspects of your self – body, emotions, breath and mind.
+
+Yoga will bring balance into your running, swimming and bike riding and most likely stop you from over-training and injuring yourself. To gain a lot you don''t need to do much – just a couple of classes per week and then incorporate what you learn into your regime. Yoga is also a fabulous tool to help your body recover from the grueling impact that an Ironman Challenge can bring.
+
+Experience the benefits of yoga for yourself. Use Promotion Code IRON online or in house to receive your first class for free. Offer only available to new students, valid during April, May and June 2015.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Screen_Shot_2015-04-22_at_1_45_36_pm.png', '2015-04-21T22:50:25+10:00'),
+  ('progress-in-yoga', 'Progress In Yoga', 'The Yoga School', 'Normally you go to class, do some home practice, put in the effort and you notice improvement in flexibility, strength and technique.  Wonderful stuff!  However,…', 'Normally you go to class, do some home practice, put in the effort and you notice improvement in flexibility, strength and technique.  Wonderful stuff!  However, this is subject to change. There has to be an underlying mental reorganizing to support ongoing physical growth. It is a bit like the larva having to undergo metamorphosis in the chrysalis before emerging as a butterfly.  There has to be a period of ''breaking down and re-configuring'' of the deep-seated aspects of ourselves before we can move ahead.
+
+Think of an arrow being pulled back in order to fly to its destination.  Imagine if the arrow said “no, no I am going backwards”, not understanding it is actually preparing for a major movement forward.  You can''t go forwards without first going backwards! Contrary to popular belief, yoga is not about green meadows and unicorns.  The real thing is challenging work and you have to actually put in the time and effort to elicit change.  You know the saying “you have to pay your dues to sing the blues”.
+
+We are amazingly complex beings and that is one reason why there are so many yoga poses, with each addressing a specific aspect of the mind.  I sometimes think how we can liken the body to a yoga block and the individual postures are like drilling through it at different angles, until the block (representing restriction) is removed or erased and then we have freedom of movement in the body and mind.
+
+As you progress you cannot completely let go of the lower level practices, because if you do, you will lose them.  In the book ''Light on Yoga'', BKS Iyengar says in the Advanced Syllabus, you can now stop doing Standing Postures and just focus on the higher-level asanas.  From personal experience, I can tell you this is not true!  If you don''t use it, you lose it. I’ll tell you up front, do not stop doing the lower level practices as you progress.  Say you have progressed to an Intermediate Level, don''t think for a minute you can forget about the techniques that got you there in the first place.  You still have to practice them, just not as often but at least once per week.  Remembering ideally we practice six days per week (class and/or home practice).
+
+Nicky and I have had some pretty amazing experiences over the years.  It is not uncommon for students who have attended teacher training to go away, drop their practice, and then the next year apply to do the next higher level.  This doesn’t make a lot of sense, because by dropping their practice they are not even capable of doing the first level, much less something more intense, difficult and potentially harmful.
+
+Not everyone has the time to fit in six days of practice each week, unless you are clever.  Go to bed earlier and get up earlier - there is always time for Sun Salutations.  Book your practices into your diary as appointments, exactly the same as you would for a dentist, doctor or hair cut.  Some practice is better than no practice.  If you get on your mat then make sure you congratulate yourself, because it is not easy and takes discipline so celebrate when you do.
+
+It is a common misconception to think you cannot regress as you certainly can.  To your benefit is body memory and what you have uploaded into your nervous system will be there for a long-time, but physical strength and control over your body dissipates quickly. If you have had a break for some reason (and I am sure it is valid), don''t think you can safely or comfortably jump back into the same practice you left off at.  I tried it (over a break of 7 weeks) and I could hardly move for a few days after I returned to practice.  It felt like there was ground up glass in my muscles and joints.
+
+Regarding progression, how do you know when you are ready to move up?  My recommendation is when you are comfortable with the techniques, understand the terminology, can execute the postures competently and have started a home practice, then you are ready.  But, as discussed above, don''t drop your current practice as you move into the higher levels. It would be sensible to discuss the intended move with your teacher.  If you have been diligent in class attendance then your teacher will be in a good position to advise you.  It would also be a good idea to book into a private one-on-one class/es to go over any weak areas and get help with specific techniques you are not 100% clear on.
+
+You cannot conquer yoga.  You can align your body/mind with the techniques and practices.  You can harmonize your lifestyle with the underlying and supporting ethics.  It is not a matter of dominating your self, but of liberating your SELF.  To do this is the essence of yoga.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Screen_Shot_2015-03-05_at_2_31_08_pm.png', '2015-03-04T22:31:10+10:00'),
+  ('holiday-yoga-practice1', 'Holiday Yoga Practice', 'The Yoga School', 'Maintaining a yoga practice is challenging at the best of times and gets even more so when the holidays approach, with all the added stress of Christmas, New Year…', 'Maintaining a yoga practice is challenging at the best of times and gets even more so when the holidays approach, with all the added stress of Christmas, New Year and family gatherings.  In a way, this is the ideal opportunity to implement a solid practice because the need is greater.
+
+Sometimes all it takes is a mind-shift that only a full practice is worthwhile.  Any practice is going to be better than none!  If you only have 5 minutes, then do 2 Earth Salutations and 3 Sun Salutations.  You will feel better, having focused your mind, energized your body and reinforced positive behaviour.
+
+Of course, if you have more time... and here let me suggest that you actually book your self-practice as an appointment in your diary – the same as you would for the dentist, doctor or any professional meeting – then use the Knoff Yoga system to get the most out of your limited and precious time.
+
+In Knoff Yoga there are 11 Asana Groups creating a balanced practice:
+
+Earth & Sun Salutations
+
+Inverted Poses (heating)
+
+Standing Poses
+
+Arm Balancings
+
+Forward Bends
+
+Sitting Poses
+
+Abdominals
+
+Twists
+
+Backbends
+
+Inverted Poses (cooling)
+
+Relaxation
+
+When you are short of time, instead of doing the whole program (Discovery, Foundation, Intermediate, Advanced or Master), where there are multiple postures in each Asana Group, do just 1 or 2 from each group.  You will still get a good work-out and importantly it will be balanced!
+
+Let''s briefly discuss overindulging with food, alcohol and partying.  Obviously not a good idea in supporting your long-term health and spiritual growth plans.  I highly recommend either completely avoiding, or at least decreasing your holiday alcohol consumption.  Yes, there is some social lubrication that happens, but more likely is a sick gut and a thick head.
+
+It is so easy to over-eat during the holidays and getting on your mat each morning will give you direct feed-back if you have overdone it.  If you don''t get on your mat, you can easily spin out of control and take weeks or months to regain your balance.
+
+Family and friends deserve your best and so do you.  Your best behaviour is in your best interest and will also be a positive influence on others who may not have your discipline, insight or life skills.
+
+James E. Bryan E.R.Y.T. 500', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/James_copy/James_copy_gallery.jpg', '2014-11-21T01:04:49+10:00'),
+  ('fascia-release-with-yoga1', 'Fascia Release with Yoga', 'The Yoga School', 'Fascia is a structure of connective tissue that surrounds muscles, groups of muscles, blood vessels, and nerves, binding some structures together, while permitting…', 'Fascia is a structure of connective tissue that surrounds muscles, groups of muscles, blood vessels, and nerves, binding some structures together, while permitting others to slide smoothly over each other.
+
+Fascia is called soft-tissue and provides support for most other tissues in the body, including muscles.  This soft tissue can become restricted due to trauma, injury, overuse, or inactivity – causing pain and tension. It can also limit the ability of your muscles to have proper blood flow.
+
+This restriction is felt as stiffness at first, then low level pain, and then pain that will make you seek out a health professional.
+
+Be pro-active and invest in your long-term health with Knoff Yoga.  Correctly practicing yoga can dramatically improve your posture, flexibility, gait and agility, because it focuses on releasing the fascia throughout your entire body.
+
+Practicing Knoff Yoga promotes physical improvement, but you will also experience better brain function as you learn to meditate and control your breath.  Meditation and breath control also help with stress and tension.
+
+The effects of yoga last for 4 days. By attending 2 classes per week, you will feel results straight away.
+
+Normal
+
+0
+
+false
+
+false
+
+false
+
+EN-AU
+
+JA
+
+X-NONE', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-06-25_at_12_13_28_pm/Screen_Shot_2014-06-25_at_12_13_28_pm_gallery.png', '2014-06-24T21:21:32+10:00'),
+  ('yoga-for-balance', 'Yoga for Balance', 'The Yoga School', 'Life can be stressful and almost everyone is experiencing the speeding up of just about everything, so there is the feeling of not being centered.', 'Life can be stressful and almost everyone is experiencing the speeding up of just about everything, so there is the feeling of not being centered.
+
+While most people come to yoga initially for a physical problem, they end up staying long-term because they simply feel better in their body/mind and start to discover their inner balance.
+
+It is not that problems disappear, but that yoga provides a set of tools to skillfully handle the stresses associated with living.
+
+The major underlying concept of yoga is one of balance.  Balance between flexibility and strength.  Balance between effort and relaxation, and even balance between the right and left hemispheres of the brain.
+
+This balancing of the right and left hemispheres creates a sense of wholeness.  When we are one side dominant in our brain activity we feel “out of balance” and often this is perceived as being cut off from family, friends, colleagues or nature.  The reality is that we are cut off from ourselves.
+
+Centering takes place at different levels.  First with the body, then with the breath and increasingly with the mind.  Yoga provides so many benefits that a regular practitioner wonders how “normal” people get by.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-05-27_at_9_12_59_pm/Screen_Shot_2014-05-27_at_9_12_59_pm_gallery.png', '2014-05-27T06:27:57+10:00'),
+  ('yoga-for-controlling-the-wandering-mind', 'Yoga For Controlling the Wandering Mind', 'The Yoga School', 'The untrained mind is always wandering from thought to thought, from desire to desire, and from aversion to aversion.  The mind gravitates towards things that give…', 'The untrained mind is always wandering from thought to thought, from desire to desire, and from aversion to aversion.  The mind gravitates towards things that give it pleasure and pushes away those that cause pain or suffering.
+
+Without training in ''mindfulness'' or ''paying attention to the present moment'', most people are at the mercy of their thoughts and cannot harness the power of their brain.
+
+This inability to focus, to steady the mind is part of a condition know as Attention Deficit Hyperactivity Disorder (ADHD), and it affects both children and adults.
+
+Yoga, when taught correctly, is a cognitive control exercise that enhances the ability to self-regulate your internal distractions.
+
+To help control your mind and activate Alpha Waves (relaxed concentration) in your yoga practice, it is essential to constantly engage three techniques:
+
+• Ujjayi Pranayama – an expanded, rhythmic, and balanced breath, that engages all of the lungs and helps shift the autonomic nervous system towards the parasympathetic side – relaxation response.
+
+• Mula Bandha – the activation of the pelvic floor muscles and also the gentle pulling in and upwards of the lower abdominal muscles.  Mula Bandha helps to take weight off the spine and stabilize the sacrum plate, which protects the lumbar spine from compression.
+
+• Drishti – specific focal points for the eyes when practicing, so that 20% of the vision is external and 80% is directed internally.  When the eyes are darting around, it is a clear indication that the mind is unsteady.
+
+These three techniques do not happen spontaneously and must be consciously applied, especially when maintaining them throughout a practice.  Like Neptune''s three-pronged Trident, when the three techniques are activated, they hold the mind steady and make it possible to be fully in the present moment.
+
+The regular practice of yoga brings great gifts of flexibility and strength, but its gem is what it can do for your mind – creating a clear cloudless sky for the enjoyment of your soul.
+
+“The physical body is not only a temple for our soul, but the means by which we embark on the inward journey toward the core.”
+
+― B.K.S. Iyengar', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-05-20_at_5_17_01_pm/Screen_Shot_2014-05-20_at_5_17_01_pm_gallery.png', '2014-05-20T02:26:31+10:00'),
+  ('life-is-simple', 'Life is Simple', 'The Yoga School', 'Life is complicated but it is also simple.  The things we need to focus upon and put our energy into are right in front of our face.  How is your health?  How are…', 'Life is complicated but it is also simple.  The things we need to focus upon and put our energy into are right in front of our face.  How is your health?  How are your relationships?  How are your finances?
+
+Practicing yoga provides benefits in all of these areas – plus more!
+
+Your physical health is improved with anatomically aligned postures, pranayama or breath-work increases vitality, and conscious relaxation gives you the tools to unknot habitual habit patterns.  Your mental health is improved with the concentration required in both postures and meditation.
+
+The world does indeed revolve around you!  If you are centred, happy and full of energy, then you will be a positive influence to those around you and importantly you will attract people, situations and events that support your intention.
+
+The more clear you are in all aspects: mind, emotions, energy, etc. the more you influence your environment.  Your vitality and vibration is stronger and has a deeper penetration into the world.
+
+With yoga philosophy, this energy is focused in the right directions: health, relationships and your livelihood.  When you realize that what you do with your life directly impacts everything, then you start making wiser decisions, because you better understand the contributions you can make.
+
+When you make mistakes, you are quicker to correct them and implement the lessons.  When you have successes, you see how much others have helped you achieve them.
+
+Life is complicated when we are tired, muddled headed and irritated.  Life is simple when we have abundant energy, clear direction and bring our passion into play.
+
+What direction do you want your life to take?  Do you prefer to be happy or dull and dismal?  I think it is a simple choice and the decision to practice yoga daily is a ''no brainer''.  Think it through, make a decision and then stop arguing with yourself.  Get on the mat, take the benefits you gain into life, and share yoga with all you can.
+
+See you on the mat!
+
+Namaste
+
+James E. Bryan E.R.Y.T. 500', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-05-15_at_9_04_36_pm/Screen_Shot_2014-05-15_at_9_04_36_pm_gallery.png', '2014-05-15T06:09:22+10:00'),
+  ('changing-your-brain-wave-patterns-can-make-you-happier', 'Changing your brain wave patterns can make you happier', 'The Yoga School', 'There are four brain wave patterns: beta, alpha, theta and delta.  These waves are very much like ocean waves, with peaks and troughs.', 'There are four brain wave patterns: beta, alpha, theta and delta.  These waves are very much like ocean waves, with peaks and troughs.
+
+Beta is where we are most of the time with everyday awareness.  The waves are short and choppy and the mind tends to be very busy and not settled.  Beta is felt throughout the body as static/stress, a little like a radio that is not fully tuned into a station.
+
+Alpha is the next level down in awareness and these waves are bigger, but have more space between them.  Alpha is the best place to be for a yoga practice.  Alpha is felt as relaxed awareness and is easily achieved with the right techniques.
+
+Theta and Delta waves are deeper again and it takes a fair amount of serious meditation to slow the mind down to these levels.  These waves are bigger and the spaces in between are much wider – more peace in the head and nervous system.
+
+When we are in Beta our brain operates predominately on one side.  In the West we tend to be left brain dominate.  We are one sided this can feel as if we are cut off from others or nature, but in reality we are cut off from ourselves.
+
+The stronger we concentrate, the deeper we go in the brain wave patterns, and the more effectively the two hemispheres of the brain communicate with each other.  From a yoga perspective this is important.  When they are not communicating, we do not feel whole.  Often people feel as if they are not connected to family, friends, nature, or even themselves - a feeling of being alone in the universe.
+
+Yoga addresses this disconnect with concentration and meditation techniques.  An extremely simple, yet highly effective technique is to practice breath awareness.  Sitting comfortably with the spine erect and the pelvic floor muscles slightly activated to ensure the mind is alert.  Do 30 to 60 seconds of deeper breathing and observe the flow of air in the nostrils.  Keep the mind located inside the nose.  Once the mind has been directed to the breath, then release the expanded breathing and work with an uncontrolled, normal breath.  Do this for a minimum of 5 minutes and gradually over a few months, build up to 20 minutes.
+
+The idea is to deepen the concentration, which will slow the brain wave patterns down, shifting from Beta to Alpha.  Then the two hemispheres start to communicate more efficiently and we begin to feel whole.  With regular yoga practice you start to feel happy for no special reason – a result of you connecting more deeply within yourself.
+
+There are some physical sensations associated with the changing waves.  The brain feels like it is settling – slightly contracting inwards away from the skull.  It also feels like it is cooling.  It is easy to feel the balance between the two hemispheres and in meditation we endeavor to keep everything even, including the two sides of the brain.
+
+Once you have achieved Alpha waves, we then take control of the breath with a technique called Ujjayi Pranayama which will be the topic of the next post.
+
+Namaste
+
+James E. Bryan E.R.Y.T. 500', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-05-08_at_9_38_03_pm/Screen_Shot_2014-05-08_at_9_38_03_pm_gallery.png', '2014-05-08T06:38:43+10:00'),
+  ('the-why-of-yoga', 'The Why of Yoga', 'The Yoga School', 'Yoga was created to help human beings find optimum health. The system designed by the ancient yogis included eight limbs or parts and today in the West is called…', 'Yoga was created to help human beings find optimum health. The system designed by the ancient yogis included eight limbs or parts and today in the West is called Ashtanga Yoga, with Ashta = 8 and Anga = Limbs.
+
+These 8 Limbs consist of:
+
+Yama – our attitude towards our environment – social conduct
+
+Niyama – our attitude towards ourselves – personal behaviour
+
+Asana – the practice of mind/body exercises
+
+Pranayama – the control and expansion of vital energy or life-force
+
+Pratyahara – withdrawing the mind from the sensory organs
+
+Dharana – the ability to direct and concentrate our mind
+
+Dhyana – sustained concentration or meditation
+
+Samadhi – a profound sense of belonging in the universe, of oneness with the life-force
+
+In practice it is actually quite simple:
+
+Adopt the Golden Rule of “treating others as you would like to be treated”.
+
+Keep yourself clean in body and mind. Avoid toxic food, people and situations.
+
+Practice yoga poses with sustained holds.
+
+Increase your capacity to breathe deeply, evenly and smoothly.
+
+From time to time, turn your attention inwards to give your mind a rest.
+
+Learn the skill of controlling your thoughts.
+
+Get proficient and change your brain wave patterns from Beta to Alpha or lower.
+
+Make life choices that incorporate simplicity and allow happiness to express itself through congruent living.
+
+Everyone on the planet has 24 hours each day. Every decision you make as to what you do with these hours, takes you towards more health and happiness, or not, but it is a choice!
+
+By adopting even some of the yoga guidelines, we get more out of life. By gradually becoming healthier and happier, we attract like minded people into our life, creating a positive and uplifting cycle of conscious living.
+
+The human condition has not changed since ancient times. People still do stress for all the “normal” reasons: family, friends, financial, health, etc. One of the teachings of yoga is that “to change your world, you must first change yourself”. The yoga system of 8 Limbs is designed to give guidance and direction, but you are the decision maker.
+
+If you are not happy with any aspect of your life, then change it. How? Go to a yoga class and pay attention to what the teacher has to say. You will learn something useful!
+
+Written by James E. Bryan E.R.Y.T. 500 (Program Director)', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/photo-gallery/Screen_Shot_2014-04-09_at_2_49_53_pm/Screen_Shot_2014-04-09_at_2_49_53_pm_gallery.png', '2014-04-08T23:53:38+10:00'),
+  ('yoga-is-a-complete-system', 'Yoga is a Complete System', 'The Yoga School', 'Yoga is much more than Pilates or a Pump class.  Yoga is a complete system, a sophisticated tool for taming an unruly mind and building a strong and flexible body.', 'Yoga is much more than Pilates or a Pump class.  Yoga is a complete system, a sophisticated tool for taming an unruly mind and building a strong and flexible body.
+
+Yoga was designed to bring balance to all aspects of the body/mind/spirit.  There are physical postures for the body,  breathing techniques for the nervous system, meditation techniques for the busy mind and the whole thing is based on a positive, uplifting philosophy.
+
+You get benefit when you start using your body correctly, start focusing your mind and expanding your breath.  You get benefit from your very first class.
+
+We age, but we don''t have to get old.  Old is both a state of mind and a physical condition.  With yoga we can keep flexible.  We can maintain functional strength, and we can keep a positive attitude towards all that life has to offer us.
+
+95% of your practice is getting from your house to The Yoga School.  Just come.  No compromise, no excuses.  You will always be welcome and glad you make the small effort for a substantial return of good health and well-being.
+
+The effects of yoga last for 4 days, so it is important to practice twice per week in order to retain the benefits and progress.
+
+The Yoga School is located at the Piccones Shopping Village on Pease St.  Join our on-going 5-Week Introduction to Yoga Course.  We supply all equipment, including top quality mats, plus an extensive Home Practice Guide.
+
+Written by James E. Bryan E.R.Y.T. 500 (Program Director)
+
+Bookingscan be made online www.theyogaschool.com.au or by calling Program Manager, James E. Bryan on 0415 362 534.', 'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/bw-gallery/IMG_8242/IMG_8242_gallery.jpg', '2014-03-23T05:02:36+10:00')
+on conflict (slug) do update set title = excluded.title, author = excluded.author, excerpt = excluded.excerpt, body = excluded.body,
+  image_url = excluded.image_url, published_at = excluded.published_at;
+
+-- ---------------------------------------------------------------------
+-- Prices (from the current prices page). Re-running replaces this list.
+-- ---------------------------------------------------------------------
+delete from public.prices;
+insert into public.prices (category, name, price, price_label, period, description, features, terms, badge, featured, cta_label, cta_url, sort) values
+  ('membership', 'Yoga Only', 80, null, 'fortnight', 'Unlimited access to all regular TYS yoga classes.',
+    array['Knoff Yoga, Yin Yoga & Chair Yoga', 'Monthly Sunday Sessions', '10% off retail · $10 child’s passes', '1 free pass a month for a friend or family member'],
+    'Minimum 12-week commitment · Fortnightly direct debit', null, false, 'Join Yoga Only', '/pages/contact-us?enquiry=Yoga%20Only%20membership', 10),
+  ('membership', 'Everything', 98, null, 'fortnight', 'All TYS yoga plus Shoshin strength & mobility classes.',
+    array['Unlimited yoga & Shoshin classes', 'Monthly Sunday Sessions', '10% off retail · $10 child’s passes', '1 free pass a month for a friend or family member'],
+    'Minimum 12-week commitment · Fortnightly direct debit', 'All access', true, 'Join Everything', '/pages/contact-us?enquiry=Everything%20membership', 20),
+  ('membership', 'Shoshin Only', 80, null, 'fortnight', 'Unlimited access to all Shoshin strength & mobility classes.',
+    array['All Shoshin strength & mobility classes', '10% off retail', '$10 child’s passes', '1 free pass a month for a friend or family member'],
+    'Minimum 12-week commitment · Fortnightly direct debit', null, false, 'Join Shoshin Only', '/pages/contact-us?enquiry=Shoshin%20Only%20membership', 30),
+  ('other', '30 days unlimited (new students)', 99, null, null, '30 days of unlimited classes for new students. Conditions apply.', '{}', null, 'New students', false,
+    'Claim offer', 'https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989', 40),
+  ('drop_in', 'Adult', 35, null, null, null, '{}', null, null, false, null, null, 100),
+  ('drop_in', 'Child (aged 6–12)', 14, null, null, null, '{}', null, null, false, null, null, 110),
+  ('chair', '1 class', 20, null, null, null, '{}', null, null, false, null, null, 200),
+  ('chair', '5 classes', 100, null, null, null, '{}', null, null, false, null, null, 210),
+  ('class_pass', '5 classes', 120, null, null, 'Valid 6 months from first use.', '{}', null, null, false, null, null, 300),
+  ('class_pass', '20 classes', 360, null, null, 'Valid 12 months from first use.', '{}', null, null, false, null, null, 310),
+  ('unlimited', '180 days (max 3-week hold)', 1045, null, null, 'Includes all Yoga and Shoshin classes, 10% off retail, $10 child’s passes and 1 complimentary pass per month for a friend or family member.', '{}', null, null, false, null, null, 400),
+  ('unlimited', '365 days (max 6-week hold)', 1969, null, null, null, '{}', null, null, false, null, null, 410),
+  ('private', '1 person: 60 / 90 min', null, '$120 / $160', null, null, '{}', null, null, false, null, null, 500),
+  ('private', 'Pack of 4: 60 / 90 min (each)', null, '$105 / $145', null, 'Prepaid, valid 12 months.', '{}', null, null, false, null, null, 510),
+  ('private', '2 people: 60 / 90 min', null, '$160 / $200', null, null, '{}', null, null, false, null, null, 520);
+
+-- ---------------------------------------------------------------------
+-- Gift vouchers: prices from the OLD gift voucher page (they differ from
+-- current class prices), so they start UNPUBLISHED. Check, edit, then
+-- tick "published" in /admin.
+-- ---------------------------------------------------------------------
+delete from public.gift_vouchers;
+insert into public.gift_vouchers (name, price, description, sort, published) values
+  ('1 class', 30, 'A single class at The Yoga School.', 10, false),
+  ('5 classes', 110, 'A 5-class pack.', 20, false),
+  ('20 classes', 320, 'A 20-class pack.', 30, false),
+  ('30 days unlimited (new students only)', 99, '30 days of unlimited classes for someone new to The Yoga School.', 40, false);
+
+-- ---------------------------------------------------------------------
+-- Shop
+-- ---------------------------------------------------------------------
+delete from public.shop_products;
+insert into public.shop_products (name, category, description, price, image_url, buy_url, sort) values
+  ('Timber meditation seat', 'Meditation', 'A quality timber meditation seat, locally made to our specifications and purchased directly from us.', null,
+    'https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/meditation-stool-336x280.jpg', null, 10),
+  ('Props & equipment', 'Props', 'Browse yoga props and equipment in our online shop.', null, null, 'https://momence.com/The-Yoga-School/products/23652', 20);
+
+-- ---------------------------------------------------------------------
+-- Timetable: imported from the live Momence timetable (week of
+-- 13 October 2026) and converted to Cairns time. Starts UNPUBLISHED:
+-- check each class in /admin, then publish. Until a class is published,
+-- the timetable page keeps showing the Momence widget only.
+-- ---------------------------------------------------------------------
+delete from public.timetable;
+insert into public.timetable (day_of_week, start_time, end_time, class_name, class_slug, teacher, notes, published) values
+  (2, '17:45', '18:45', 'All Levels', 'all', 'Rossi Postler', 'Imported from Momence: please check', false),
+  (3, '10:00', '11:15', 'All Levels Mid-week Yoga', 'all', 'Tanja Richter', 'Imported from Momence: please check', false),
+  (3, '16:30', '17:30', 'Beginner Level 2', 'l2', 'Tanja Richter', 'Imported from Momence: please check', false),
+  (3, '17:45', '18:45', 'Yin Yoga', 'yin', 'Tanja Richter', 'Imported from Momence: please check', false),
+  (4, '06:00', '07:00', 'All Levels', 'all', 'Jennifer Earl', 'Imported from Momence: please check', false),
+  (4, '10:00', '11:15', 'Beginner Level 2', 'l2', 'Pennie Burke', 'Imported from Momence: please check', false),
+  (4, '17:15', '18:15', 'Shoshin Strength', 'shoshin', 'Lindsay Welch', 'Imported from Momence: please check', false),
+  (4, '18:15', '19:15', 'Shoshin Mobility', 'shoshin', 'Lindsay Welch', 'Imported from Momence: please check', false),
+  (5, '10:00', '11:15', 'All Levels', 'all', 'Pennie Burke', 'Imported from Momence: please check', false),
+  (5, '16:30', '17:30', 'Shoshin Strength', 'shoshin', 'Lindsay Welch', 'Imported from Momence: please check', false),
+  (5, '17:45', '18:45', 'Yin Yoga', 'yin', 'Sara Durward Brown', 'Imported from Momence: please check', false),
+  (6, '08:30', '09:30', 'All Levels', 'all', 'Pennie Burke', 'Imported from Momence: please check', false),
+  (6, '10:00', '11:15', 'Beginner Level 2', 'l2', 'Rossi Postler', 'Imported from Momence: please check', false),
+  (7, '08:30', '10:00', 'Intermediate (Level 3)', 'l3', 'Rossi Postler', 'Imported from Momence: please check', false);
+
+-- Events: none yet. Add upcoming workshops in /admin > Events.

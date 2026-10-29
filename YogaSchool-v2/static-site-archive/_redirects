@@ -1,0 +1,2 @@
+# Netlify: /pages/classes is served from pages/classes.html automatically (Pretty URLs).
+/pages/*.html  /pages/:splat  301

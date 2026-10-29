@@ -1,0 +1,11 @@
+{
+  "name": "theyogaschool",
+  "private": true,
+  "description": "Shortcuts: the Next.js app lives in ./web",
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "start": "npm --prefix web run start",
+    "postinstall": "npm --prefix web install"
+  }
+}
