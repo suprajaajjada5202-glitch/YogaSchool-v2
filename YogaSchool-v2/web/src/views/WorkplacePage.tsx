@@ -2,6 +2,7 @@
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { SplitWords } from "@/components/SplitWords";
 import { seo } from "@/lib/seo";
 
 export default function WorkplacePage() {
@@ -73,7 +74,7 @@ export default function WorkplacePage() {
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" aria-labelledby="wp-title">
+      <section className="section wp-help" aria-labelledby="wp-title">
         {" "}
         <div className="container split split--even">
           {" "}
@@ -81,7 +82,10 @@ export default function WorkplacePage() {
             {" "}
             <p className="eyebrow">How we help</p>{" "}
             <h2 id="wp-title">
-              Breath work, yoga and <em>meditation</em>
+              <SplitWords text="Breath work, yoga and" />{" "}
+              <em>
+                <SplitWords text="meditation" start={4} />
+              </em>
             </h2>{" "}
             <p className="lead">
               The Yoga School works with many local companies, government bodies and private groups, assisting with their
@@ -92,6 +96,7 @@ export default function WorkplacePage() {
               <li>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path
+                    pathLength="1"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.8"
@@ -105,6 +110,7 @@ export default function WorkplacePage() {
               <li>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path
+                    pathLength="1"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.8"
@@ -118,9 +124,9 @@ export default function WorkplacePage() {
               <li>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <g fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <circle cx="9" cy="8" r="3" />
-                    <circle cx="17" cy="9" r="2.5" />
-                    <path d="M3 20a6 6 0 0 1 12 0M15 20a4.5 4.5 0 0 1 6-4.2" />
+                    <circle cx="9" cy="8" r="3" pathLength="1" />
+                    <circle cx="17" cy="9" r="2.5" pathLength="1" />
+                    <path d="M3 20a6 6 0 0 1 12 0M15 20a4.5 4.5 0 0 1 6-4.2" pathLength="1" />
                   </g>
                 </svg>
                 Better team dynamics

@@ -55,15 +55,17 @@ export function Reveal({ as = "div", delay, className, children, ...rest }: Prop
       io.observe(el);
       return () => io.disconnect();
     }
-    // Repeat: shown once a fifth of it is above the bottom 12% of the screen, so the entrance is seen; hidden only
-    // when fully off screen, so it never disappears while any of it shows
+    // Repeat: shown once it rises past a line 24px above the bottom edge (with the hidden offset, about 64px of it is
+    // on screen, whatever its height), so it never sits blank on screen; hidden only when fully off screen, so it
+    // never disappears while any of it shows. Each callback reads the latest change, not the oldest queued one.
     const show = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.2) setVisible(true);
+      (entries) => {
+        if (entries[entries.length - 1].isIntersecting) setVisible(true);
       },
-      { threshold: [0, 0.2], rootMargin: "0px 0px -12% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -24px 0px" },
     );
-    const hide = new IntersectionObserver(([entry]) => {
+    const hide = new IntersectionObserver((entries) => {
+      const entry = entries[entries.length - 1];
       if (entry.isIntersecting) return;
       setVisible(false);
       setFrom(entry.boundingClientRect.top < (entry.rootBounds?.top ?? 0) ? "top" : "bottom");

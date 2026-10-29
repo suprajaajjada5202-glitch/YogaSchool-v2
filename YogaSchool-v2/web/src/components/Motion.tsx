@@ -69,7 +69,8 @@ function skip(el: HTMLElement, cs: CSSStyleDeclaration) {
     cs.display === "none" ||
     cs.position === "absolute" ||
     cs.position === "fixed" ||
-    el.matches("script, style, template, dialog, .sr-only")
+    el.matches("script, style, template, dialog, .sr-only") ||
+    el.hasAttribute("data-motion-skip") // a block with motion of its own (the gallery mosaic)
   );
 }
 

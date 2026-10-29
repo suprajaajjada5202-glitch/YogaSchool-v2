@@ -28,35 +28,41 @@ export function HeroSlider() {
     [current],
   );
 
+  // Scrolled out of view, the slideshow rests (no timer, decorations paused in CSS via is-offscreen)
+  const hero = useRef<HTMLElement>(null);
+  const [offscreen, setOffscreen] = useState(false);
   useEffect(() => {
-    if (paused) return;
+    const el = hero.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((entries) => setOffscreen(!entries[entries.length - 1].isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  // Back in view: the slide's progress bar and text start afresh, in step with the restarted timer
+  const wasOffscreen = useRef(false);
+  useEffect(() => {
+    if (wasOffscreen.current && !offscreen) setCycle((c) => c + 1);
+    wasOffscreen.current = offscreen;
+  }, [offscreen]);
+
+  // With reduced motion the slideshow starts paused; its play button still runs it
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPaused(true);
+  }, []);
+
+  useEffect(() => {
+    if (paused || offscreen) return;
     const t = setTimeout(() => {
       if (!document.hidden) go(current + 1);
     }, DURATION);
     return () => clearTimeout(t);
-  }, [current, paused, cycle, go]);
+  }, [current, paused, offscreen, cycle, go]);
 
   useEffect(() => {
     const onLoad = () => setLoaded((s) => new Set(s).add(1));
     if (document.readyState === "complete") onLoad();
     else window.addEventListener("load", onLoad, { once: true });
     return () => window.removeEventListener("load", onLoad);
-  }, []);
-
-  // The text builds in once the first photo is decoded and on screen, so the entrance is seen instead of being spent
-  // while the page is still loading (CSS holds it until "is-ready"; a timer makes sure it never waits long)
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    const img = document.querySelector<HTMLImageElement>(".home-hero .hero__slide.is-active img");
-    let done = false;
-    const start = () => {
-      if (done) return;
-      done = true;
-      requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)));
-    };
-    (img?.decode ? img.decode() : Promise.resolve()).then(start, start);
-    const t = setTimeout(start, 1200);
-    return () => clearTimeout(t);
   }, []);
 
   // A video plays only while its slide shows and the slideshow runs; with reduced motion its photo stays instead
@@ -71,7 +77,8 @@ export function HeroSlider() {
 
   return (
     <section
-      className={`home-hero on-dark${paused ? " is-paused" : ""}${ready ? " is-ready" : ""}`}
+      ref={hero}
+      className={`home-hero on-dark${paused ? " is-paused" : ""}${offscreen ? " is-offscreen" : ""}`}
       aria-roledescription="carousel"
       aria-label="The Yoga School studio"
       style={{ "--hero-dur": `${DURATION}ms` } as CSSProperties}
@@ -147,9 +154,11 @@ export function HeroSlider() {
             </a>
           </div>
         </div>
-        {/* Scroll cue down to the classes (large screens only, see .hero__scroll) */}
-        <a className="hero__scroll" href="#classes-title" aria-label="Scroll down to our classes"></a>
       </div>
+
+      {/* Scroll cue down to the classes (large screens only, see .hero__scroll); it targets the section, which never
+          moves, so the heading lands clear of the header */}
+      <a className="hero__scroll" href="#our-classes" aria-label="Scroll down to our classes"></a>
 
       <div className="home-hero__controls">
         {/* Announced only when paused, not on every automatic change */}

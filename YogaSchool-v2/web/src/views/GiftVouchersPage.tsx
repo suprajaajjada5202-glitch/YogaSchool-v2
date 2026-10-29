@@ -11,7 +11,7 @@ export default async function GiftVouchersPage() {
   return (
     <>
       {" "}
-      <section className="page-hero">
+      <section className="page-hero page-hero--gift">
         {" "}
         <svg className="blob blob--a" viewBox="0 0 500 500" aria-hidden="true">
           <path
@@ -84,7 +84,7 @@ export default async function GiftVouchersPage() {
         <div className="container">
           {" "}
           <Vouchers vouchers={vouchers}>
-            <div className="info-cards">
+            <div className="info-cards gift-cards">
               {" "}
               <Reveal className="info-card">
                 <span className="feature__icon">
@@ -95,6 +95,7 @@ export default async function GiftVouchersPage() {
                       strokeWidth="1.8"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      pathLength={1}
                       d="M4 8h16v12H4zM12 8v12M4 12h16"
                     />
                   </svg>
@@ -117,6 +118,7 @@ export default async function GiftVouchersPage() {
                       strokeWidth="1.8"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      pathLength={1}
                       d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3z"
                     />
                   </svg>
@@ -144,6 +146,7 @@ export default async function GiftVouchersPage() {
                       strokeWidth="1.8"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      pathLength={1}
                       d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"
                     />
                   </svg>

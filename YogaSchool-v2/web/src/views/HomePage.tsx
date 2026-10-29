@@ -6,6 +6,8 @@ import { MembershipTiles, PassesTeaser } from "@/components/Prices";
 import { Reveal, RevealRepeat } from "@/components/Reveal";
 import { ModalityCards } from "@/components/ClassRows";
 import { JsonLd } from "@/components/JsonLd";
+import { MembershipPicks } from "@/components/MembershipPicks";
+import { OmCorner } from "@/components/OmCorner";
 import { modalities } from "@/data/content";
 import { seo } from "@/lib/seo";
 import { getClasses, getMemberships, getPasses } from "@/lib/data";
@@ -14,8 +16,8 @@ import { getClasses, getMemberships, getPasses } from "@/lib/data";
 const WHY = [
   {
     icon: "M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1ZM4 10h16M8 3v4M16 3v4",
-    title: "Decades of Experience",
-    text: "Over 80 years of combined teaching experience from our Master Teachers.",
+    title: "Established 2013",
+    text: "A trusted part of the local community for over a decade.",
   },
   {
     icon: "M9 8a3 3 0 1 0 0 .01M3 20a6 6 0 0 1 12 0M17 11a2.5 2.5 0 1 0 0-.01M15.5 20a4.5 4.5 0 0 1 5.5-4.4",
@@ -41,7 +43,8 @@ export default async function HomePage() {
   return (
     <RevealRepeat>
       <HeroSlider />
-      <section className="section home-classes" aria-labelledby="classes-title">
+      <section className="section home-classes" id="our-classes" aria-labelledby="classes-title">
+        <OmCorner />
         <div className="container">
           <Reveal className="home-head home-head--row">
             <div>
@@ -57,6 +60,7 @@ export default async function HomePage() {
         </div>
       </section>
       <section className="section section--dark on-dark home-why" aria-labelledby="why-title">
+        <OmCorner side="left" />
         <div className="container home-why__grid">
           <Reveal className="home-head home-head--left">
             <p className="home-eyebrow">Why The Yoga School?</p>
@@ -80,6 +84,7 @@ export default async function HomePage() {
         </div>
       </section>
       <section className="section home-plans" aria-labelledby="plans-title">
+        <OmCorner />
         <div className="container">
           <Reveal className="home-head">
             <p className="home-eyebrow">Memberships</p>
@@ -90,6 +95,10 @@ export default async function HomePage() {
           <PassesTeaser groups={passes} />
         </div>
       </section>
+      {/* Three designs for the closing memberships section, shown together until one is chosen */}
+      <MembershipPicks variant="a" />
+      <MembershipPicks variant="b" />
+      <MembershipPicks variant="c" />
       <JsonLd data={seo("home").jsonLd} />
     </RevealRepeat>
   );

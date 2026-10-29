@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { teachers } from "@/data/content";
 import { Reveal } from "./Reveal";
 import { Sheet } from "./Sheet";
@@ -62,6 +62,12 @@ export function TeacherDirectory() {
                 height={p.photo.height}
                 loading="lazy"
               />
+              <span className="teacher__more" aria-hidden="true">
+                Read story
+                <svg>
+                  <use href="#i-arrow" />
+                </svg>
+              </span>
             </span>
             <h3>{p.name}</h3>
             <p className="teacher__role">{p.role}</p>
@@ -71,7 +77,8 @@ export function TeacherDirectory() {
 
       <Sheet open={t !== null} onClose={close} labelledBy="sheet-title">
         {t && prev && next && (
-          <>
+          // Keyed by teacher, so the profile plays in again on Previous / Next
+          <Fragment key={t.slug}>
             <div className="sheet__profile">
               <img src={t.photo.src} alt={t.photo.alt} width={t.photo.width} height={t.photo.height} />
               <div>
@@ -115,7 +122,7 @@ export function TeacherDirectory() {
                 </svg>
               </button>
             </nav>
-          </>
+          </Fragment>
         )}
       </Sheet>
     </>
