@@ -22,26 +22,23 @@ const linkify = (text: string) =>
     ),
   );
 
-/** Upcoming events from Supabase, then the live site's events, with a short note when there are none. Cards that come
-    on screen together reveal one after another (delay cycles 0, 1, 2; see EVENTS in globals.css). */
+/** Upcoming events from Supabase, then the live site's events, with a short note when there are none. */
 export function UpcomingEvents({ events, siteEvents = [] }: { events: EventItem[]; siteEvents?: SiteEvent[] }) {
   return (
     <div className="events">
-      <Reveal as="h2" className="book-head">
-        Upcoming events
-      </Reveal>
+      <h2 className="book-head">Upcoming events</h2>
       {!events.length && !siteEvents.length && (
-        <Reveal as="p" className="events__empty">
+        <p className="events__empty">
           No events are scheduled right now. Check back soon, or call <a href="tel:+61412499700">0412 499 700</a>.
-        </Reveal>
+        </p>
       )}
       <div className="events__list">
-        {events.map((e, i) => {
+        {events.map((e) => {
           const when =
             fmt(e.startsAt, { weekday: "long", hour: "numeric", minute: "2-digit" }) +
             (e.endsAt ? ` – ${fmt(e.endsAt, { hour: "numeric", minute: "2-digit" })}` : "");
           return (
-            <Reveal as="article" className="event" key={e.id} delay={i % 3 || undefined}>
+            <Reveal as="article" className="event" key={e.id}>
               <p className="event__date">
                 <b>{fmt(e.startsAt, { day: "numeric" })}</b>
                 {fmt(e.startsAt, { month: "short" })}
@@ -72,13 +69,8 @@ export function UpcomingEvents({ events, siteEvents = [] }: { events: EventItem[
             </Reveal>
           );
         })}
-        {siteEvents.map(({ id, badge, heading: [title, ...dates], body, links }, i) => (
-          <Reveal
-            as="article"
-            className={badge ? "event" : "event event--nodate"}
-            key={id}
-            delay={(events.length + i) % 3 || undefined}
-          >
+        {siteEvents.map(({ id, badge, heading: [title, ...dates], body, links }) => (
+          <Reveal as="article" className={badge ? "event" : "event event--nodate"} key={id}>
             {badge && (
               <p className="event__date">
                 <b>{badge.day}</b>

@@ -6,7 +6,6 @@ import { MembershipTiles, PassesTeaser } from "@/components/Prices";
 import { Reveal, RevealRepeat } from "@/components/Reveal";
 import { ModalityCards } from "@/components/ClassRows";
 import { JsonLd } from "@/components/JsonLd";
-import { MembershipPicks } from "@/components/MembershipPicks";
 import { OmCorner } from "@/components/OmCorner";
 import { modalities } from "@/data/content";
 import { seo } from "@/lib/seo";
@@ -95,10 +94,6 @@ export default async function HomePage() {
           <PassesTeaser groups={passes} />
         </div>
       </section>
-      {/* Three designs for the closing memberships section, shown together until one is chosen */}
-      <MembershipPicks variant="a" />
-      <MembershipPicks variant="b" />
-      <MembershipPicks variant="c" />
       <JsonLd data={seo("home").jsonLd} />
     </RevealRepeat>
   );

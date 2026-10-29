@@ -83,7 +83,7 @@ export default async function TimetablePage() {
           <Reveal as="p" className="schedule__help">
             Timetable not loading? Call <a href="tel:+61412499700">0412 499 700</a> and we’ll book you in.
           </Reveal>{" "}
-          <div className="info-cards">
+          <div className="info-cards tt-cards">
             {" "}
             <Reveal className="info-card">
               <span className="feature__icon">

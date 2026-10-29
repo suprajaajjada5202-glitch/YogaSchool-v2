@@ -6,8 +6,8 @@ import { useEffect } from "react";
    parts are watched as they appear:
    - class cards and day headings are hidden (data-tt "below" / "above") until a sixth of one is in view, inside the
      scrolling box and on the page, then shown ("in"), entering together one after another, and new cards after a
-     change cascade in. Shown cards stay while the box is on screen, so scrolling inside it stays smooth; once the
-     whole box is off screen they are hidden again, to come in again each time it comes back;
+     change cascade in. They are hidden again once fully out of view, so they come in again each time the page
+     brings them back, but never by the box's own scrolling, so scrolling inside it stays smooth;
    - the next class is marked (data-tt-next) for its accent: the first card while the list shows this week, every day,
      from its first page. It keeps the mark on any day or filter that lists it;
    - the selected day's position and width are measured, so a highlight can slide under it (none while all show). */
@@ -39,29 +39,31 @@ export function ScheduleMotion() {
           { threshold: [0, 0.15], rootMargin: "0px 0px -6% 0px" },
         )
       : null;
-    // The whole box off screen: every card is hidden again, set to enter from where it will come back into view (from
-    // above or below the box's view, or, with the box, from the edge the box left by)
-    const away = animate
+    // Hidden again once fully out of view, ready to come back from the edge it left by (of the screen or the box, which
+    // ever is nearer), but never while the box itself scrolls, so scrolling inside it never fades cards out and in
+    let boxScrolled = 0;
+    const onBoxScroll = () => (boxScrolled = performance.now());
+    box.addEventListener("scroll", onBoxScroll, { passive: true });
+    const hide = animate
       ? new IntersectionObserver((entries) => {
-          const { isIntersecting, boundingClientRect, rootBounds } = entries[entries.length - 1];
-          if (isIntersecting) return;
-          const side = boundingClientRect.top < (rootBounds?.top ?? 0) ? "above" : "below";
-          const view = box.getBoundingClientRect();
-          for (const el of tracked) {
-            const r = el.getBoundingClientRect();
-            el.dataset.tt = r.bottom <= view.top ? "above" : r.top >= view.bottom ? "below" : side;
+          if (performance.now() - boxScrolled < 250) return;
+          let edge: number | undefined;
+          for (const { target, isIntersecting, boundingClientRect: r, rootBounds } of entries) {
+            if (isIntersecting) continue;
+            edge ??= Math.max(box.getBoundingClientRect().top + box.clientTop, rootBounds?.top ?? 0);
+            (target as HTMLElement).dataset.tt = r.top < edge ? "above" : "below";
           }
         })
       : null;
-    away?.observe(box);
 
     const track = () => {
       for (const el of tracked) {
         if (el.isConnected) continue;
         show?.unobserve(el);
+        hide?.unobserve(el);
         tracked.delete(el);
       }
-      if (!show) return;
+      if (!show || !hide) return;
       const fresh = Array.from(box.querySelectorAll<HTMLElement>(CARDS)).filter((el) => !tracked.has(el));
       if (!fresh.length) return;
       // Set before the next paint, so a new card never flashes up before it enters (from above while the box is)
@@ -70,6 +72,7 @@ export function ScheduleMotion() {
         tracked.add(el);
         el.dataset.tt = side;
         show.observe(el);
+        hide.observe(el);
       }
     };
 
@@ -96,22 +99,26 @@ export function ScheduleMotion() {
       const appear = !!day && nav.style.getPropertyValue("--tt-on") !== "1";
       nav.style.setProperty("--tt-on", day ? "1" : "0");
       if (!day) return;
-      if (appear) nav.dataset.ttSnap = "";
       nav.style.setProperty("--tt-x", `${day.offsetLeft}px`);
       nav.style.setProperty("--tt-w", `${day.offsetWidth}px`);
+      // The slide is switched back on once a frame has drawn it in its new place
       if (appear) {
-        void getComputedStyle(nav, "::after").opacity; // takes the new place now, before the slide is switched back on
-        delete nav.dataset.ttSnap;
+        nav.dataset.ttSnap = "";
+        requestAnimationFrame(() => requestAnimationFrame(() => delete nav.dataset.ttSnap));
       }
     };
     const queue = () => {
       if (!raf) raf = requestAnimationFrame(place);
     };
 
-    const mo = new MutationObserver(() => {
+    const mo = new MutationObserver((records) => {
       track();
       mark();
-      queue();
+      // Another day chosen: the highlight moves before the next paint; other changes are measured once a frame
+      if (records.some((r) => r.type === "attributes")) {
+        cancelAnimationFrame(raf);
+        place();
+      } else queue();
     });
     mo.observe(box, { childList: true, subtree: true, attributes: true, attributeFilter: ["aria-selected"] });
     track();
@@ -121,7 +128,8 @@ export function ScheduleMotion() {
     return () => {
       mo.disconnect();
       show?.disconnect();
-      away?.disconnect();
+      hide?.disconnect();
+      box.removeEventListener("scroll", onBoxScroll);
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", queue);
     };
