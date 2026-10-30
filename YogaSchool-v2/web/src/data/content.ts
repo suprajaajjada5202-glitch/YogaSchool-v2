@@ -849,38 +849,38 @@ export const classes: ClassItem[] = [
 
 
 /** Home page "Our classes": the five ways to practise, each card linking to its class on /pages/classes.
-    PLACEHOLDER photos (crops of studio gallery shots): replace the files in public/images/modalities/ with the
-    final photos, keeping the file names (600 × 630 px, or any image of that shape). */
+    The photos in public/images/modalities/ are 1200 × 1260 px (sharp on high-resolution screens); to change one,
+    replace the file keeping its name and that shape. */
 export const modalities: Modality[] = [
   {
     name: "Knoff Yoga",
     blurb: "Experience, alignment and flexibility.",
     classMatch: null,
-    image: { src: "/images/modalities/knoff-yoga.jpg", alt: "A student in triangle pose", width: 600, height: 630 },
+    image: { src: "/images/modalities/knoff-yoga.jpg", alt: "A teacher adjusting a student in triangle pose", width: 600, height: 630 },
   },
   {
     name: "Strength",
     blurb: "Build real, usable strength.",
     classMatch: /strength|shoshin/i,
-    image: { src: "/images/modalities/strength.jpg", alt: "Students holding plank pose", width: 600, height: 630 },
+    image: { src: "/images/modalities/strength.jpg", alt: "Students in plank pose with yoga blocks", width: 600, height: 630 },
   },
   {
     name: "Mobility",
     blurb: "Move more freely and comfortably.",
     classMatch: /mobility|shoshin/i,
-    image: { src: "/images/modalities/mobility.jpg", alt: "A student in a deep seated stretch", width: 600, height: 630 },
+    image: { src: "/images/modalities/mobility.jpg", alt: "A student in a low lunge with hands on blocks", width: 600, height: 630 },
   },
   {
     name: "Chair Yoga",
     blurb: "Gentle, accessible movement.",
     classMatch: /chair/i,
-    image: { src: "/images/modalities/chair-yoga.jpg", alt: "Students sitting quietly in meditation", width: 600, height: 630 },
+    image: { src: "/images/modalities/chair-yoga.jpg", alt: "Students doing a seated side stretch on chairs", width: 600, height: 630 },
   },
   {
     name: "Yin Yoga",
     blurb: "Slow down, release and restore.",
     classMatch: /\byin\b/i,
-    image: { src: "/images/modalities/yin-yoga.jpg", alt: "A student folding forward with a strap", width: 600, height: 630 },
+    image: { src: "/images/modalities/yin-yoga.jpg", alt: "A student resting forward over a bolster", width: 600, height: 630 },
   },
 ];
 
