@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { LOGO, SITE_URL } from "@/lib/site";
-import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,18 +11,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfbfb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1626" },
-  ],
+  themeColor: "#0b1626",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // The site is dark only: <html data-theme="dark"> switches on the dark palette in globals.css everywhere
   return (
-    // suppressHydrationWarning: THEME_SCRIPT sets data-theme on <html> before React hydrates
-    <html lang="en-AU" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en-AU" data-theme="dark" data-scroll-behavior="smooth">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}

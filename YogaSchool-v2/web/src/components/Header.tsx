@@ -6,7 +6,6 @@ import { useBodyLock } from "@/hooks/useBodyLock";
 import { BOOK_URL, isExternal, LOGO, NAV, OFFER_URL, type NavEntry } from "@/lib/site";
 import { Use } from "./Icons";
 import { MegaMenu, MenuLink } from "./MegaMenu";
-import { ThemeToggle } from "./ThemeToggle";
 
 const HOME_PATHS = ["/", "/home", "/pages/home"];
 
@@ -177,7 +176,6 @@ export function Header() {
               <Link className="btn btn--primary btn--sm header-cta" href={BOOK_URL}>
                 Book a Class
               </Link>
-              <ThemeToggle />
               <button
                 ref={toggleBtn}
                 className="nav-toggle"
@@ -354,11 +352,6 @@ export function Header() {
                   />
                 </svg>
               </a>
-            </div>
-            {/* Light / dark mode lives here (the client's header mockup has no toggle in the bar) */}
-            <div className="menu__theme">
-              <span>Light or dark mode</span>
-              <ThemeToggle />
             </div>
           </div>
           {/* Pinned to the bottom of the panel, in thumb reach */}

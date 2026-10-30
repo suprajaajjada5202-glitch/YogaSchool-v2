@@ -82,10 +82,9 @@
 }
 
 /* =====================================================================
-       DARK MODE: <html data-theme="dark"> (set before first paint by the
-       script in app/layout.tsx from the visitor's choice or their device
-       setting). The navy sections, teal and pink brand colours stay put;
-       only the light surfaces and text turn dark / light.
+       DARK THEME: always on (<html data-theme="dark"> in app/layout.tsx).
+       The navy sections, teal and pink brand colours stay put; the light
+       surfaces and text below are swapped for their dark versions.
        ===================================================================== */
 :root[data-theme="dark"] {
   --c-bg: #0b1626;
@@ -924,50 +923,7 @@ button {
   gap: 8px;
   margin-left: auto;
 }
-.theme-toggle {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  flex: none;
-  padding: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--c-white);
-  cursor: pointer;
-  transition:
-    background-color var(--t),
-    color var(--t),
-    border-color var(--t),
-    transform var(--t) var(--ease);
-}
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.22);
-  transform: rotate(-12deg);
-}
-.is-solid .theme-toggle,
-.is-light .theme-toggle {
-  border-color: var(--c-line);
-  background: transparent;
-  color: var(--c-heading);
-}
-.is-solid .theme-toggle:hover,
-.is-light .theme-toggle:hover {
-  background: var(--c-light);
-}
-.theme-toggle svg {
-  width: 20px;
-  height: 20px;
-}
 /* Light mode shows the moon (switch to dark); dark mode shows the sun */
-.theme-toggle__sun,
-:root[data-theme="dark"] .theme-toggle__moon {
-  display: none;
-}
-:root[data-theme="dark"] .theme-toggle__sun {
-  display: block;
-}
 .header-cta {
   display: none;
 }
@@ -1449,25 +1405,6 @@ button {
   transition-delay: 0.32s;
 }
 /* Light / dark switch at the foot of the menu */
-.menu__theme {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: var(--s-2);
-  border-top: 1px solid var(--c-line);
-  font-size: var(--fs-sm);
-  color: var(--c-heading);
-}
-.menu__theme .theme-toggle {
-  border-color: var(--c-line);
-  background: transparent;
-  color: var(--c-heading);
-}
-.menu__theme .theme-toggle:hover {
-  background: var(--c-light);
-}
 /* Short screens: a tighter list (still 44px targets); landscape phones let "Book a Class" scroll with the rest */
 @media (max-height: 700px) {
   .menu__top {

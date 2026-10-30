@@ -8,7 +8,6 @@ import { NAV, TYPES } from "./config";
 import { ContentSection } from "./ContentSection";
 import { Dashboard } from "./Dashboard";
 import { Icon } from "./Icon";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Messages } from "./Messages";
 import { ToastProvider } from "./Toast";
 
@@ -345,7 +344,6 @@ export function AdminApp() {
             <img src={LOGO} alt="" width={30} height={30} />
             <span key={section}>{current}</span>
           </span>
-          <ThemeToggle />
         </header>
         <div className="a-scrim" aria-hidden="true" onClick={closeDrawer} />
         <aside className="a-side" id="a-side" aria-label="Admin menu">
@@ -391,7 +389,6 @@ export function AdminApp() {
             {NAV.slice(2).map((item, n) => navButton(item, n + 3))}
           </nav>
           <div className="a-side__foot">
-            <ThemeToggle />
             <div className="a-user">
               <span className="a-user__avatar" aria-hidden="true" title={user?.email}>
                 {(user?.email ?? "?").charAt(0).toUpperCase()}

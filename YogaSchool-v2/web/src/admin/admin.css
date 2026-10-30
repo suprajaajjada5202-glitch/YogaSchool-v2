@@ -348,12 +348,6 @@ body:has(.admin-root)::after {
   align-items: center;
   gap: 8px;
 }
-.a-side__foot .theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border-color: rgba(255, 255, 255, 0.14);
-}
 .a-user {
   flex: 1;
   min-width: 0;
@@ -439,14 +433,6 @@ body:has(.admin-root)::after {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-.a-topbar .theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border-color: var(--a-line);
-  background: var(--c-surface);
-  color: var(--c-heading);
 }
 .a-scrim {
   position: fixed;
@@ -1170,7 +1156,7 @@ dialog.a-dialog::backdrop {
   margin: 0;
 }
 
-/* ---------- dark mode (same switch as the website: <html data-theme="dark">) ---------- */
+/* ---------- dark theme (always on, like the website: <html data-theme="dark">) ---------- */
 :root[data-theme="dark"] .admin-root {
   --a-bg: #0b1626;
   --a-line: #263d60;
