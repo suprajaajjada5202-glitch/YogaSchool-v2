@@ -1,0 +1,14 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencies and build output (YogaSchool-v2/web/.gitignore covers these for the app too)
+node_modules/
+.next/
+out/
+
+# Local environment and secrets: never commit. YogaSchool-v2/web/.env.example is the template.
+.env
+.env*.local
+.vercel

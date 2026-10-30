@@ -1,98 +1,56 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
-import { flatNav, LOGO, MENU_SECTIONS, MORE, NAV, OFFER_URL, type NavEntry, type NavItem } from "@/lib/site";
-import { TileIcon, Use } from "./Icons";
-import { NavDrop } from "./NavDrop";
+import { BOOK_URL, isExternal, LOGO, NAV, OFFER_URL, type NavEntry } from "@/lib/site";
+import { Use } from "./Icons";
+import { MegaMenu, MenuLink } from "./MegaMenu";
 import { ThemeToggle } from "./ThemeToggle";
 
 const HOME_PATHS = ["/", "/home", "/pages/home"];
 
-const TOP_HREFS = new Set(NAV.map((n) => n.href));
+const chevron = (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+  </svg>
+);
 
-/** Floating glass header, "More" dropdown, slide-in menu, scroll progress and back-to-top. */
+/** Header bar with the Classes and About mega menus, slide-in phone menu, scroll progress and back-to-top. */
 export function Header() {
   const pathname = usePathname() ?? "/";
   const current = HOME_PATHS.includes(pathname) ? "/pages/home" : pathname;
   const isCurrent = (href: string) => href === current;
+  // A mega menu is "active" (marked in the bar) on any page it links to
+  const megaActive = (n: NavEntry) =>
+    "groups" in n && (n.groups.some((g) => g.links.some((l) => isCurrent(l.href))) || isCurrent(n.card.href));
 
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   // Once the page has moved: the bar can firm up (styled on the home page only)
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Desktop: the open mega menu (one at a time). Phone menu: the open section.
+  const [mega, setMega] = useState<string | null>(null);
+  const [section, setSection] = useState<string | null>(null);
+  const megaTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
   const toggleBtn = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const navList = useRef<HTMLUListElement>(null);
-  // How many bar entries fit; the rest move into "More". null until measured (the bar shows what fits, faded at the edge).
-  const [fit, setFit] = useState<number | null>(null);
-  // Logo without its name, so more entries fit (used whenever the full logo would push entries into "More")
-  const [compact, setCompact] = useState(false);
   useBodyLock(menuOpen);
 
-  // Measure which entries fit the bar (the space between the logo and the buttons, less "More"):
-  // on load, on resize and once the web fonts are in
-  useLayoutEffect(() => {
-    const ul = navList.current;
-    const nav = ul?.parentElement;
-    const island = nav?.parentElement;
-    const brand = island?.querySelector<HTMLElement>(".brand");
-    const actions = island?.querySelector<HTMLElement>(".island__actions");
-    if (!ul || !nav || !island || !brand || !actions) return;
-    const measure = () => {
-      if (getComputedStyle(nav).display === "none") {
-        setCompact(false); // phones / tablets use the menu button, with the full logo
-        return;
-      }
-      // Lay every entry out, and the logo with and without its name, for a moment (same frame, nothing is
-      // painted) to read their widths
-      const wasCompact = island.classList.contains("is-compact");
-      ul.classList.add("is-sizing");
-      const widths = ([...ul.children] as HTMLElement[]).map((li) => li.offsetWidth);
-      island.classList.remove("is-compact");
-      const fullLogo = brand.offsetWidth;
-      island.classList.add("is-compact");
-      const smallLogo = brand.offsetWidth;
-      island.classList.toggle("is-compact", wasCompact);
-      ul.classList.remove("is-sizing");
-      const bar = getComputedStyle(island);
-      const room =
-        island.clientWidth -
-        parseFloat(bar.paddingLeft) -
-        parseFloat(bar.paddingRight) -
-        2 * (parseFloat(bar.columnGap) || 0) -
-        actions.offsetWidth -
-        (nav.lastElementChild as HTMLElement).offsetWidth; // "More"
-      const gap = parseFloat(getComputedStyle(ul).columnGap) || 0;
-      const count = (space: number) => {
-        let used = 0;
-        let n = 0;
-        for (const w of widths) {
-          if (used + (n ? gap : 0) + w > space - 1) break;
-          used += (n ? gap : 0) + w;
-          n++;
-        }
-        return n;
-      };
-      const full = count(room - fullLogo);
-      setCompact(full < widths.length);
-      setFit(full < widths.length ? count(room - smallLogo) : full);
-    };
-    measure();
-    // The bar, and everything in it that isn't an entry: if styles arrive late (logo, buttons, "More" change size),
-    // the first measurement would wrongly push every entry into "More"
-    const ro = new ResizeObserver(measure);
-    for (const el of [island, ...island.children, nav.lastElementChild]) if (el && el !== nav) ro.observe(el);
-    document.fonts?.ready.then(measure);
-    window.addEventListener("load", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("load", measure);
-    };
-  }, []);
+  /* Open or close a mega menu. Clicks and keys act at once; mouse hover waits a moment (opening: so the pointer
+     crossing the bar doesn't flash a panel; closing: so a slip off the edge doesn't shut it). Moving from one open
+     menu to the other switches straight away. */
+  const setMegaOpen = (id: string) => (open: boolean, instant = false) => {
+    if (megaTimer.current) clearTimeout(megaTimer.current);
+    if (open) {
+      if (instant || mega) setMega(id);
+      else megaTimer.current = setTimeout(() => setMega(id), 90);
+    } else if (instant) setMega((m) => (m === id ? null : m));
+    else megaTimer.current = setTimeout(() => setMega((m) => (m === id ? null : m)), 220);
+  };
 
   // Scroll: progress bar, back-to-top. The header always stays on screen.
   useEffect(() => {
@@ -119,9 +77,28 @@ export function Header() {
   // Close menus when the page changes
   useEffect(() => {
     setMenuOpen(false);
+    setMega(null);
   }, [pathname]);
 
-  // Mobile menu: focus, Esc, focus trap, close on wide screens
+  // Desktop mega menu: a click or tap outside the bar closes it
+  useEffect(() => {
+    if (!mega) return;
+    const onDown = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setMega(null);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [mega]);
+
+  // Phone menu: opens with the section holding the current page expanded
+  useEffect(() => {
+    if (!menuOpen) return;
+    const holder = NAV.find(megaActive);
+    setSection(holder && "id" in holder ? holder.id : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [menuOpen]);
+
+  // Phone menu: focus, Esc, focus trap, close on wide screens
   useEffect(() => {
     if (!menuOpen) return;
     const t = setTimeout(() => closeBtn.current?.focus(), 60);
@@ -131,7 +108,8 @@ export function Header() {
         toggleBtn.current?.focus();
       }
       if (e.key === "Tab" && panel.current) {
-        const f = panel.current.querySelectorAll<HTMLElement>("a, button");
+        // Links inside a closed section are inert, so they're skipped
+        const f = [...panel.current.querySelectorAll<HTMLElement>("a, button")].filter((el) => !el.closest("[inert]"));
         const first = f[0];
         const lastEl = f[f.length - 1];
         if (e.shiftKey && document.activeElement === first) {
@@ -153,62 +131,7 @@ export function Header() {
     };
   }, [menuOpen]);
 
-  const shown = fit ?? NAV.length;
-  const moreItems = flatNav([...NAV.slice(shown), ...MORE]);
-  const moreActive = moreItems.some((m) => isCurrent(m.href));
-  const navEntry = (n: NavEntry, i: number) => {
-    const cls = i >= shown ? "is-overflow" : undefined;
-    if (!n.children)
-      return (
-        <li key={n.href} className={cls}>
-          <Link href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
-            {n.label}
-          </Link>
-        </li>
-      );
-    // A dropdown is active on its own page and on pages that only it links to (About: Teachers, Gallery)
-    const active = isCurrent(n.href) || n.children.some((c) => isCurrent(c.href) && !TOP_HREFS.has(c.href));
-    return (
-      <NavDrop
-        key={n.href}
-        id={`drop-${n.label.toLowerCase()}`}
-        label={n.label}
-        items={n.children}
-        pathname={pathname}
-        active={active}
-        isCurrent={isCurrent}
-        className={cls}
-        href={n.href}
-      />
-    );
-  };
-  const menuLink = (n: NavItem) => {
-    const body = (
-      <>
-        <TileIcon d={n.icon} className="menu__icon" />
-        <span className="menu__text">{n.label}</span>
-      </>
-    );
-    // Links to other sites (Momence shop, on-demand videos) open in a new tab
-    return /^https?:/.test(n.href) ? (
-      <a className="menu__link" href={n.href} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)}>
-        {body}
-        <svg className="menu__ext" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" d="M7 17 17 7M9 7h8v8" />
-        </svg>
-        <span className="sr-only"> (opens in a new tab)</span>
-      </a>
-    ) : (
-      <Link
-        className="menu__link"
-        href={n.href}
-        aria-current={isCurrent(n.href) ? "page" : undefined}
-        onClick={() => setMenuOpen(false)}
-      >
-        {body}
-      </Link>
-    );
-  };
+  const closeMenu = () => setMenuOpen(false);
   // Light, solid bar on every page (the home page photo starts below it, as on the inner pages' light heroes)
   const headerCls = `site-header is-light is-solid${scrolled ? " is-scrolled" : ""}`;
 
@@ -220,24 +143,38 @@ export function Header() {
 
       <header className={headerCls}>
         <div className="container">
-          <div className={`island${compact ? " is-compact" : ""}`}>
+          <div className="island">
             <Link className="brand" href="/pages/home" aria-label="The Yoga School, home">
               <img src={LOGO} alt="The Yoga School logo" width={180} height={180} />
-              <span className="brand-text">
-                The Yoga School<small>Cairns · Knoff Yoga</small>
-              </span>
+              <span className="brand-text">The Yoga School</span>
             </Link>
-            <nav className="nav-desktop" aria-label="Main">
-              <ul className={`nav-list${fit === null ? " is-measuring" : ""}`} ref={navList}>
-                {NAV.map(navEntry)}
-              </ul>
-              <ul>
-                <NavDrop id="drop-more" label="More" items={moreItems} pathname={pathname} active={moreActive} isCurrent={isCurrent} />
+            <nav className="nav-desktop" aria-label="Main" ref={navRef}>
+              <ul className="nav-list">
+                {NAV.map((n) =>
+                  "groups" in n ? (
+                    <MegaMenu
+                      key={n.id}
+                      id={n.id}
+                      label={n.label}
+                      groups={n.groups}
+                      card={n.card}
+                      open={mega === n.id}
+                      active={megaActive(n)}
+                      isCurrent={isCurrent}
+                      setOpen={setMegaOpen(n.id)}
+                    />
+                  ) : (
+                    <li key={n.href}>
+                      <MenuLink link={n} className="nav-link" current={isCurrent(n.href)}>
+                        {n.label}
+                      </MenuLink>
+                    </li>
+                  ),
+                )}
               </ul>
             </nav>
             <div className="island__actions">
-              <ThemeToggle />
-              <Link className="btn btn--teal btn--sm header-cta" href="/pages/timetable">
+              <Link className="btn btn--primary btn--sm header-cta" href={BOOK_URL}>
                 Book a Class
               </Link>
               <button
@@ -265,7 +202,7 @@ export function Header() {
         aria-label="Menu"
         inert={!menuOpen}
       >
-        <div className="menu__backdrop" onClick={() => setMenuOpen(false)}></div>
+        <div className="menu__backdrop" onClick={closeMenu}></div>
         <figure className="menu__photo on-dark">
           <img
             src="/images/gallery/DSC00180.jpg"
@@ -287,11 +224,9 @@ export function Header() {
         </figure>
         <div className="menu__panel" ref={panel}>
           <div className="menu__top">
-            <Link className="brand" href="/pages/home" aria-label="The Yoga School, home" onClick={() => setMenuOpen(false)}>
+            <Link className="brand" href="/pages/home" aria-label="The Yoga School, home" onClick={closeMenu}>
               <img src={LOGO} alt="" width={180} height={180} />
-              <span className="brand-text">
-                The Yoga School<small>Cairns · Knoff Yoga</small>
-              </span>
+              <span className="brand-text">The Yoga School</span>
             </Link>
             <button
               ref={closeBtn}
@@ -307,18 +242,83 @@ export function Header() {
             </button>
           </div>
           <nav className="menu__nav" aria-label="Mobile">
-            {MENU_SECTIONS.map((s) => (
-              <div className="menu__section" key={s.title}>
-                <h2 className="menu__label" id={`menu-${s.title.toLowerCase()}`}>
-                  {s.title}
-                </h2>
-                <ul className="menu__list" aria-labelledby={`menu-${s.title.toLowerCase()}`}>
-                  {s.items.map((n) => (
-                    <li key={n.href}>{menuLink(n)}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <ul className="menu__list">
+              <li style={{ "--i": 0 } as CSSProperties}>
+                <MenuLink link={{ href: "/pages/home", label: "Home" }} className="menu__link" current={isCurrent("/pages/home")} onClick={closeMenu}>
+                  Home
+                </MenuLink>
+              </li>
+              {NAV.map((n, i) => {
+                const style = { "--i": i + 1 } as CSSProperties;
+                if (!("groups" in n))
+                  return (
+                    <li key={n.href} style={style}>
+                      <MenuLink link={n} className="menu__link" current={isCurrent(n.href)} onClick={closeMenu}>
+                        {n.label}
+                      </MenuLink>
+                    </li>
+                  );
+                const open = section === n.id;
+                return (
+                  <li key={n.id} style={style} className={`menu__acc${open ? " is-open" : ""}`}>
+                    <button
+                      type="button"
+                      className={`menu__link menu__acc-btn${megaActive(n) ? " is-active" : ""}`}
+                      aria-expanded={open}
+                      aria-controls={`menu-${n.id}`}
+                      onClick={() => setSection(open ? null : n.id)}
+                    >
+                      {n.label}
+                      {chevron}
+                    </button>
+                    <div className="menu__sub" id={`menu-${n.id}`} inert={!open}>
+                      <div className="menu__sub-inner">
+                        {n.groups.map((g, gi) => (
+                          <div className="menu__group" key={g.title}>
+                            <p className="menu__group-title" id={`menu-${n.id}-${gi}`}>
+                              {g.title}
+                            </p>
+                            <ul aria-labelledby={`menu-${n.id}-${gi}`}>
+                              {g.links.map((l) => (
+                                <li key={l.href}>
+                                  <MenuLink link={l} className="menu__sublink" current={isCurrent(l.href)} onClick={closeMenu}>
+                                    {l.label}
+                                    {isExternal(l.href) && (
+                                      <svg className="menu__ext" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                          fill="none"
+                                          stroke="currentColor"
+                                          strokeWidth="1.6"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M7 17 17 7M9 7h8v8"
+                                        />
+                                      </svg>
+                                    )}
+                                  </MenuLink>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                        <MenuLink
+                          link={{ href: n.card.href, label: n.card.title }}
+                          className="menu__card"
+                          current={isCurrent(n.card.href)}
+                          onClick={closeMenu}
+                        >
+                          <span className="menu__card-eyebrow">{n.card.eyebrow}</span>
+                          <strong>{n.card.title}</strong>
+                          <span className="menu__card-cta">
+                            {n.card.cta} <span aria-hidden="true">{isExternal(n.card.href) ? "↗" : "→"}</span>
+                          </span>
+                        </MenuLink>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </nav>
           <div className="menu__foot">
             <div className="menu__reach">
@@ -354,10 +354,15 @@ export function Header() {
                 </svg>
               </a>
             </div>
+            {/* Light / dark mode lives here (the client's header mockup has no toggle in the bar) */}
+            <div className="menu__theme">
+              <span>Light or dark mode</span>
+              <ThemeToggle />
+            </div>
           </div>
           {/* Pinned to the bottom of the panel, in thumb reach */}
           <div className="menu__cta">
-            <Link className="btn btn--primary" href="/pages/timetable" onClick={() => setMenuOpen(false)}>
+            <Link className="btn btn--primary" href={BOOK_URL} onClick={closeMenu}>
               Book a Class
             </Link>
           </div>

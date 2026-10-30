@@ -4,11 +4,19 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { heroSlides } from "@/data/content";
 import { OFFER_URL } from "@/lib/site";
 
+/** Quick links in the frosted bar along the foot of the hero */
+const QUICK = [
+  { href: "/pages/classes", label: "Classes", sub: "5 approaches, all levels" },
+  { href: "/pages/timetable", label: "Timetable", sub: "This week’s classes" },
+  { href: OFFER_URL, label: "New students", sub: "30 days unlimited, $99" },
+];
+
 const DURATION = 3500; // time per hero slide (ms)
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/** Home page hero: headline and buttons over a slideshow of photos or videos (heroSlides in data/content.ts),
-    with one bar per slide and a pause button. Only the first photo loads with the page. */
+/** Home page hero: full screen, headline and buttons over a slideshow of photos or videos (heroSlides in
+    data/content.ts), and a frosted bar along the foot with three quick links and the slide controls (count, one bar
+    per slide, pause). Only the first photo loads with the page. */
 export function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [leaving, setLeaving] = useState<number | null>(null);
@@ -122,7 +130,7 @@ export function HeroSlider() {
         ))}
       </div>
 
-      <div className="container">
+      <div className="container home-hero__main">
         {/* With each new photo the heading, tagline and line play in again (keyed by cycle, so they remount; the
             buttons keep their place and focus) */}
         <div className={`home-hero__text${cycle ? " is-swap" : ""}`}>
@@ -156,39 +164,65 @@ export function HeroSlider() {
         </div>
       </div>
 
-      {/* Scroll cue down to the classes (large screens only, see .hero__scroll); it targets the section, which never
-          moves, so the heading lands clear of the header */}
-      <a className="hero__scroll" href="#our-classes" aria-label="Scroll down to our classes"></a>
-
-      <div className="home-hero__controls">
-        {/* Announced only when paused, not on every automatic change */}
-        <span className="hero__count" aria-live={paused ? "polite" : "off"}>
-          <span>{pad(current + 1)}</span> / {pad(heroSlides.length)}
-        </span>
-        <div className="hero__bars" role="group" aria-label="Choose slide">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i === current ? `active-${cycle}` : i}
-              type="button"
-              className={i === current ? "is-active" : i < current ? "is-done" : undefined}
-              aria-label={`Show slide ${i + 1}`}
-              aria-current={i === current}
-              onClick={() => go(i)}
-            >
-              <span></span>
-            </button>
-          ))}
+      <div className="home-hero__bar">
+        <div className="container">
+          <div className="home-hero__bar-inner">
+            <nav className="home-hero__quick" aria-label="Get started">
+              {QUICK.map((q) => {
+                const ext = /^https?:/.test(q.href);
+                const body = (
+                  <>
+                    <span className="home-hero__quick-label">{q.label}</span>
+                    <span className="home-hero__quick-sub">{q.sub}</span>
+                    <span className="home-hero__quick-arrow" aria-hidden="true">
+                      {ext ? "↗" : "→"}
+                    </span>
+                  </>
+                );
+                return ext ? (
+                  <a key={q.href} href={q.href} target="_blank" rel="noopener" className="home-hero__quick-link is-offer">
+                    {body}
+                    <span className="sr-only"> (opens Momence in a new tab)</span>
+                  </a>
+                ) : (
+                  <Link key={q.href} href={q.href} className="home-hero__quick-link">
+                    {body}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="home-hero__controls">
+              {/* Announced only when paused, not on every automatic change */}
+              <span className="hero__count" aria-live={paused ? "polite" : "off"}>
+                <span>{pad(current + 1)}</span> / {pad(heroSlides.length)}
+              </span>
+              <div className="hero__bars" role="group" aria-label="Choose slide">
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i === current ? `active-${cycle}` : i}
+                    type="button"
+                    className={i === current ? "is-active" : i < current ? "is-done" : undefined}
+                    aria-label={`Show slide ${i + 1}`}
+                    aria-current={i === current}
+                    onClick={() => go(i)}
+                  >
+                    <span></span>
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="icon-btn"
+                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                onClick={() => setPaused((p) => !p)}
+              >
+                <svg aria-hidden="true">
+                  <use href={paused ? "#i-play" : "#i-pause"} />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          type="button"
-          className="icon-btn"
-          aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-          onClick={() => setPaused((p) => !p)}
-        >
-          <svg aria-hidden="true">
-            <use href={paused ? "#i-play" : "#i-pause"} />
-          </svg>
-        </button>
       </div>
     </section>
   );

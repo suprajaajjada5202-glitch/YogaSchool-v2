@@ -1,19 +1,20 @@
-# Theyogaschool
+# The Yoga School website
 
-Website for The Yoga School, Cairns: Next.js (App Router) + Supabase content + Momence bookings.
+The Yoga School Cairns website (theyogaschool.com.au), built with Next.js.
 
-## Run it locally
+**The app lives in [`YogaSchool-v2/web`](YogaSchool-v2/web).** That is the only copy; its README covers running,
+building and the project structure.
+
+| Folder | What it is |
+|---|---|
+| `YogaSchool-v2/web` | The Next.js website (deployed by the Vercel project `web` → web-beta-azure-30.vercel.app) |
+| `YogaSchool-v2/supabase` | Database schema and setup for the site's content |
+| `YogaSchool-v2/static-site-archive` | The approved static HTML site the Next.js app was migrated from (reference only) |
+| `YogaSchool-v2/exports` | SEO URL map and a homepage PDF export |
 
 ```bash
-npm install          # installs the app in web/
-cp web/.env.example web/.env.local
-npm run dev          # http://localhost:3000/pages/home
+cd YogaSchool-v2/web
+npm install
+cp .env.example .env.local   # Supabase URL + publishable key (never commit .env.local)
+npm run dev                  # http://localhost:3000/pages/home
 ```
-
-- Admin panel: http://localhost:3000/admin (sign in with an admin account, see `supabase/README.md`).
-- `web/` is the website. `supabase/` has the database schema and starting content.
-- `static-site-archive/` is the earlier static HTML version, kept for reference. `exports/` holds the SEO URL map and the homepage PDF.
-
-## Deploy
-
-Deploy the `web/` folder (e.g. on Vercel set **Root Directory** to `web`) and add the two `NEXT_PUBLIC_SUPABASE_*` variables from `web/.env.example`.
