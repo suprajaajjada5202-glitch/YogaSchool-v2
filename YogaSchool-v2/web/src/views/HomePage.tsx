@@ -59,7 +59,6 @@ export default async function HomePage() {
         </div>
       </section>
       <section className="section section--dark on-dark home-why" aria-labelledby="why-title">
-        <OmCorner side="left" />
         <div className="container home-why__grid">
           <Reveal className="home-head home-head--left">
             <p className="home-eyebrow">Why The Yoga School?</p>
