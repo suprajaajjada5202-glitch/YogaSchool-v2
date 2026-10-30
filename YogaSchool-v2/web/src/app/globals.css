@@ -82,9 +82,10 @@
 }
 
 /* =====================================================================
-       DARK THEME: always on (<html data-theme="dark"> in app/layout.tsx).
-       The navy sections, teal and pink brand colours stay put; the light
-       surfaces and text below are swapped for their dark versions.
+       DARK THEME: <html data-theme="dark">, used by the admin only (set
+       in app/admin/layout.tsx; the website is light). The navy sections,
+       teal and pink brand colours stay put; the light surfaces and text
+       below are swapped for their dark versions.
        ===================================================================== */
 :root[data-theme="dark"] {
   --c-bg: #0b1626;

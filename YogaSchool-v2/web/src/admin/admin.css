@@ -1156,7 +1156,7 @@ dialog.a-dialog::backdrop {
   margin: 0;
 }
 
-/* ---------- dark theme (always on, like the website: <html data-theme="dark">) ---------- */
+/* ---------- dark theme (always on: app/admin/layout.tsx sets <html data-theme="dark">) ---------- */
 :root[data-theme="dark"] .admin-root {
   --a-bg: #0b1626;
   --a-line: #263d60;

@@ -11,13 +11,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0b1626",
+  themeColor: "#fbfbfb",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // The site is dark only: <html data-theme="dark"> switches on the dark palette in globals.css everywhere
+  // The website is light only. The admin is dark: app/admin/layout.tsx sets <html data-theme="dark"> while it is open
   return (
-    <html lang="en-AU" data-theme="dark" data-scroll-behavior="smooth">
+    // suppressHydrationWarning: the admin's script sets data-theme on <html> before React hydrates
+    <html lang="en-AU" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
