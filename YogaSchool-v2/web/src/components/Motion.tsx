@@ -8,7 +8,8 @@ import { useEffect } from "react";
    list items animate one by one, text columns line by line, other blocks (headings, text, photos, buttons, embeds) as
    a whole. <Reveal> wrappers are taken over (data-cm-host) so they don't also fade in once. Photos wipe up inside their
    frame and settle from a gentle zoom; arch photos also drift slowly as they pass (--cm-p, parallax). Blocks already on
-   screen when the page opens start shown, so nothing blinks; blocks React adds later simply show.
+   screen when the page opens start shown, so nothing blinks (unless marked data-cm-intro, which plays in on load, like
+   the first cards under a banner); blocks React adds later simply show.
    CSS: [data-cm] in globals.css. */
 
 /** Cards and list items: always animated on their own */
@@ -125,7 +126,11 @@ export function Motion() {
       if (el.matches("[data-cm-photo]")) el.dataset.cmPhoto = s;
       window.clearTimeout(shownAt.get(el));
       // Once settled, hand the block its own transitions back (hover lifts) without the entrance timing
-      if (s === "in") shownAt.set(el, window.setTimeout(() => set(el, "shown"), SETTLE));
+      if (s === "in")
+        shownAt.set(
+          el,
+          window.setTimeout(() => set(el, "shown"), SETTLE),
+        );
     };
 
     // Shown a little before the bottom edge; hidden again only when completely off screen, so no one sees it fade out
@@ -192,9 +197,11 @@ export function Motion() {
       for (const el of targets) {
         el.querySelectorAll<HTMLElement>(PHOTOS).forEach((p) => p.setAttribute("data-cm-photo", ""));
         if (el.matches(PHOTOS)) el.setAttribute("data-cm-photo", "");
-        if (el.matches(GROUPS)) el.querySelectorAll<HTMLElement>(":scope > a").forEach((a, i) => a.style.setProperty("--cm-i", String(Math.min(i, 8))));
+        if (el.matches(GROUPS))
+          el.querySelectorAll<HTMLElement>(":scope > a").forEach((a, i) => a.style.setProperty("--cm-i", String(Math.min(i, 8))));
         const b = el.getBoundingClientRect();
-        set(el, b.bottom <= 0 ? "above" : b.top >= vh ? "below" : "shown");
+        const onScreen = b.bottom > 0 && b.top < vh;
+        set(el, !onScreen ? (b.bottom <= 0 ? "above" : "below") : el.hasAttribute("data-cm-intro") ? "below" : "shown");
         show.observe(el);
         hide.observe(el);
       }

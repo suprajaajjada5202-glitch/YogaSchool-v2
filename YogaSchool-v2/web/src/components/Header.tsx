@@ -177,6 +177,7 @@ export function Header() {
               <Link className="btn btn--primary btn--sm header-cta" href={BOOK_URL}>
                 Book a Class
               </Link>
+              <ThemeToggle />
               <button
                 ref={toggleBtn}
                 className="nav-toggle"

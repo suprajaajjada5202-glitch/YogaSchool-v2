@@ -3,11 +3,14 @@ import type { ClassItem, Modality } from "@/lib/types";
 import { Use } from "./Icons";
 import { Reveal } from "./Reveal";
 
-/** Full class sections on /pages/classes (Supabase "classes" table, or the built-in list). */
-export function ClassRows({ classes }: { classes: ClassItem[] }) {
+/** Full class sections on /pages/classes (Supabase "classes" table, or the built-in list). A class that a home page
+    modality card links to shows that card's photo, so the visitor lands on the same picture they clicked
+    (Shoshin, matched by both Strength and Mobility, shows the first: Strength). */
+export function ClassRows({ classes, modalities = [] }: { classes: ClassItem[]; modalities?: Modality[] }) {
+  const image = (c: ClassItem) => modalities.find((m) => m.classMatch?.test(c.name))?.image ?? c.image;
   return (
     <div className="rows">
-      {classes.map((c) => (
+      {classes.map((c) => ({ ...c, image: image(c) })).map((c) => (
         <Reveal as="article" className="row" id={`class-${c.slug}`} key={c.slug}>
           <div className="row__media">
             <div className="arch">

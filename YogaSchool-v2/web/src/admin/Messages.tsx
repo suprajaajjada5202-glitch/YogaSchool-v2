@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { supabase } from "./client";
 import { fmtDate } from "./config";
 import { Dialog } from "./Dialog";
@@ -21,6 +21,30 @@ const STATUS: [string, string][] = [
   ["replied", "Replied"],
   ["archived", "Archived"],
 ];
+
+const FILTERS: [string, string][] = [
+  ["inbox", "Inbox"],
+  ["new", "New"],
+  ["archived", "Archived"],
+  ["all", "All"],
+];
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]!.toUpperCase())
+    .join("") || "?";
+/** "5 min ago", "3 h ago", "2 d ago", then the date */
+function ago(iso: string) {
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (!Number.isFinite(s)) return "";
+  if (s < 60) return "Just now";
+  if (s < 3600) return `${Math.floor(s / 60)} min ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)} h ago`;
+  if (s < 7 * 86400) return `${Math.floor(s / 86400)} d ago`;
+  return fmtDate(iso).replace(/,? \d{1,2}:\d{2}.*$/, "");
+}
 
 /** Contact form inbox. */
 export function Messages({ onCountChange }: { onCountChange: () => void }) {
@@ -73,16 +97,15 @@ export function Messages({ onCountChange }: { onCountChange: () => void }) {
           <h1>Messages</h1>
           <p>Enquiries from the contact form.</p>
         </div>
-        <div className="a-tools">
-          <select aria-label="Show" value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="inbox">Inbox (not archived)</option>
-            <option value="new">New only</option>
-            <option value="archived">Archived</option>
-            <option value="all">All</option>
-          </select>
+        <div className="a-seg" role="group" aria-label="Show">
+          {FILTERS.map(([v, l]) => (
+            <button key={v} type="button" aria-pressed={filter === v} onClick={() => setFilter(v)}>
+              {l}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="a-table-wrap">
+      <div className={rows?.length && !error ? "a-inbox-wrap" : "a-table-wrap"}>
         {error ? (
           <p className="a-empty">Could not load: {error}</p>
         ) : rows === null ? (
@@ -90,52 +113,53 @@ export function Messages({ onCountChange }: { onCountChange: () => void }) {
         ) : !rows.length ? (
           <p className="a-empty">No messages here.</p>
         ) : (
-          <table className="a-table">
-            <thead>
-              <tr>
-                <th>Received</th>
-                <th>From</th>
-                <th>Enquiry</th>
-                <th>Message</th>
-                <th>Status</th>
-                <th>
-                  <span className="sr-only">Actions</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((m) => (
-                <tr key={m.id} className={m.status === "new" ? "is-new" : undefined}>
-                  <td>{fmtDate(m.created_at)}</td>
-                  <td>
-                    <strong>{m.name}</strong>
-                    <br />
-                    <a href={`mailto:${m.email}`}>{m.email}</a>
-                    <br />
-                    <a href={`tel:${m.phone}`}>{m.phone}</a>
-                  </td>
-                  <td>{m.preferred_class || "—"}</td>
-                  <td>
-                    <div className="a-clip">{m.message}</div>
-                  </td>
-                  <td>
-                    <select aria-label="Status" value={m.status} onChange={(e) => setStatus(m.id, e.target.value)}>
-                      {STATUS.map(([v, l]) => (
-                        <option key={v} value={v}>
-                          {l}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td className="a-actions">
-                    <button className="btn btn--outline btn--sm" type="button" onClick={() => view(m)}>
-                      Open
+          <ul className="a-inbox">
+            {rows.map((m, n) => (
+              <li
+                key={m.id}
+                className={`a-mail is-${m.status}`}
+                style={{ "--r": Math.min(n, 20) } as CSSProperties}
+              >
+                <span className="a-mail__avatar" aria-hidden="true">
+                  {initials(m.name)}
+                </span>
+                <div className="a-mail__main">
+                  <div className="a-mail__head">
+                    <button type="button" className="a-mail__from" onClick={() => view(m)}>
+                      {m.name || "No name"}
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    {m.status === "new" && <span className="a-mail__new">New</span>}
+                    <time className="a-mail__time" dateTime={m.created_at} title={fmtDate(m.created_at)}>
+                      {ago(m.created_at)}
+                    </time>
+                  </div>
+                  <p className="a-mail__contact">
+                    {m.email && <a href={`mailto:${m.email}`}>{m.email}</a>}
+                    {m.phone && <a href={`tel:${m.phone}`}>{m.phone}</a>}
+                    {m.preferred_class && <span className="a-mail__chip">{m.preferred_class}</span>}
+                  </p>
+                  <p className="a-mail__text">{m.message}</p>
+                </div>
+                <div className="a-mail__side">
+                  <select
+                    className={`a-mail__status is-${m.status}`}
+                    aria-label={`Status of the message from ${m.name}`}
+                    value={m.status}
+                    onChange={(e) => setStatus(m.id, e.target.value)}
+                  >
+                    {STATUS.map(([v, l]) => (
+                      <option key={v} value={v}>
+                        {l}
+                      </option>
+                    ))}
+                  </select>
+                  <button className="a-btn-ghost" type="button" onClick={() => view(m)}>
+                    Open
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
       {open && (

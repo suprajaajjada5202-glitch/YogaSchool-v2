@@ -823,7 +823,13 @@ button {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(0deg, rgba(7, 26, 56, 0.96) 0%, rgba(7, 26, 56, 0.86) 52%, rgba(7, 26, 56, 0.3) 82%, rgba(7, 26, 56, 0.1));
+  background: linear-gradient(
+    0deg,
+    rgba(7, 26, 56, 0.96) 0%,
+    rgba(7, 26, 56, 0.86) 52%,
+    rgba(7, 26, 56, 0.3) 82%,
+    rgba(7, 26, 56, 0.1)
+  );
 }
 .mega__card:hover {
   color: var(--c-white);
@@ -5391,8 +5397,9 @@ body::after {
   color: var(--c-secondary-ink);
   margin-bottom: var(--s-1);
 }
+/* Divider drawn as a background (teal lead-in, then hairline) so it can draw in from the left (see "Classes page motion") */
 .row .prose {
-  border-top: 1px solid var(--c-line);
+  background: linear-gradient(90deg, var(--c-secondary) 0 56px, var(--c-line) 56px) left top / 100% 1px no-repeat;
   padding-top: var(--s-3);
 }
 .row__actions {
@@ -7615,7 +7622,19 @@ body:not(.no-js) .reveal:not(.is-visible) .eyebrow::before {
 }
 /* Banners play their load animation again when scrolled back to: Motion.tsx switches it off while they are away */
 :is(.page-hero, .voices-hero)[data-cm-hero="off"]
-  :is(.crumbs, .eyebrow, h1, .lead, .article__meta, .page-hero__actions, .pd-tabs, .arch__badge, .voices-hero__quote, .voices-index, .arch__frame img),
+  :is(
+    .crumbs,
+    .eyebrow,
+    h1,
+    .lead,
+    .article__meta,
+    .page-hero__actions,
+    .pd-tabs,
+    .arch__badge,
+    .voices-hero__quote,
+    .voices-index,
+    .arch__frame img
+  ),
 :is(.page-hero, .voices-hero)[data-cm-hero="off"] .eyebrow::before {
   animation: none;
 }
@@ -7675,7 +7694,9 @@ body:not(.no-js) .reveal:not(.is-visible) .eyebrow::before {
   }
   .arch:hover > [data-cm-par] {
     transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(14, 50, 103, 0.14), 0 40px 80px rgba(14, 50, 103, 0.18);
+    box-shadow:
+      0 16px 36px rgba(14, 50, 103, 0.14),
+      0 40px 80px rgba(14, 50, 103, 0.18);
   }
   [data-cm-par][data-cm-photo="shown"] img {
     transition: scale 1.2s var(--ease-out);
@@ -7737,6 +7758,127 @@ body:not(.no-js) .reveal:not(.is-visible) .eyebrow::before {
 /* Once settled, a card's reveal stagger (.reveal[data-delay]) no longer holds back its hover lift */
 .reveal[data-delay][data-cm="shown"] {
   transition-delay: 0s;
+}
+
+/* Classes page motion. Level path: as each card rises in, its number springs up, the label and line follow, and the
+   connector to the next level draws across; under the pointer a teal bar sweeps over the top and the number lifts.
+   Class shortcuts pop in as they cascade and lift under the pointer. Class rows: the level label wipes in from the
+   left and the divider draws across; jumping to a class (shortcut or level card) underlines its title. */
+.path a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--s-3);
+  right: var(--s-3);
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--c-secondary), var(--c-fill));
+  scale: 0 1;
+  transform-origin: left;
+}
+.path > a[data-cm="in"] :is(b, span, small) {
+  transition:
+    opacity 0.6s var(--ease-out) calc(var(--cm-d) + var(--cm-x)),
+    translate 0.7s var(--ease-out) calc(var(--cm-d) + var(--cm-x)),
+    scale 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--cm-d) + var(--cm-x));
+}
+.path > a b {
+  --cm-x: 0.15s;
+}
+.path > a span {
+  --cm-x: 0.28s;
+}
+.path > a small {
+  --cm-x: 0.38s;
+}
+.path > a:is([data-cm="below"], [data-cm="above"]) :is(b, span, small) {
+  opacity: 0;
+  translate: 0 10px;
+}
+.path > a:is([data-cm="below"], [data-cm="above"]) b {
+  scale: 0.5;
+  transform-origin: left bottom;
+}
+.path > a[data-cm="in"]::after {
+  transition: scale 0.6s var(--ease-out) calc(var(--cm-d) + 0.45s);
+}
+.path > a:is([data-cm="below"], [data-cm="above"])::after {
+  scale: 0 1;
+  transform-origin: left;
+}
+.jump[data-cm="in"] a {
+  transition:
+    opacity 0.6s var(--ease-out) calc(var(--cm-i, 0) * 50ms),
+    translate 0.7s var(--ease-out) calc(var(--cm-i, 0) * 50ms),
+    scale 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--cm-i, 0) * 50ms),
+    background var(--t),
+    border-color var(--t),
+    color var(--t),
+    transform var(--t) var(--ease);
+}
+.jump[data-cm="below"] a,
+.jump[data-cm="above"] a {
+  scale: 0.85;
+}
+.row__sub[data-cm="below"],
+.row__sub[data-cm="above"] {
+  clip-path: inset(0 100% 0 0);
+}
+:root .row__sub[data-cm="in"] {
+  transition:
+    opacity 0.7s var(--ease-out) var(--cm-d),
+    translate 0.8s var(--ease-out) var(--cm-d),
+    clip-path 0.9s var(--ease-out) calc(var(--cm-d) + 0.1s);
+}
+.row .prose:has(> [data-cm="in"]:first-child) {
+  transition: background-size 1.1s var(--ease-out) 0.15s;
+}
+.row .prose:has(> :is([data-cm="below"], [data-cm="above"]):first-child) {
+  background-size: 0% 1px;
+}
+.row h2 {
+  width: fit-content;
+  background: linear-gradient(var(--c-secondary), var(--c-secondary)) left bottom / 0% 3px no-repeat;
+}
+.row:target h2 {
+  background-size: 100% 3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .path a::before {
+    transition: scale 0.5s var(--ease-out);
+  }
+  .path b {
+    transition:
+      color var(--t),
+      transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .jump a {
+    transition:
+      background var(--t),
+      border-color var(--t),
+      color var(--t),
+      transform var(--t) var(--ease);
+  }
+  .jump a:active {
+    transform: scale(0.95);
+  }
+  .row h2 {
+    transition: background-size 0.9s var(--ease-out) 0.4s;
+  }
+}
+@media (hover: hover) {
+  .path a:hover::before {
+    scale: 1 1;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .path a:hover b {
+    transform: translateY(-3px);
+    color: var(--c-secondary-ink);
+  }
+  .jump a:hover {
+    transform: translateY(-2px);
+  }
 }
 
 /* =====================================================================
@@ -8639,14 +8781,7 @@ body:has(#book) .info-card .feature__icon svg {
       box-shadow 0.45s var(--ease-out),
       border-color 0.45s var(--ease-out),
       background-color 0.45s var(--ease-out);
-    transition-delay:
-      calc(var(--tt-i, 0) * 70ms),
-      calc(var(--tt-i, 0) * 70ms),
-      calc(var(--tt-i, 0) * 70ms),
-      0s,
-      0s,
-      0s,
-      0s;
+    transition-delay: calc(var(--tt-i, 0) * 70ms), calc(var(--tt-i, 0) * 70ms), calc(var(--tt-i, 0) * 70ms), 0s, 0s, 0s, 0s;
   }
   #book :is([data-tt="below"], [data-tt="above"]) {
     opacity: 0;
@@ -8664,7 +8799,8 @@ body:has(#book) .info-card .feature__icon svg {
   }
   /* Inside a card, the title and its details follow it in (the title's hover colour keeps its own, undelayed
      transition) */
-  #book article[data-tt]
+  #book
+    article[data-tt]
     :is(
       .momence-host_schedule-session_list-item-title,
       .momence-session-teacher,
@@ -8677,24 +8813,16 @@ body:has(#book) .info-card .feature__icon svg {
       opacity 0.6s var(--ease),
       translate 0.6s var(--ease),
       color 0.35s var(--ease);
-    transition-delay:
-      calc(var(--tt-i, 0) * 70ms + 0.15s),
-      calc(var(--tt-i, 0) * 70ms + 0.15s),
-      0s;
+    transition-delay: calc(var(--tt-i, 0) * 70ms + 0.15s), calc(var(--tt-i, 0) * 70ms + 0.15s), 0s;
   }
   #book article[data-tt] :is(.momence-session-starts_at, .momence-session-duration, .momence-session-in_person) {
-    transition-delay:
-      calc(var(--tt-i, 0) * 70ms + 0.25s),
-      calc(var(--tt-i, 0) * 70ms + 0.25s),
-      0s;
+    transition-delay: calc(var(--tt-i, 0) * 70ms + 0.25s), calc(var(--tt-i, 0) * 70ms + 0.25s), 0s;
   }
   #book article[data-tt] .momence-host_schedule-session-list-item-wrapper {
-    transition-delay:
-      calc(var(--tt-i, 0) * 70ms + 0.3s),
-      calc(var(--tt-i, 0) * 70ms + 0.3s),
-      0s;
+    transition-delay: calc(var(--tt-i, 0) * 70ms + 0.3s), calc(var(--tt-i, 0) * 70ms + 0.3s), 0s;
   }
-  #book article:is([data-tt="below"], [data-tt="above"])
+  #book
+    article:is([data-tt="below"], [data-tt="above"])
     :is(
       .momence-host_schedule-session_list-item-title,
       .momence-session-teacher,
@@ -9585,7 +9713,9 @@ body:has(#book) .info-card .feature__icon svg {
         omFloat 3.2s ease-in-out infinite alternate,
         omCornerIn linear both;
       animation-timeline: auto, view();
-      animation-range: normal, entry 0% cover 25%;
+      animation-range:
+        normal,
+        entry 0% cover 25%;
     }
   }
 }
@@ -9754,8 +9884,7 @@ body:has(#book) .info-card .feature__icon svg {
 .mp--b {
   background:
     radial-gradient(40% 60% at 15% 10%, rgba(0, 171, 201, 0.22), transparent 70%),
-    radial-gradient(35% 55% at 90% 90%, rgba(255, 153, 204, 0.14), transparent 70%),
-    var(--c-primary-950);
+    radial-gradient(35% 55% at 90% 90%, rgba(255, 153, 204, 0.14), transparent 70%), var(--c-primary-950);
   color: rgba(255, 255, 255, 0.82);
 }
 .mp--b .home-eyebrow {
@@ -9812,7 +9941,14 @@ body:has(#book) .info-card .feature__icon svg {
   inset: 0;
   padding: 1.5px;
   border-radius: inherit;
-  background: conic-gradient(from var(--mp-angle), var(--c-secondary), var(--c-accent) 25%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.12) 80%, var(--c-secondary));
+  background: conic-gradient(
+    from var(--mp-angle),
+    var(--c-secondary),
+    var(--c-accent) 25%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.12) 80%,
+    var(--c-secondary)
+  );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -10007,7 +10143,7 @@ body:has(#book) .info-card .feature__icon svg {
   .page-hero--gift h1 em {
     animation: giftUnderline 1s 0.9s var(--ease-out) both;
   }
-  .page-hero--gift .btn--primary svg {
+  .page-hero--motion .btn--primary svg {
     animation: giftNudge 3s 2s ease-in-out infinite;
   }
   .page-hero--gift .arch__badge span::after {
@@ -10020,8 +10156,9 @@ body:has(#book) .info-card .feature__icon svg {
     animation: giftPulse 2.8s 1.8s var(--ease-out) infinite;
   }
   /* Scrolled away, these rest and play again when the banner comes back (as its load animation does) */
-  .page-hero--gift[data-cm-hero="off"] :is(h1 em, .btn--primary svg),
-  .page-hero--gift[data-cm-hero="off"] .arch__badge span::after {
+  .page-hero--gift[data-cm-hero="off"] h1 em,
+  .page-hero--gift[data-cm-hero="off"] .arch__badge span::after,
+  .page-hero--motion[data-cm-hero="off"] .btn--primary svg {
     animation: none;
   }
 
@@ -10686,5 +10823,840 @@ body:has(#book) .info-card .feature__icon svg {
   }
   .tt-cards .info-card:hover .link-arrow svg {
     transform: translateX(4px);
+  }
+}
+
+/* =====================================================================
+   Classes page: photos and buttons. Class photos tilt toward the pointer (components/Tilt.tsx) and their outline
+   ring drifts and glows; each row's buttons pop in one after the other (after the row's own entrance, data-cm on
+   .row__actions); the main button glows and the outline button and class shortcuts fill from the left under the
+   pointer.
+   ===================================================================== */
+.row__actions .btn--outline {
+  background: linear-gradient(var(--c-fill), var(--c-fill)) left / 0% 100% no-repeat;
+}
+.row__actions .btn--outline:hover {
+  background-color: transparent;
+  background-size: 100% 100%;
+  border-color: var(--c-fill);
+}
+.jump > a {
+  background:
+    linear-gradient(var(--c-fill), var(--c-fill)) left / 0% 100% no-repeat,
+    var(--c-surface);
+}
+.jump > a:hover {
+  background:
+    linear-gradient(var(--c-fill), var(--c-fill)) left / 100% 100% no-repeat,
+    var(--c-surface);
+}
+@keyframes arch-drift {
+  to {
+    translate: 10px -8px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .row__media .arch {
+    transform: perspective(1000px) rotateY(var(--tilt-x, 0deg)) rotateX(var(--tilt-y, 0deg));
+    transition: transform 0.7s var(--ease-out);
+  }
+  .row__media .arch:hover {
+    transition-duration: 0.2s;
+  }
+  .row__media .arch::before {
+    animation: arch-drift 6s ease-in-out infinite alternate;
+  }
+  .row__media .arch:hover::before {
+    opacity: 0.95;
+    box-shadow: 0 0 28px rgba(0, 171, 201, 0.35);
+    transition:
+      opacity 0.4s,
+      box-shadow 0.4s;
+  }
+  .row__actions .btn {
+    transition:
+      background-color var(--t) var(--ease),
+      background-size 0.45s var(--ease-out),
+      color var(--t) var(--ease),
+      border-color var(--t),
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+  }
+  .row__actions .btn--primary:hover {
+    box-shadow: 0 14px 30px -12px var(--c-fill);
+  }
+  /* The buttons pop in one by one after their row has risen in */
+  .row__actions > .btn:nth-child(1) {
+    --b: 0.15s;
+  }
+  .row__actions > .btn:nth-child(2) {
+    --b: 0.27s;
+  }
+  .row__actions[data-cm="in"] > .btn {
+    transition:
+      opacity 0.6s var(--ease-out) calc(var(--cm-d, 0s) + var(--b, 0s)),
+      translate 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--cm-d, 0s) + var(--b, 0s)),
+      scale 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--cm-d, 0s) + var(--b, 0s)),
+      background-color var(--t) var(--ease),
+      background-size 0.45s var(--ease-out),
+      color var(--t) var(--ease),
+      border-color var(--t),
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+  }
+  .row__actions:is([data-cm="below"], [data-cm="above"]) > .btn {
+    opacity: 0;
+    translate: 0 14px;
+    scale: 0.9;
+  }
+}
+
+/* =====================================================================
+   Prices page cards. As each card plays in (Motion.tsx data-cm on .plan / .pass-card), its list rows cascade in, its
+   price rises, its icons spring in and the badge drops in; fine-print headings wipe in. Under the pointer cards lift
+   onto a teal edge, pass icons tilt, the row pointed at tints and its price nudges, Buy buttons fill from the left and
+   membership ticks bounce in turn. The highlighted cards' teal glow drifts slowly. No white flashes.
+   ===================================================================== */
+@property --glow-at {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+.plan--featured {
+  background: radial-gradient(90% 60% at var(--glow-at) 0%, rgba(0, 171, 201, 0.35), transparent 70%), var(--c-primary);
+}
+.pass-card--featured {
+  background: radial-gradient(80% 70% at var(--glow-at) 0%, rgba(0, 171, 201, 0.35), transparent 70%), var(--c-primary);
+}
+.pass-card__list li {
+  margin-inline: -10px;
+  padding-inline: 10px;
+  border-radius: 10px;
+}
+.pass-card__buy {
+  background: linear-gradient(var(--c-secondary-ink), var(--c-secondary-ink)) left / 0% 100% no-repeat;
+}
+.pass-card__buy:hover {
+  background: linear-gradient(var(--c-secondary-ink), var(--c-secondary-ink)) left / 100% 100% no-repeat;
+}
+.pass-card--featured .pass-card__buy,
+.pass-card--featured .pass-card__buy:hover {
+  background: var(--c-secondary);
+}
+.pass-card--featured .pass-card__buy:hover {
+  background: var(--c-white);
+}
+/* Row index, for the cascades */
+:is(.plan ul, .pass-card__list) > li:nth-child(2) {
+  --li: 1;
+}
+:is(.plan ul, .pass-card__list) > li:nth-child(3) {
+  --li: 2;
+}
+:is(.plan ul, .pass-card__list) > li:nth-child(4) {
+  --li: 3;
+}
+:is(.plan ul, .pass-card__list) > li:nth-child(5) {
+  --li: 4;
+}
+:is(.plan ul, .pass-card__list) > li:nth-child(n + 6) {
+  --li: 5;
+}
+@keyframes glow-drift {
+  to {
+    --glow-at: 55%;
+  }
+}
+@keyframes gift-wiggle {
+  20% {
+    rotate: -12deg;
+  }
+  40% {
+    rotate: 10deg;
+  }
+  60% {
+    rotate: -6deg;
+  }
+  80% {
+    rotate: 3deg;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* ---- playing in ---- */
+  :is(.plan, .pass-card):is([data-cm="below"], [data-cm="above"]) :is(.plan ul, .pass-card__list) > li {
+    opacity: 0;
+    translate: -14px 0;
+  }
+  :is(.plan, .pass-card)[data-cm="in"] :is(.plan ul, .pass-card__list) > li {
+    transition:
+      opacity 0.5s var(--ease-out) calc(var(--cm-d, 0s) + 0.25s + var(--li, 0) * 60ms),
+      translate 0.6s var(--ease-out) calc(var(--cm-d, 0s) + 0.25s + var(--li, 0) * 60ms);
+  }
+  :is(.plan, .pass-card):is([data-cm="below"], [data-cm="above"]) :is(.plan__price, .pass-card__price) {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  :is(.plan, .pass-card)[data-cm="in"] :is(.plan__price, .pass-card__price) {
+    transition:
+      opacity 0.6s var(--ease-out) calc(var(--cm-d, 0s) + 0.2s + var(--li, 0) * 60ms),
+      translate 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--cm-d, 0s) + 0.2s + var(--li, 0) * 60ms);
+  }
+  :is(.plan, .pass-card):is([data-cm="below"], [data-cm="above"]) :is(.pass-card__ic, .plan li svg) {
+    opacity: 0;
+    scale: 0.4;
+    rotate: -30deg;
+  }
+  :is(.plan, .pass-card)[data-cm="in"] :is(.pass-card__ic, .plan li svg) {
+    transition:
+      opacity 0.5s var(--ease-out) calc(var(--cm-d, 0s) + 0.3s + var(--li, 0) * 60ms),
+      scale 0.7s cubic-bezier(0.34, 1.6, 0.64, 1) calc(var(--cm-d, 0s) + 0.3s + var(--li, 0) * 60ms),
+      rotate 0.7s cubic-bezier(0.34, 1.6, 0.64, 1) calc(var(--cm-d, 0s) + 0.3s + var(--li, 0) * 60ms);
+  }
+  .plan:is([data-cm="below"], [data-cm="above"]) .plan__badge {
+    opacity: 0;
+    translate: 0 -14px;
+  }
+  .plan[data-cm="in"] .plan__badge {
+    transition:
+      opacity 0.5s var(--ease-out) calc(var(--cm-d, 0s) + 0.35s),
+      translate 0.8s cubic-bezier(0.34, 1.8, 0.64, 1) calc(var(--cm-d, 0s) + 0.35s);
+  }
+  .pass-terms__group:is([data-cm="below"], [data-cm="above"]) h4 {
+    clip-path: inset(0 100% 0 0);
+  }
+  .pass-terms__group[data-cm="in"] h4 {
+    transition: clip-path 0.9s var(--ease-out) calc(var(--cm-d, 0s) + 0.15s);
+  }
+
+  /* ---- always ---- */
+  .plan--featured,
+  .pass-card--featured {
+    animation: glow-drift 7s ease-in-out infinite alternate;
+  }
+  .plan__badge {
+    transition: translate 0.4s cubic-bezier(0.34, 1.6, 0.64, 1);
+  }
+
+  /* ---- under the pointer ---- */
+  .plan,
+  .pass-card,
+  .promo__card {
+    transition:
+      transform 0.45s var(--ease-out),
+      box-shadow 0.45s var(--ease-out),
+      border-color 0.3s;
+  }
+  .pass-card__ic {
+    transition: transform 0.5s cubic-bezier(0.34, 1.6, 0.64, 1);
+  }
+  .pass-card__list li {
+    transition: background-color 0.2s;
+  }
+  .pass-card__price {
+    transition:
+      translate 0.3s var(--ease-out),
+      color 0.2s;
+  }
+  .plan li svg {
+    transition: transform 0.45s cubic-bezier(0.34, 1.8, 0.64, 1) calc(var(--li, 0) * 50ms);
+  }
+  .pass-card__buy {
+    transition:
+      background-size 0.4s var(--ease-out),
+      background-color var(--t),
+      color var(--t),
+      scale 0.15s;
+  }
+  .pass-card__buy:active {
+    scale: 0.94;
+  }
+  .promo__card img {
+    transition: scale 0.7s var(--ease-out);
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .plan:hover,
+  .pass-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--c-secondary);
+    box-shadow: 0 26px 50px -26px rgba(14, 50, 103, 0.45);
+  }
+  .plan--featured:hover,
+  .pass-card--featured:hover {
+    box-shadow: 0 30px 60px -24px rgba(0, 171, 201, 0.45);
+  }
+  .plan:hover .plan__badge {
+    translate: 0 -4px;
+  }
+  .plan:hover li svg {
+    transform: scale(1.25);
+  }
+  .pass-card:hover .pass-card__ic {
+    transform: rotate(-10deg) scale(1.1);
+  }
+  .pass-card__list li:hover {
+    background-color: color-mix(in srgb, var(--c-secondary) 9%, transparent);
+  }
+  .pass-card__list li:hover .pass-card__price {
+    translate: -4px 0;
+    color: var(--c-secondary-ink);
+  }
+  .pass-card--featured .pass-card__list li:hover .pass-card__price {
+    color: var(--c-secondary);
+  }
+  .promo__card:hover {
+    transform: translateY(-4px);
+    border-style: solid;
+    border-color: var(--c-secondary);
+    box-shadow: var(--shadow);
+  }
+  .promo__card:hover img {
+    scale: 1.04;
+  }
+  .promo__gift:hover .gift-icon {
+    animation: gift-wiggle 0.7s ease-in-out;
+  }
+}
+
+/* =====================================================================
+   GIFT VOUCHERS: more motion (views/GiftVouchersPage.tsx, components/Vouchers.tsx, CountUp.tsx, Tilt.tsx).
+   Banner (any banner with .page-hero--motion, also the new-student page): the photo drifts slowly behind the text as
+   the page scrolls, the heading's words (components/Word.tsx) rise out of a mask one after another and the main
+   button's arrow nudges; on this page "yoga" comes last, then is underlined. Voucher cards: they swing in like gift tags on a string, their amounts
+   count up in step with the price bar, and under the pointer they tilt and lift. The best-value card has a teal and
+   pink light running round its edge and a button that pulses; each Buy button holds a gift box whose lid
+   lifts and a fill that sweeps across it. Nothing flashes white.
+   ===================================================================== */
+@property --gv-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+/* Heading words: each sits in a mask, tall enough for descenders, and rises out of it */
+.gw {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+.gw > span {
+  display: inline-block;
+  transform-origin: 0 100%;
+}
+/* The lid of the gift box on each Buy button, hinged at its left */
+.vcard__buy {
+  position: relative;
+  gap: 10px;
+  background:
+    linear-gradient(90deg, #0a7ea4, #0e91b8) left / 0% 100% no-repeat,
+    linear-gradient(180deg, var(--c-fill-hover), var(--c-fill));
+}
+.vcard__buy:hover {
+  filter: none;
+  background-size:
+    100% 100%,
+    auto;
+}
+.vcard__gift {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+.vcard__lid {
+  transform-box: fill-box;
+  transform-origin: 12% 100%;
+}
+/* A card that plays in on load (data-cm-intro) is hidden for a single moment, so its parts must reach their hidden
+   state at once instead of fading there slowly; they only animate on the way in */
+.vcard:is([data-cm="below"], [data-cm="above"]) :is(.vcard__bar span, .vcard__chip),
+.gift-cards .info-card:is([data-cm="below"], [data-cm="above"]) :is(.feature__icon, .feature__icon path) {
+  transition: none;
+}
+/* Best value: a light runs round the card's edge, a faint ring marks it when still */
+.vcard--best::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--gv-angle),
+    var(--c-secondary),
+    var(--c-accent) 22%,
+    rgba(0, 171, 201, 0.28) 45%,
+    rgba(0, 171, 201, 0.28) 80%,
+    var(--c-secondary)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.vcard--best {
+  position: relative;
+}
+.vcard--best .vcard__buy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--c-secondary);
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes gvSpin {
+  to {
+    --gv-angle: 360deg;
+  }
+}
+@keyframes gvWord {
+  from {
+    translate: 0 110%;
+    rotate: 6deg;
+  }
+}
+@keyframes gvSwing {
+  0% {
+    rotate: -4deg;
+  }
+  30% {
+    rotate: 2.5deg;
+  }
+  55% {
+    rotate: -1.4deg;
+  }
+  78% {
+    rotate: 0.6deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+@keyframes gvRing {
+  from {
+    opacity: 0.7;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 1.12 1.5;
+  }
+}
+@keyframes gvParallax {
+  to {
+    translate: 0 9%;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* ---- banner ---- */
+  .page-hero--motion h1 {
+    animation: none;
+  }
+  .gw > span {
+    animation: gvWord 0.95s calc(0.2s + var(--w, 0) * 90ms) var(--ease-out) both;
+  }
+  .page-hero--gift h1 em {
+    animation: giftUnderline 1s 1.15s var(--ease-out) both;
+  }
+  /* Scrolled away, the words rest and rise again when the banner comes back (as the rest of its load animation does) */
+  .page-hero--motion[data-cm-hero="off"] .gw > span {
+    animation: none;
+  }
+
+  /* ---- voucher cards ---- */
+  .vcard {
+    transition:
+      transform 0.7s var(--ease-out),
+      box-shadow 0.5s var(--ease-out);
+  }
+  .vcard:hover {
+    transition-duration: 0.22s, 0.5s;
+  }
+  .vcard:hover .vcard__lid,
+  .vcard__buy:focus-visible .vcard__lid {
+    transform: translateY(-1.5px) rotate(-7deg);
+  }
+  .vcard__buy:hover .vcard__lid,
+  .vcard__buy:focus-visible .vcard__lid {
+    transform: translateY(-3.5px) rotate(-16deg);
+  }
+  .vcard__lid {
+    transition: transform 0.5s cubic-bezier(0.34, 1.6, 0.64, 1);
+  }
+  .vcard__buy {
+    transition:
+      background-size 0.5s var(--ease-out),
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+  }
+  .vcard__buy:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 14px 28px -8px rgba(10, 126, 164, 0.55);
+  }
+  /* While a card plays in it keeps its entrance timing, and its tilt stays quick */
+  .vcard[data-cm="in"] {
+    transition:
+      opacity 0.7s var(--ease-out) var(--cm-d),
+      translate 0.8s var(--ease-out) var(--cm-d),
+      scale 0.8s var(--ease-out) var(--cm-d),
+      transform 0.22s var(--ease-out),
+      box-shadow 0.5s var(--ease-out);
+  }
+  .vcard--best::before {
+    animation: gvSpin 5s linear infinite;
+  }
+  .vcard--best .vcard__buy::after {
+    animation: gvRing 2.6s 2s ease-out infinite;
+  }
+  .vcard--best .vcard__buy:hover::after {
+    animation: none;
+  }
+}
+/* Cards hang from the top edge and swing in once they start playing in (two columns and wider; one per row on phones) */
+@media (prefers-reduced-motion: no-preference) and (min-width: 640px) {
+  .vcard[data-cm="in"] {
+    transform-origin: 50% 0;
+    animation: gvSwing 1.2s var(--cm-d) ease-in-out both;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .vcard:hover {
+    transform: perspective(900px) rotateY(var(--tilt-x, 0deg)) rotateX(var(--tilt-y, 0deg)) translateY(-6px);
+    box-shadow:
+      0 2px 6px rgba(14, 50, 103, 0.06),
+      0 34px 60px -26px rgba(14, 50, 103, 0.5);
+  }
+}
+/* Banner photo: drifts down slowly behind the text as the page scrolls (where the browser can tie motion to scrolling).
+   The frame is taller than the banner so its edges never show. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page-hero--motion .arch__frame {
+      inset: -12% 0;
+      animation: gvParallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 640px;
+    }
+  }
+}
+
+/* FAQs page motion. A question opens with its answer sliding down and fading in, the plus spins into a cross with a
+   springy turn, a teal bar grows down the card's left edge, and the question title warms to teal. Closing reverses it.
+   Smooth height needs ::details-content (Chromium/Safari); elsewhere the answer simply fades in. */
+@media (prefers-reduced-motion: no-preference) {
+  .faq {
+    position: relative;
+    overflow: hidden;
+    interpolate-size: allow-keywords;
+  }
+  .faq::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--c-secondary), var(--c-fill));
+    scale: 1 0;
+    transform-origin: top;
+    transition: scale 0.5s var(--ease-out);
+  }
+  .faq[open]::before {
+    scale: 1 1;
+  }
+  .faq summary {
+    transition:
+      color var(--t) var(--ease),
+      padding-left 0.4s var(--ease-out);
+  }
+  .faq[open] summary {
+    color: var(--c-secondary-ink, var(--c-secondary));
+    padding-left: calc(var(--s-3) + 6px);
+  }
+  .faq__icon {
+    transition:
+      background-color var(--t) var(--ease),
+      rotate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .faq summary:hover .faq__icon {
+    scale: 1.1;
+  }
+  .faq[open] .faq__icon {
+    rotate: 135deg;
+  }
+  .faq p {
+    transition: padding-left 0.4s var(--ease-out);
+  }
+  .faq[open] p {
+    padding-left: calc(var(--s-3) + 6px);
+    animation: faqAnswer 0.5s var(--ease-out) both;
+  }
+  @supports selector(::details-content) {
+    .faq::details-content {
+      block-size: 0;
+      overflow: clip;
+      opacity: 0;
+      transition:
+        block-size 0.45s var(--ease-out),
+        opacity 0.35s var(--ease),
+        content-visibility 0.45s allow-discrete;
+    }
+    .faq[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+    .faq[open] p {
+      animation: none;
+    }
+  }
+}
+@keyframes faqAnswer {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* =====================================================================
+   NEW STUDENT REGISTRATION (views/NewStudentPage.tsx; the banner shares the gift page's .page-hero--motion). The three
+   steps build one after another, 0.4s apart, as the page opens (data-cm-intro, so also when they are already on
+   screen) and each time they scroll back: a card rises, its icon tile pops in with a turn and the icon draws itself,
+   the step number springs up and the text wipes in (wipes, not moves: text moving inside a moving card counts as
+   layout shift). Where the cards sit in a row, dashed lines join the icon tiles like a stepper and draw across just as
+   the next step arrives; a small dot then keeps travelling along them. The sign-up buttons come in after the last
+   step, the main one pulsing softly. Under the pointer a step does not move (the lines stay joined to its tile): it
+   gains a teal edge, its tile turns and glows and its icon draws itself again. Nothing flashes white.
+   ===================================================================== */
+@property --flow {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -100%; /* off the line's left end: the dot only exists while it is animated */
+}
+.steps {
+  position: relative;
+}
+.step__n {
+  display: inline-block;
+  color: var(--c-secondary-ink);
+  transform-origin: 50% 70%;
+}
+/* The lines: one from each tile to the next, along the tiles' centre line, with a dot on the end and one travelling.
+   Measured from the grid: a tile sits one card padding in from its card's edge and is 52px wide; a line starts 12px
+   after a tile and stops 12px before the next, and the next card is a third of the grid plus a gap further on. */
+@media (min-width: 768px) {
+  .steps::before,
+  .steps::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: calc(var(--s-3) + 22px);
+    width: calc((100% + var(--s-3)) / 3 - 76px);
+    height: 8px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle 4px, rgba(0, 171, 201, 0.95) 0 2.5px, rgba(0, 171, 201, 0.3) 2.5px 3.4px, transparent 4px)
+        var(--flow) 50% / 8px 8px no-repeat,
+      radial-gradient(circle 4px at calc(100% - 4px) 50%, var(--c-secondary) 0 3.5px, transparent 4px) no-repeat,
+      repeating-linear-gradient(90deg, var(--c-secondary) 0 8px, transparent 8px 14px) 0 50% / calc(100% - 10px) 2px no-repeat;
+  }
+  .steps::before {
+    left: calc(var(--s-3) + 64px);
+  }
+  .steps::after {
+    left: calc((100% + var(--s-3)) / 3 + var(--s-3) + 64px);
+  }
+}
+@keyframes stepFlow {
+  0% {
+    --flow: 0%;
+  }
+  55%,
+  100% {
+    --flow: 100%;
+  }
+}
+@keyframes stepDraw {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+/* Hovering: the teal edge and the glowing, turning tile (the step itself stays put) */
+@media (hover: hover) {
+  .steps .info-card:hover {
+    transform: none;
+    box-shadow:
+      0 0 0 1.5px color-mix(in srgb, var(--c-secondary) 60%, transparent),
+      var(--shadow);
+  }
+  .steps .info-card:hover .feature__icon {
+    transform: rotate(-7deg) scale(1.08);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--c-secondary) 18%, transparent);
+  }
+  .steps .info-card:hover .step__n {
+    transform: scale(1.14);
+  }
+}
+/* The sign-up buttons: the outline one fills from the left under the pointer */
+.steps__foot .btn--outline {
+  background: linear-gradient(var(--c-fill), var(--c-fill)) left / 0% 100% no-repeat;
+}
+.steps__foot .btn--outline:hover {
+  background-color: transparent;
+  background-size: 100% 100%;
+  border-color: var(--c-fill);
+}
+.steps__foot .btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--c-secondary);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* ---- the lines draw across, each just before the next step's tile pops in ---- */
+  @media (min-width: 768px) {
+    .steps::before,
+    .steps::after {
+      clip-path: inset(0 0 0 0); /* not "none": a clip can only animate between two shapes */
+      transition: clip-path 0.5s var(--ease-out) var(--seg-d);
+      animation: stepFlow 3s linear infinite;
+    }
+    .steps::before {
+      --seg-d: 0.15s;
+      animation-delay: 1.4s;
+    }
+    .steps::after {
+      --seg-d: 0.55s;
+      animation-delay: 1.9s;
+    }
+    .steps:has(> .info-card:first-child:is([data-cm="below"], [data-cm="above"]))::before,
+    .steps:has(> .info-card:first-child:is([data-cm="below"], [data-cm="above"]))::after {
+      clip-path: inset(0 100% 0 0);
+      transition: none;
+    }
+  }
+
+  /* ---- each step: one transition list for all states (so the slow ones are not cut short when Motion.tsx hands the
+     card over to "shown" after 1.5s), hidden at once, delayed by its place in the sequence while it plays in ---- */
+  .steps .info-card {
+    transition:
+      opacity 0.7s var(--ease-out),
+      translate 0.8s var(--ease-out),
+      scale 0.8s var(--ease-out),
+      box-shadow 0.4s var(--ease-out);
+  }
+  .steps .info-card[data-cm="in"] {
+    --cm-d: calc(var(--cm-i, 0) * 400ms);
+    transition:
+      opacity 0.7s var(--ease-out) var(--cm-d),
+      translate 0.8s var(--ease-out) var(--cm-d),
+      scale 0.8s var(--ease-out) var(--cm-d),
+      box-shadow 0.4s var(--ease-out);
+  }
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]),
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]) :is(.feature__icon, .feature__icon path, .step__n, h3, p) {
+    transition: none;
+  }
+  /* Tile: pops in from small with a turn (hover uses transform, so its response is not held back by the delay) */
+  .steps .feature__icon {
+    transition:
+      scale 0.7s cubic-bezier(0.34, 1.45, 0.64, 1) calc(var(--cm-d, 0ms) + 0.2s),
+      rotate 0.7s cubic-bezier(0.34, 1.45, 0.64, 1) calc(var(--cm-d, 0ms) + 0.2s),
+      transform 0.45s cubic-bezier(0.34, 1.6, 0.64, 1),
+      box-shadow 0.4s var(--ease-out);
+  }
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]) .feature__icon {
+    scale: 0.4;
+    rotate: -25deg;
+  }
+  /* …and the icon draws its strokes (every icon path here is shorter than 100 units, so one dash covers it) */
+  .steps .feature__icon path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.2s var(--ease-out) calc(var(--cm-d, 0ms) + 0.4s);
+  }
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]) .feature__icon path {
+    stroke-dashoffset: 100;
+  }
+  /* Step number: springs up */
+  .steps .step__n {
+    transition:
+      scale 0.6s cubic-bezier(0.34, 1.8, 0.64, 1) calc(var(--cm-d, 0ms) + 0.3s),
+      opacity 0.4s var(--ease-out) calc(var(--cm-d, 0ms) + 0.3s),
+      transform 0.35s cubic-bezier(0.34, 1.6, 0.64, 1);
+  }
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]) .step__n {
+    scale: 0.3;
+    opacity: 0;
+  }
+  /* Title, then text, wipe in left to right */
+  .steps .info-card > :is(h3, p) {
+    --st: 0.3s;
+    clip-path: inset(-0.4em -0.4em -0.4em -0.4em);
+    transition:
+      opacity 0.6s var(--ease-out) calc(var(--cm-d, 0ms) + var(--st)),
+      clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--cm-d, 0ms) + var(--st));
+  }
+  .steps .info-card > p {
+    --st: 0.42s;
+  }
+  .steps .info-card:is([data-cm="below"], [data-cm="above"]) > :is(h3, p) {
+    opacity: 0;
+    clip-path: inset(-0.4em 100% -0.4em -0.4em);
+  }
+  @media (hover: hover) {
+    .steps .info-card:hover .feature__icon path {
+      animation: stepDraw 0.9s var(--ease-out);
+    }
+  }
+
+  /* ---- the sign-up buttons follow the last step ---- */
+  .steps__foot .btn {
+    transition:
+      opacity 0.7s var(--ease-out),
+      translate 0.8s var(--ease-out),
+      scale 0.8s var(--ease-out),
+      background-color var(--t) var(--ease),
+      background-size 0.45s var(--ease-out),
+      color var(--t) var(--ease),
+      border-color var(--t),
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+  }
+  .steps__foot .btn[data-cm="in"] {
+    --cm-d: calc(var(--cm-i, 0) * 400ms);
+    transition:
+      opacity 0.7s var(--ease-out) var(--cm-d),
+      translate 0.8s var(--ease-out) var(--cm-d),
+      scale 0.8s var(--ease-out) var(--cm-d),
+      background-color var(--t) var(--ease),
+      background-size 0.45s var(--ease-out),
+      color var(--t) var(--ease),
+      border-color var(--t),
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+  }
+  .steps__foot .btn:is([data-cm="below"], [data-cm="above"]) {
+    transition: none;
+  }
+  .steps__foot .btn--primary::after {
+    animation: gvRing 2.6s 3.2s ease-out infinite;
+  }
+  .steps__foot .btn--primary:hover::after {
+    animation: none;
+  }
+  .steps__foot .btn--primary svg {
+    animation: giftNudge 3s 3.2s ease-in-out infinite;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 import type { User } from "@supabase/supabase-js";
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { LOGO } from "@/lib/site";
 import { supabaseUrlProblem } from "@/lib/supabase";
 import { supabase } from "./client";
@@ -14,6 +14,15 @@ import { ToastProvider } from "./Toast";
 
 type View = "loading" | "setup" | "login" | "notAdmin" | "app";
 
+const COLLAPSE_KEY = "admin-menu-collapsed";
+const DESKTOP = "(min-width: 960px)"; // matches the breakpoint in admin.css
+
+/* 24 × 24 outline icons for the menu controls */
+const MENU_ICON = "M4 7h16M4 12h16M4 17h10";
+const CLOSE_ICON = "M6 6l12 12M18 6 6 18";
+const FOLD_ICON = "M15 6l-6 6 6 6M4 4v16";
+const SIGNOUT_ICON = "M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l4-4-4-4M14 12H4";
+
 /** /admin: staff sign in (Supabase Auth) and manage website content. */
 export function AdminApp() {
   const [view, setView] = useState<View>("loading");
@@ -24,6 +33,78 @@ export function AdminApp() {
   const [busy, setBusy] = useState(false);
   const [showPw, setShowPw] = useState(false);
   const [denied, setDenied] = useState<{ id: string; email: string; reason: string } | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  // Desktop: sidebar folded to an icon rail (remembered). Phones/tablets: sidebar open as a drawer.
+  const [collapsed, setCollapsed] = useState(() => typeof window !== "undefined" && localStorage.getItem(COLLAPSE_KEY) === "1");
+  const [drawer, setDrawer] = useState(false);
+  const [pill, setPill] = useState<CSSProperties | null>(null);
+  const [pillReady, setPillReady] = useState(false); // glide only after it is first placed, not in from the corner
+  useEffect(() => {
+    if (!pill || pillReady) return;
+    const f = requestAnimationFrame(() => setPillReady(true));
+    return () => cancelAnimationFrame(f);
+  }, [pill, pillReady]);
+
+  // Menu highlight: one pill that slides to the current section (re-measured when the menu changes size)
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    if (view !== "app" || !nav) return;
+    const place = () => {
+      const b = nav.querySelector<HTMLElement>('[aria-current="page"]');
+      if (!b) return setPill(null);
+      setPill({ width: b.offsetWidth, height: b.offsetHeight, transform: `translate(${b.offsetLeft}px, ${b.offsetTop}px)` });
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(nav);
+    return () => ro.disconnect();
+  }, [view, section]);
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed((c) => {
+      localStorage.setItem(COLLAPSE_KEY, c ? "0" : "1");
+      return !c;
+    });
+  }, []);
+  const closeDrawer = useCallback(() => {
+    setDrawer(false);
+    menuBtnRef.current?.focus();
+  }, []);
+
+  // Ctrl/⌘ + B opens or closes the menu (not while typing, where it means bold); Esc closes the drawer
+  useEffect(() => {
+    if (view !== "app") return;
+    const desktop = matchMedia(DESKTOP);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && drawer) return closeDrawer();
+      const t = e.target as HTMLElement;
+      if (e.key.toLowerCase() !== "b" || !(e.metaKey || e.ctrlKey) || t.closest("input, textarea, select, [contenteditable]"))
+        return;
+      e.preventDefault();
+      if (desktop.matches) toggleCollapsed();
+      else setDrawer((d) => !d);
+    };
+    // Growing the window past the phone layout closes the drawer
+    const onWide = () => desktop.matches && setDrawer(false);
+    addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onWide);
+    return () => {
+      removeEventListener("keydown", onKey);
+      desktop.removeEventListener("change", onWide);
+    };
+  }, [view, drawer, closeDrawer, toggleCollapsed]);
+
+  // While the drawer is open the page behind it does not scroll, and focus moves into the drawer
+  useEffect(() => {
+    if (!drawer) return;
+    document.documentElement.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [drawer]);
 
   const start = useCallback(async (u: User) => {
     const sb = supabase()!;
@@ -68,6 +149,7 @@ export function AdminApp() {
 
   const go = (key: string) => {
     setSection(key);
+    setDrawer(false);
     history.replaceState(null, "", `#${key}`);
   };
 
@@ -212,57 +294,119 @@ export function AdminApp() {
       </div>
     );
 
-  const navButton = ([key, label]: [string, string]) => (
-    <button key={key} type="button" aria-current={section === key ? "page" : undefined} onClick={() => go(key)}>
+  const navButton = ([key, label]: [string, string], n: number) => (
+    <button
+      key={key}
+      type="button"
+      aria-current={section === key ? "page" : undefined}
+      onClick={() => go(key)}
+      data-tip={label}
+      style={{ "--i": n } as CSSProperties}
+    >
       <Icon name={key} />
-      <span>{label}</span>
-      {key === "messages" && newCount > 0 && <span className="a-badge">{newCount}</span>}
+      <span className="a-nav__label">{label}</span>
+      {key === "messages" && newCount > 0 && (
+        <span className="a-badge" aria-label={`${newCount} new`}>
+          {newCount}
+        </span>
+      )}
     </button>
   );
+  const signOut = () =>
+    supabase()!
+      .auth.signOut()
+      .then(() => location.reload());
+  const current = NAV.find(([k]) => k === section)?.[1] ?? "Dashboard";
   return (
     <ToastProvider>
-      <div className="a-app">
-        <aside className="a-side">
+      <div className={`a-app${collapsed ? " is-collapsed" : ""}${drawer ? " is-drawer" : ""}`}>
+        {/* Phones and tablets: bar with the menu button; the sidebar opens over the page as a drawer */}
+        <header className="a-topbar">
+          <button
+            ref={menuBtnRef}
+            type="button"
+            className="a-iconbtn"
+            aria-label="Open menu"
+            aria-controls="a-side"
+            aria-expanded={drawer}
+            onClick={() => setDrawer(true)}
+          >
+            <Icon path={MENU_ICON} />
+          </button>
+          <span className="a-topbar__title">
+            <img src={LOGO} alt="" width={30} height={30} />
+            <span key={section}>{current}</span>
+          </span>
+          <ThemeToggle />
+        </header>
+        <div className="a-scrim" aria-hidden="true" onClick={closeDrawer} />
+        <aside className="a-side" id="a-side" aria-label="Admin menu">
           <div className="a-side__top">
-            <a className="a-brand" href="/pages/home" target="_blank" rel="noopener">
+            <a className="a-brand" href="/pages/home" target="_blank" rel="noopener" title="Open the website">
               <img src={LOGO} alt="" width={40} height={40} />
               <span>
                 The Yoga School
                 <small>Website admin</small>
               </span>
             </a>
-            <ThemeToggle />
-          </div>
-          <nav aria-label="Sections">
-            {NAV.slice(0, 2).map(navButton)}
-            <p className="a-navlabel">Content</p>
-            {NAV.slice(2).map(navButton)}
-          </nav>
-          <div className="a-user">
-            <span className="a-user__avatar" aria-hidden="true">
-              {(user?.email ?? "?").charAt(0).toUpperCase()}
-            </span>
-            <span className="a-user__email">{user?.email}</span>
             <button
+              ref={closeBtnRef}
               type="button"
-              onClick={() =>
-                supabase()!
-                  .auth.signOut()
-                  .then(() => location.reload())
-              }
+              className="a-iconbtn a-side__close"
+              aria-label="Close menu"
+              onClick={closeDrawer}
             >
-              Sign out
+              <Icon path={CLOSE_ICON} />
             </button>
+          </div>
+          <button
+            type="button"
+            className="a-fold"
+            aria-label={collapsed ? "Expand menu" : "Collapse menu"}
+            aria-expanded={!collapsed}
+            aria-controls="a-side"
+            title={`${collapsed ? "Expand" : "Collapse"} menu (Ctrl/⌘ + B)`}
+            onClick={toggleCollapsed}
+          >
+            <Icon path={FOLD_ICON} />
+          </button>
+          <nav aria-label="Sections" ref={navRef}>
+            <span
+              className={`a-nav__pill${pill ? " is-on" : ""}${pillReady ? " is-ready" : ""}`}
+              style={pill ?? undefined}
+              aria-hidden="true"
+            />
+            {NAV.slice(0, 2).map(navButton)}
+            <p className="a-navlabel" style={{ "--i": 2 } as CSSProperties}>
+              <span>Content</span>
+            </p>
+            {NAV.slice(2).map((item, n) => navButton(item, n + 3))}
+          </nav>
+          <div className="a-side__foot">
+            <ThemeToggle />
+            <div className="a-user">
+              <span className="a-user__avatar" aria-hidden="true" title={user?.email}>
+                {(user?.email ?? "?").charAt(0).toUpperCase()}
+              </span>
+              <span className="a-user__email">{user?.email}</span>
+              <button type="button" className="a-user__out" onClick={signOut} data-tip="Sign out">
+                <Icon path={SIGNOUT_ICON} />
+                <span>Sign out</span>
+              </button>
+            </div>
           </div>
         </aside>
         <main className="a-main">
-          {section === "dashboard" ? (
-            <Dashboard go={go} newMessages={newCount} />
-          ) : section === "messages" ? (
-            <Messages onCountChange={refreshCount} />
-          ) : (
-            <ContentSection key={section} table={section} />
-          )}
+          {/* keyed, so each section fades in when it opens */}
+          <div className="a-view" key={section}>
+            {section === "dashboard" ? (
+              <Dashboard go={go} newMessages={newCount} />
+            ) : section === "messages" ? (
+              <Messages onCountChange={refreshCount} />
+            ) : (
+              <ContentSection table={section} />
+            )}
+          </div>
         </main>
       </div>
     </ToastProvider>

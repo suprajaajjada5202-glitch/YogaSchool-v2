@@ -1,4 +1,5 @@
 /* Converted from the static page; interactive parts are React components. */
+import { Tilt } from "@/components/Tilt";
 import { ClassJump, ClassRows } from "@/components/ClassRows";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
@@ -6,11 +7,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { Wave } from "@/components/Wave";
 import { seo } from "@/lib/seo";
 import { getClasses } from "@/lib/data";
+import { modalities } from "@/data/content";
 
 export default async function ClassesPage() {
   const [classes] = await Promise.all([getClasses()]);
   // "Level N" class section, whatever web address name it was given in /admin
-  const levelHref = (n: number) => `#class-${classes.find((c) => new RegExp(`^level ${n}\\b`, "i").test(c.name))?.slug ?? `l${n}`}`;
+  const levelHref = (n: number) =>
+    `#class-${classes.find((c) => new RegExp(`^level ${n}\\b`, "i").test(c.name))?.slug ?? `l${n}`}`;
   return (
     <>
       {" "}
@@ -68,7 +71,8 @@ export default async function ClassesPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 decoding="async"
                 src="/images/headers/childs-pose.jpg"
                 alt="A teacher gently adjusting a student resting in child's pose"
@@ -127,8 +131,8 @@ export default async function ClassesPage() {
         {" "}
         <div className="container">
           {" "}
-          <ClassJump classes={classes} />{" "}
-          <ClassRows classes={classes} />{" "}
+          <ClassJump classes={classes} /> <ClassRows classes={classes} modalities={modalities} />
+          <Tilt selector=".row__media .arch" />{" "}
         </div>{" "}
       </section>{" "}
       <Wave />{" "}

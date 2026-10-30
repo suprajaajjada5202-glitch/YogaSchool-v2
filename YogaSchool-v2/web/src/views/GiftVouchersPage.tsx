@@ -1,6 +1,8 @@
 /* Converted from the static page; interactive parts are React components. */
 import { Reveal } from "@/components/Reveal";
+import { Tilt } from "@/components/Tilt";
 import { Vouchers } from "@/components/Vouchers";
+import { Word } from "@/components/Word";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
@@ -11,7 +13,7 @@ export default async function GiftVouchersPage() {
   return (
     <>
       {" "}
-      <section className="page-hero page-hero--gift">
+      <section className="page-hero page-hero--gift page-hero--motion">
         {" "}
         <svg className="blob blob--a" viewBox="0 0 500 500" aria-hidden="true">
           <path
@@ -39,7 +41,10 @@ export default async function GiftVouchersPage() {
             </nav>{" "}
             <p className="eyebrow">Gift vouchers</p>{" "}
             <h1>
-              Give the gift of <em>yoga</em>
+              <Word n={0}>Give</Word> <Word n={1}>the</Word> <Word n={2}>gift</Word> <Word n={3}>of</Word>{" "}
+              <em>
+                <Word n={4}>yoga</Word>
+              </em>
             </h1>{" "}
             <p className="lead">
               Gift vouchers are available online, or at the studio in Piccones Village on Pease Street, Edge Hill (diagonally
@@ -60,7 +65,8 @@ export default async function GiftVouchersPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
+                loading="lazy"
                 decoding="async"
                 src="/images/gallery/DSC00185.jpg"
                 alt="A full class in warrior pose"
@@ -86,7 +92,7 @@ export default async function GiftVouchersPage() {
           <Vouchers vouchers={vouchers}>
             <div className="info-cards gift-cards">
               {" "}
-              <Reveal className="info-card">
+              <Reveal className="info-card" data-cm-intro="">
                 <span className="feature__icon">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -109,7 +115,7 @@ export default async function GiftVouchersPage() {
                   </svg>
                 </a>
               </Reveal>{" "}
-              <Reveal delay={1} className="info-card">
+              <Reveal delay={1} className="info-card" data-cm-intro="">
                 <span className="feature__icon">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -137,7 +143,7 @@ export default async function GiftVouchersPage() {
                   </svg>
                 </a>
               </Reveal>{" "}
-              <Reveal delay={2} className="info-card">
+              <Reveal delay={2} className="info-card" data-cm-intro="">
                 <span className="feature__icon">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -162,6 +168,7 @@ export default async function GiftVouchersPage() {
               </Reveal>{" "}
             </div>
           </Vouchers>{" "}
+          <Tilt selector=".vcard" x={5} y={4} />
         </div>{" "}
       </section>{" "}
       <JsonLd data={seo("gift-vouchers").jsonLd} />

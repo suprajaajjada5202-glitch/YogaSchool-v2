@@ -9,7 +9,7 @@ export const CATEGORIES: [string, string][] = [
   ["private", "Private class"],
   ["other", "Other / offer"],
 ];
-const TZ = "Australia/Brisbane";
+export const TZ = "Australia/Brisbane";
 
 export type Row = Record<string, unknown> & { id: string };
 export type FieldType = "text" | "textarea" | "number" | "checkbox" | "url" | "image" | "select" | "time" | "datetime" | "list";
@@ -39,7 +39,25 @@ export type ContentType = {
   order: [string, boolean][];
   search: string[];
   cols: [string, (r: Row) => string][];
+  /** Optional: rows are listed under a heading per value (e.g. the timetable's day); rows must already be in that order */
+  group?: (r: Row) => string;
+  /** Card view (every type but the timetable, which has its week board) */
+  card?: Card;
   fields: Field[];
+};
+
+/** What a content card shows. `date` puts a calendar tile on the photo; `value` is the big number (price);
+    `group` puts cards under a heading per value, in first-seen order. */
+export type Card = {
+  title: (r: Row) => string;
+  kicker?: (r: Row) => string;
+  meta?: (r: Row) => string[];
+  text?: (r: Row) => string;
+  value?: (r: Row) => string;
+  sub?: (r: Row) => string;
+  date?: (r: Row) => unknown;
+  group?: (r: Row) => string;
+  tag?: (r: Row) => string;
 };
 
 export const money = (n: unknown) =>
@@ -104,6 +122,13 @@ export const TYPES: Record<string, ContentType> = {
       ["Duration", (r) => String(r.duration || "—")],
       ["Status", status],
     ],
+    card: {
+      title: (r) => String(r.name ?? ""),
+      kicker: (r) => String(r.level ?? ""),
+      meta: (r) => [String(r.duration ?? ""), r.slug ? `#class-${r.slug}` : ""],
+      text: (r) => String(r.description ?? ""),
+      tag: (r) => String(r.tag ?? ""),
+    },
     fields: [
       F("name", "Class name", "text", { required: true }),
       F("level", "Who it's for", "text", { half: true, help: "e.g. Beginners or All levels" }),
@@ -137,8 +162,8 @@ export const TYPES: Record<string, ContentType> = {
     search: ["class_name", "teacher"],
     intro:
       "Weekly timetable. When at least one class is published, the Timetable page shows it above the Momence booking widget.",
+    group: (r) => DAYS[Number(r.day_of_week) - 1] ?? "No day set",
     cols: [
-      ["Day", (r) => DAYS[Number(r.day_of_week) - 1]],
       ["Time", (r) => hhmm(r.start_time) + (r.end_time ? "–" + hhmm(r.end_time) : "")],
       ["Class", (r) => String(r.class_name ?? "")],
       ["Teacher", (r) => String(r.teacher ?? "")],
@@ -173,6 +198,16 @@ export const TYPES: Record<string, ContentType> = {
       ["Price", (r) => String(r.price_label || money(r.price))],
       ["Status", status],
     ],
+    card: {
+      title: (r) => String(r.name ?? ""),
+      kicker: (r) => String(r.badge ?? ""),
+      value: (r) => String(r.price_label || money(r.price)),
+      sub: (r) => (r.period ? `per ${r.period}` : ""),
+      text: (r) => String(r.description || r.terms || ""),
+      meta: (r) => [Array.isArray(r.features) && r.features.length ? `${r.features.length} included` : ""],
+      group: (r) => CATEGORIES.find((c) => c[0] === r.category)?.[1] ?? String(r.category ?? "Other"),
+      tag: (r) => (r.featured ? "Highlighted" : ""),
+    },
     fields: [
       F("category", "Type", "select", { half: true, required: true, options: CATEGORIES, def: "membership" }),
       F("name", "Name", "text", { half: true, required: true }),
@@ -205,6 +240,14 @@ export const TYPES: Record<string, ContentType> = {
       ["Teacher", (r) => String(r.teacher ?? "")],
       ["Status", status],
     ],
+    card: {
+      title: (r) => String(r.title ?? ""),
+      kicker: (r) => fmtDate(r.starts_at),
+      date: (r) => r.starts_at,
+      meta: (r) => [String(r.teacher ?? ""), String(r.price_label ?? "")],
+      text: (r) => String(r.description ?? ""),
+      tag: (r) => (r.ends_at && new Date(String(r.ends_at)) < new Date() ? "Finished" : ""),
+    },
     fields: [
       F("title", "Event title", "text", { required: true }),
       F("starts_at", "Starts", "datetime", { half: true, required: true }),
@@ -234,6 +277,13 @@ export const TYPES: Record<string, ContentType> = {
       ["Date", (r) => fmtDate(r.published_at)],
       ["Status", status],
     ],
+    card: {
+      title: (r) => String(r.title ?? ""),
+      kicker: (r) => fmtDate(r.published_at),
+      meta: (r) => [String(r.author ?? "")],
+      text: (r) => String(r.excerpt || r.body || ""),
+      tag: (r) => (r.published_at && new Date(String(r.published_at)) > new Date() ? "Scheduled" : ""),
+    },
     fields: [
       F("title", "Title", "text", { required: true }),
       F("slug", "Web address name", "text", { required: true, half: true, slugFrom: "title" }),
@@ -257,6 +307,12 @@ export const TYPES: Record<string, ContentType> = {
       ["Price", (r) => money(r.price)],
       ["Status", status],
     ],
+    card: {
+      title: (r) => String(r.name ?? ""),
+      kicker: () => "Gift voucher",
+      value: (r) => money(r.price),
+      text: (r) => String(r.description ?? ""),
+    },
     fields: [
       F("name", "Voucher name", "text", { required: true, half: true }),
       F("price", "Price ($)", "number", { half: true, step: "0.01" }),

@@ -1,13 +1,21 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import { importContent, refreshWebsite } from "./api";
 import { supabase } from "./client";
 import { TYPES, type Row } from "./config";
 import { Editor } from "./Editor";
 import { Icon } from "./Icon";
 import { useToast } from "./Toast";
+import { WeekBoard } from "./WeekBoard";
+import { ContentCards } from "./ContentCards";
 
 type Filter = "all" | "live" | "hidden";
+type View = "board" | "list";
+const viewKey = (table: string) => `tys-admin-view-${table}`;
+const BOARD_ICON = { week: "M4 5h16v15H4zM4 10h16M9 5v15M15 5v15", cards: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" };
+
+const EDIT_ICON = "M4 20h4L19 9l-4-4L4 16v4ZM14 6l4 4";
+const COPY_ICON = "M9 9h11v11H9zM5 15V4h11";
 
 /** List + search + filter + live switch + add / edit / duplicate for one content table. */
 export function ContentSection({ table }: { table: string }) {
@@ -19,6 +27,22 @@ export function ContentSection({ table }: { table: string }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [editing, setEditing] = useState<{ row: Row | null; isNew: boolean } | null>(null);
   const [importing, setImporting] = useState(false);
+  // Week board (timetable) or cards (everything else) by default, or the plain list; remembered per section on this device
+  const isWeek = table === "timetable";
+  const hasBoard = isWeek || Boolean(type.card);
+  const [view, setView] = useState<View>("board");
+  useEffect(() => {
+    try {
+      setView(localStorage.getItem(viewKey(table)) === "list" ? "list" : "board");
+    } catch {}
+  }, [table]);
+  const pickView = (v: View) => {
+    setView(v);
+    try {
+      localStorage.setItem(viewKey(table), v);
+    } catch {}
+  };
+  const board = hasBoard && view === "board";
 
   const load = useCallback(async () => {
     const sb = supabase();
@@ -52,6 +76,8 @@ export function ContentSection({ table }: { table: string }) {
     );
   }, [rows, term, filter, type]);
   const live = rows?.filter((r) => r.published).length ?? 0;
+  const cols = type.cols.filter(([h]) => h !== "Status");
+  const span = cols.length + (type.thumb ? 3 : 2); // every column, for the group headings
 
   async function toggle(r: Row) {
     const published = !r.published;
@@ -130,6 +156,21 @@ export function ContentSection({ table }: { table: string }) {
             </button>
           ))}
         </div>
+        {hasBoard && (
+          <div className="a-seg a-seg--view" role="group" aria-label="Layout">
+            {(
+              [
+                ["board", isWeek ? "Week" : "Cards", isWeek ? BOARD_ICON.week : BOARD_ICON.cards],
+                ["list", "List", "M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"],
+              ] as [View, string, string][]
+            ).map(([k, label, d]) => (
+              <button key={k} type="button" aria-pressed={view === k} onClick={() => pickView(k)}>
+                <Icon path={d} />
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
         <input
           className="a-search"
           type="search"
@@ -140,7 +181,7 @@ export function ContentSection({ table }: { table: string }) {
         />
       </div>
 
-      <div className="a-table-wrap">
+      <div className={board && rows?.length && shown.length ? "a-board-wrap" : "a-table-wrap"}>
         {error ? (
           <p className="a-empty">Could not load: {error}</p>
         ) : rows === null ? (
@@ -161,6 +202,23 @@ export function ContentSection({ table }: { table: string }) {
           </div>
         ) : !shown.length ? (
           <p className="a-empty">Nothing matches.</p>
+        ) : board && !isWeek ? (
+          <ContentCards
+            table={table}
+            type={type}
+            rows={shown}
+            onEdit={(r) => setEditing({ row: r, isNew: false })}
+            onDuplicate={duplicate}
+            onToggle={toggle}
+          />
+        ) : board ? (
+          <WeekBoard
+            rows={shown}
+            onEdit={(r) => setEditing({ row: r, isNew: false })}
+            onDuplicate={duplicate}
+            onToggle={toggle}
+            onAdd={(day) => setEditing({ row: { id: "", day_of_week: day } as Row, isNew: true })}
+          />
         ) : (
           <table className="a-table">
             <thead>
@@ -170,13 +228,11 @@ export function ContentSection({ table }: { table: string }) {
                     <span className="sr-only">Photo</span>
                   </th>
                 )}
-                {type.cols
-                  .filter(([h]) => h !== "Status")
-                  .map(([h]) => (
-                    <th scope="col" key={h}>
-                      {h}
-                    </th>
-                  ))}
+                {cols.map(([h]) => (
+                  <th scope="col" key={h}>
+                    {h}
+                  </th>
+                ))}
                 <th scope="col">Live</th>
                 <th>
                   <span className="sr-only">Actions</span>
@@ -184,48 +240,62 @@ export function ContentSection({ table }: { table: string }) {
               </tr>
             </thead>
             <tbody>
-              {shown.map((r) => (
-                <tr key={r.id} className={r.published ? undefined : "is-hidden"}>
-                  {type.thumb && (
-                    <td className="a-thumb">
-                      {r[type.thumb] ? <img src={String(r[type.thumb])} alt="" loading="lazy" /> : <span />}
-                    </td>
-                  )}
-                  {type.cols
-                    .filter(([h]) => h !== "Status")
-                    .map(([h, fn], i) => (
-                      <td key={h} className={i === 0 ? "a-primary" : undefined}>
-                        {i === 0 ? (
-                          <button type="button" className="a-rowlink" onClick={() => setEditing({ row: r, isNew: false })}>
-                            {fn(r) || "—"}
-                          </button>
-                        ) : (
-                          fn(r)
-                        )}
+              {shown.map((r, n) => {
+                const group = type.group?.(r);
+                const groupStart = group !== undefined && group !== (n ? type.group!(shown[n - 1]) : undefined);
+                return (
+                  <Fragment key={r.id}>
+                    {groupStart && (
+                      <tr className="a-group">
+                        <th colSpan={span} scope="rowgroup">
+                          {group}
+                          <span>{shown.filter((x) => type.group!(x) === group).length}</span>
+                        </th>
+                      </tr>
+                    )}
+                    <tr className={r.published ? undefined : "is-hidden"} style={{ "--r": Math.min(n, 14) } as CSSProperties}>
+                      {type.thumb && (
+                        <td className="a-thumb">
+                          {r[type.thumb] ? <img src={String(r[type.thumb])} alt="" loading="lazy" /> : <span />}
+                        </td>
+                      )}
+                      {cols.map(([h, fn], i) => (
+                        <td key={h} className={i === 0 ? "a-primary" : undefined}>
+                          {i === 0 ? (
+                            <button type="button" className="a-rowlink" onClick={() => setEditing({ row: r, isNew: false })}>
+                              {fn(r) || "—"}
+                            </button>
+                          ) : (
+                            fn(r)
+                          )}
+                        </td>
+                      ))}
+                      <td className="a-live">
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={Boolean(r.published)}
+                          aria-label={`Show on website`}
+                          className="a-switch"
+                          onClick={() => toggle(r)}
+                        >
+                          <span />
+                        </button>
                       </td>
-                    ))}
-                  <td className="a-live">
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={Boolean(r.published)}
-                      aria-label={`Show on website`}
-                      className="a-switch"
-                      onClick={() => toggle(r)}
-                    >
-                      <span />
-                    </button>
-                  </td>
-                  <td className="a-actions">
-                    <button className="a-btn-ghost" type="button" onClick={() => setEditing({ row: r, isNew: false })}>
-                      Edit
-                    </button>
-                    <button className="a-btn-ghost" type="button" onClick={() => duplicate(r)}>
-                      Duplicate
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                      <td className="a-actions">
+                        <button className="a-act" type="button" onClick={() => setEditing({ row: r, isNew: false })}>
+                          <Icon path={EDIT_ICON} />
+                          <span>Edit</span>
+                        </button>
+                        <button className="a-act" type="button" onClick={() => duplicate(r)}>
+                          <Icon path={COPY_ICON} />
+                          <span>Duplicate</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </Fragment>
+                );
+              })}
             </tbody>
           </table>
         )}

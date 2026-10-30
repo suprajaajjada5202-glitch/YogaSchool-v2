@@ -13,6 +13,7 @@ export function SimpleHero({
   title,
   lead,
   image,
+  className,
   children,
 }: {
   crumb: string;
@@ -20,10 +21,12 @@ export function SimpleHero({
   title: ReactNode;
   lead: string;
   image?: Img;
+  /** Extra class for the banner, e.g. page-hero--motion */
+  className?: string;
   children?: ReactNode;
 }) {
   return (
-    <section className="page-hero" style={{ paddingBottom: "var(--s-6)" }}>
+    <section className={`page-hero${className ? ` ${className}` : ""}`} style={{ paddingBottom: "var(--s-6)" }}>
       {image && (
         <div className="arch__frame">
           <img src={image.src} alt={image.alt} width={image.width} height={image.height} decoding="async" />
