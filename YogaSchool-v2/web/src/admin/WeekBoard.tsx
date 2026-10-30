@@ -1,5 +1,5 @@
 "use client";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { DAYS, TZ, hhmm, type Row } from "./config";
 import { Icon } from "./Icon";
 
@@ -39,14 +39,62 @@ export function WeekBoard({
   const today = DAYS.indexOf(new Intl.DateTimeFormat("en-AU", { timeZone: TZ, weekday: "long" }).format(new Date())) + 1;
   const days = DAYS.map((name, i) => ({ day: i + 1, name, rows: rows.filter((r) => Number(r.day_of_week) === i + 1) }));
   const unscheduled = rows.filter((r) => !(Number(r.day_of_week) >= 1 && Number(r.day_of_week) <= 7));
+  const columns = [...days, ...(unscheduled.length ? [{ day: 0, name: "No day set", rows: unscheduled }] : [])];
   let n = 0; // running index for the entrance stagger
 
+  // Phones show one day at a time, picked from the day tabs (starts on today); wider screens show every column
+  const [active, setActive] = useState(today || 1);
+  const shownDay = columns.some((d) => d.day === active) ? active : columns[0].day;
+
+  // Wider screens scroll the columns sideways when they don't all fit: fade the edge that has more days past it
+  const weekRef = useRef<HTMLDivElement>(null);
+  const [more, setMore] = useState({ left: false, right: false });
+  useEffect(() => {
+    const el = weekRef.current;
+    if (!el) return;
+    const check = () => {
+      const left = el.scrollLeft > 2;
+      const right = el.scrollLeft + el.clientWidth < el.scrollWidth - 2;
+      setMore((m) => (m.left === left && m.right === right ? m : { left, right }));
+    };
+    check();
+    el.addEventListener("scroll", check, { passive: true });
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", check);
+      ro.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="a-week" role="list" aria-label="Week timetable">
-      {[...days, ...(unscheduled.length ? [{ day: 0, name: "No day set", rows: unscheduled }] : [])].map((d) => (
+    <div className="a-weekwrap">
+      <div className="a-daytabs" role="group" aria-label="Choose a day">
+        {columns.map((d) => (
+          <button
+            key={d.day}
+            type="button"
+            aria-pressed={d.day === shownDay}
+            className={d.day === today ? "is-today" : undefined}
+            onClick={() => setActive(d.day)}
+          >
+            <b>{d.day ? d.name.slice(0, 3) : "—"}</b>
+            <span>{d.rows.length}</span>
+          </button>
+        ))}
+      </div>
+      <div
+        ref={weekRef}
+        className="a-week"
+        data-more-left={more.left || undefined}
+        data-more-right={more.right || undefined}
+        role="list"
+        aria-label="Week timetable"
+      >
+      {columns.map((d) => (
         <section
           key={d.day}
-          className={`a-day${d.day === today ? " is-today" : ""}`}
+          className={`a-day${d.day === today ? " is-today" : ""}${d.day === shownDay ? " is-active" : ""}`}
           role="listitem"
           aria-label={`${d.name}, ${d.rows.length} ${d.rows.length === 1 ? "class" : "classes"}`}
         >
@@ -121,6 +169,7 @@ export function WeekBoard({
           </div>
         </section>
       ))}
+      </div>
     </div>
   );
 }

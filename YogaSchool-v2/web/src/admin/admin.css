@@ -1544,11 +1544,16 @@ dialog.a-dialog {
 .a-board-wrap {
   margin-inline: -4px;
 }
+/* As many day columns as fit at ~195px or more each (measured on the board itself, so the sidebar is accounted for);
+   the rest scroll sideways, with a fade on the edge that has more days past it */
+.a-weekwrap {
+  container-type: inline-size;
+}
 .a-week {
-  --a-col: minmax(212px, 1fr);
+  --a-n: 1;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: var(--a-col);
+  grid-auto-columns: calc((100% - (var(--a-n) - 1) * 12px) / var(--a-n));
   gap: 12px;
   padding: 4px 4px 16px;
   overflow-x: auto;
@@ -1877,13 +1882,6 @@ dialog.a-dialog {
   }
   .a-slot {
     animation: a-rise 0.45s calc(120ms + var(--r, 0) * 22ms) var(--a-ease) backwards;
-  }
-}
-/* Phones: one day at a time, swiped sideways */
-@media (max-width: 700px) {
-  .a-week {
-    --a-col: 82%;
-    scroll-snap-type: x mandatory;
   }
 }
 :root[data-theme="dark"] .a-slot {
@@ -2337,15 +2335,6 @@ dialog.a-dialog {
 .a-mail__status.is-replied {
   background-color: color-mix(in srgb, #16a34a 12%, var(--c-surface));
 }
-@media (max-width: 700px) {
-  .a-mail {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-  .a-mail__side {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
-  }
-}
 @media (prefers-reduced-motion: no-preference) {
   .a-mail {
     animation: a-rise 0.4s calc(var(--r, 0) * 25ms) var(--a-ease) backwards;
@@ -2378,4 +2367,546 @@ dialog.a-dialog {
 }
 .a-cards:is(.a-cards--events, .a-cards--blog_posts) .a-ccard__media img {
   object-fit: contain;
+}
+
+/* ---------- phones: roomy, thumb-friendly layout ---------- */
+/* Notched phones: keep the top bar and the page clear of the notch and home indicator */
+.a-topbar {
+  padding-top: max(10px, env(safe-area-inset-top));
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
+}
+.a-main {
+  overflow-x: clip; /* nothing can push the whole page sideways */
+}
+@media (max-width: 700px) {
+  .a-main {
+    padding: 16px max(14px, env(safe-area-inset-right)) calc(88px + env(safe-area-inset-bottom))
+      max(14px, env(safe-area-inset-left));
+  }
+  /* 16px text in fields stops iPhones zooming the page when one is tapped */
+  .admin-root :is(input, select, textarea),
+  .a-search,
+  .a-mail__status {
+    font-size: 16px;
+  }
+
+  /* Page heading: smaller title, intro kept short, actions as a full-width row */
+  .a-head {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .a-head > div:first-child {
+    width: 100%;
+  }
+  .a-head h1 {
+    font-size: 1.875rem;
+  }
+  .a-head p {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .a-head__actions {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    width: 100%;
+    gap: 8px;
+  }
+  .a-head__actions .btn {
+    justify-content: center;
+    min-height: 44px;
+    padding-inline: 10px;
+    white-space: nowrap;
+  }
+  /* Three actions (View page, Import missing, Add): Add gets the full second row */
+  .a-head__actions:has(> :nth-child(3)) {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+  }
+  .a-head__actions:has(> :nth-child(3)) > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Toolbar: search on its own full-width row, then filters and the layout switch side by side */
+  .a-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  /* Row 1: search + the icon-only layout switch; row 2: All / Live / Hidden as three equal buttons, full width,
+     so the filters never get squeezed or clipped on narrow phones */
+  .a-toolbar .a-search {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+  }
+  .a-toolbar .a-seg--view {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .a-toolbar .a-seg:not(.a-seg--view) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+  .a-toolbar .a-seg:not(.a-seg--view) button {
+    min-width: 0;
+    padding-inline: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Sections without a layout switch: search spans the whole row */
+  .a-toolbar:not(:has(.a-seg--view)) .a-search {
+    grid-column: 1 / -1;
+  }
+  .a-seg--view {
+    margin-left: 0;
+  }
+  /* The layout switch shows just its icons on phones */
+  .a-seg--view button {
+    font-size: 0;
+    gap: 0;
+  }
+  .a-seg--view .a-ic {
+    width: 18px;
+    height: 18px;
+  }
+  .a-seg button {
+    min-height: 38px;
+    white-space: nowrap;
+  }
+  .a-head > .a-seg {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .a-head > .a-seg button {
+    flex: 1;
+  }
+
+  /* Cards: one per row with a slightly shorter photo; actions always visible and easy to tap */
+  .a-cards,
+  .a-cards--prices,
+  .a-cards--gift_vouchers {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .a-cards--prices,
+  .a-cards--gift_vouchers {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .a-cards--prices .a-ccard__value b,
+  .a-cards--gift_vouchers .a-ccard__value b {
+    font-size: 1.5rem;
+  }
+  .a-cards--prices .a-ccard__body,
+  .a-cards--gift_vouchers .a-ccard__body {
+    padding: 12px;
+  }
+  .a-ccard__media {
+    aspect-ratio: 16 / 9;
+  }
+  .a-cardbtn {
+    width: 38px;
+    height: 38px;
+    border-color: var(--a-line);
+  }
+  .a-cards-groups {
+    gap: 22px;
+  }
+
+  .a-slot__time b {
+    font-size: 1.25rem;
+  }
+
+  /* Messages: name and time on one line, long emails wrap instead of overflowing */
+  .a-mail {
+    gap: 12px;
+    padding: 14px;
+  }
+  .a-mail__avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+  .a-mail__head {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+  .a-mail__contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .a-mail__contact a,
+  .a-mail__from {
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+  .a-mail__side {
+    gap: 8px;
+  }
+  .a-mail__side .a-mail__status {
+    flex: 1;
+    min-height: 40px;
+  }
+  .a-mail__side .a-btn-ghost {
+    min-height: 40px;
+    padding-inline: 18px;
+  }
+
+  /* Dashboard: two tiles per row */
+  .a-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .a-stat {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+  }
+  .a-stat .a-ic {
+    grid-row: auto;
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+    margin-bottom: 6px;
+  }
+  .a-stat__n {
+    font-size: 1.5rem;
+  }
+
+  /* Editor and message popups: full-screen sheet, header and Save button pinned, fields scroll between them */
+  dialog.a-dialog {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+  }
+  .a-dialog form,
+  .a-dialog > div {
+    height: 100%;
+    max-height: 100dvh;
+  }
+  .a-dialog header {
+    padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+  }
+  .a-dialog header h2 {
+    font-size: 1.5rem;
+  }
+  .a-dialog .a-body {
+    flex: 1;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .a-dialog footer {
+    padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+    flex-wrap: nowrap;
+  }
+  .a-dialog footer .btn--primary {
+    flex: 1;
+    min-height: 48px;
+    justify-content: center;
+  }
+  .a-dialog footer > span:empty {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .a-cards--prices,
+  .a-cards--gift_vouchers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- phones & tablets: bottom tab bar ---------- */
+/* Rows only take the height they need (short pages were stretching the top bar to fill the screen) */
+.a-app {
+  align-content: start;
+}
+.a-tabbar {
+  display: none;
+}
+@media (max-width: 959px) {
+  .a-tabbar {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    z-index: 35;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 6px;
+    border: 1px solid var(--a-line);
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--c-surface) 82%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    backdrop-filter: blur(18px) saturate(1.5);
+    box-shadow: 0 18px 40px -16px rgba(7, 26, 56, 0.35);
+  }
+  .a-tabbar button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 0;
+    min-height: 54px;
+    padding: 6px 2px;
+    border: 0;
+    border-radius: 16px;
+    background: none;
+    color: var(--c-ink-soft);
+    font: 600 0.6875rem var(--f-body);
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 0.2s,
+      background 0.2s;
+  }
+  .a-tabbar__icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 28px;
+    border-radius: 99px;
+    transition: background 0.25s var(--a-ease);
+  }
+  .a-tabbar .a-ic {
+    width: 22px;
+    height: 22px;
+  }
+  .a-tabbar button[aria-current="page"] {
+    color: var(--c-heading);
+  }
+  .a-tabbar button[aria-current="page"] .a-tabbar__icon {
+    background: linear-gradient(90deg, color-mix(in srgb, #38bdf8 28%, transparent), color-mix(in srgb, #6366f1 28%, transparent));
+  }
+  .a-tabbar button:active .a-tabbar__icon {
+    scale: 0.92;
+  }
+  .a-tabbar button:focus-visible {
+    outline: 2px solid var(--c-secondary);
+    outline-offset: -2px;
+  }
+  .a-tabbar__badge {
+    position: absolute;
+    top: -4px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 99px;
+    background: #ec4899;
+    box-shadow: 0 0 0 2px var(--c-surface);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+  }
+  /* Room under the page for the bar; toasts float just above it */
+  .a-main {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+  .a-toast {
+    bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+  /* The drawer sits over the tab bar while open */
+  .is-drawer .a-tabbar {
+    visibility: hidden;
+  }
+}
+
+/* ---------- week board sizing, edge fades and phone day tabs ---------- */
+@container (min-width: 460px) {
+  .a-week {
+    --a-n: 2;
+  }
+}
+@container (min-width: 640px) {
+  .a-week {
+    --a-n: 3;
+  }
+}
+@container (min-width: 860px) {
+  .a-week {
+    --a-n: 4;
+  }
+}
+@container (min-width: 1060px) {
+  .a-week {
+    --a-n: 5;
+  }
+}
+@container (min-width: 1240px) {
+  .a-week {
+    --a-n: 6;
+  }
+}
+@container (min-width: 1400px) {
+  .a-week {
+    --a-n: 7;
+  }
+}
+.a-week[data-more-right] {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+}
+.a-week[data-more-left] {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px);
+  mask-image: linear-gradient(90deg, transparent, #000 48px);
+}
+.a-week[data-more-left][data-more-right] {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+}
+.a-week {
+  scroll-behavior: smooth;
+}
+.a-daytabs {
+  display: none;
+}
+@media (max-width: 700px) {
+  /* Phones: day tabs, then just the chosen day at full width (no sideways scrolling at all) */
+  .a-daytabs {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 4px;
+    margin-bottom: 12px;
+    padding: 4px;
+    border: 1px solid var(--a-line);
+    border-radius: 18px;
+    background: var(--c-surface);
+  }
+  .a-daytabs button {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 6px 0;
+    border: 0;
+    border-radius: 14px;
+    background: none;
+    color: var(--c-ink-soft);
+    font: 600 0.75rem var(--f-body);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+  .a-daytabs b {
+    color: var(--c-heading);
+    font-size: 0.8125rem;
+  }
+  .a-daytabs span {
+    min-width: 20px;
+    padding: 0 5px;
+    border-radius: 99px;
+    background: var(--a-bg);
+    font-size: 0.6875rem;
+    line-height: 18px;
+  }
+  .a-daytabs button.is-today b::after {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin: 2px auto 0;
+    border-radius: 50%;
+    background: #ec4899;
+  }
+  .a-daytabs button[aria-pressed="true"] {
+    background: var(--c-fill);
+    color: var(--c-white);
+  }
+  .a-daytabs button[aria-pressed="true"] b {
+    color: var(--c-white);
+  }
+  .a-daytabs button[aria-pressed="true"] span {
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .a-daytabs button:focus-visible {
+    outline: 2px solid var(--c-secondary);
+    outline-offset: 1px;
+  }
+  .a-board-wrap {
+    margin-inline: 0;
+  }
+  .a-week {
+    grid-auto-columns: 100%;
+    padding: 0 0 8px;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .a-day:not(.is-active) {
+    display: none;
+  }
+  .a-day {
+    padding: 8px;
+  }
+}
+
+/* ---------- messages: status and Open move to the bottom of the card below desktop ---------- */
+@media (max-width: 959px) {
+  .a-mail {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .a-mail__side {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid var(--a-line);
+  }
+}
+/* Phones: avatar sits beside the name; contact details and the message use the card's full width */
+@media (max-width: 700px) {
+  .a-mail {
+    row-gap: 8px;
+    column-gap: 12px;
+    align-items: center;
+  }
+  .a-mail__main {
+    display: contents;
+  }
+  .a-mail__head {
+    min-width: 0;
+  }
+  .a-mail__contact,
+  .a-mail__text {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+  .a-mail__time {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}
+/* Tablets and small laptops: filters, then search filling the gap, then the layout switch */
+@media (min-width: 701px) and (max-width: 1199px) {
+  .a-toolbar .a-search {
+    order: 2;
+    flex: 1 1 200px;
+    min-width: 0;
+  }
+  .a-toolbar .a-seg--view {
+    order: 3;
+    margin-left: 0;
+  }
 }

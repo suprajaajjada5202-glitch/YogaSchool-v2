@@ -21,6 +21,14 @@ const DESKTOP = "(min-width: 960px)"; // matches the breakpoint in admin.css
 const MENU_ICON = "M4 7h16M4 12h16M4 17h10";
 const CLOSE_ICON = "M6 6l12 12M18 6 6 18";
 const FOLD_ICON = "M15 6l-6 6 6 6M4 4v16";
+const MORE_ICON = "M5 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0M17 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0";
+/** Phone tab bar: the sections used most; the rest are under "More" (the drawer) */
+const TABS: [string, string][] = [
+  ["dashboard", "Home"],
+  ["messages", "Messages"],
+  ["timetable", "Timetable"],
+  ["classes", "Classes"],
+];
 const SIGNOUT_ICON = "M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l4-4-4-4M14 12H4";
 
 /** /admin: staff sign in (Supabase Auth) and manage website content. */
@@ -408,6 +416,34 @@ export function AdminApp() {
             )}
           </div>
         </main>
+        {/* Phones: thumb-reach tabs for the busiest sections; "More" opens the full menu */}
+        <nav className="a-tabbar" aria-label="Quick sections">
+          {TABS.map(([key, label]) => (
+            <button key={key} type="button" aria-current={section === key ? "page" : undefined} onClick={() => go(key)}>
+              <span className="a-tabbar__icon">
+                <Icon name={key} />
+                {key === "messages" && newCount > 0 && (
+                  <span className="a-tabbar__badge" aria-label={`${newCount} new`}>
+                    {newCount}
+                  </span>
+                )}
+              </span>
+              {label}
+            </button>
+          ))}
+          <button
+            type="button"
+            aria-current={!TABS.some(([k]) => k === section) ? "page" : undefined}
+            aria-controls="a-side"
+            aria-expanded={drawer}
+            onClick={() => setDrawer(true)}
+          >
+            <span className="a-tabbar__icon">
+              <Icon path={MORE_ICON} />
+            </span>
+            More
+          </button>
+        </nav>
       </div>
     </ToastProvider>
   );
