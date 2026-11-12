@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
+import { importantInformation } from "@/data/important-information";
 
 export default function FaqsPage() {
   return (
@@ -202,6 +203,19 @@ export default function FaqsPage() {
               </Reveal>
             </div>
           </div>{" "}
+          <Reveal className="section-head section-head--center" style={{ marginTop: "var(--s-6)" }}>
+            <p className="eyebrow">Important Information</p>
+          </Reveal>{" "}
+          <ul className="ticks">
+            {importantInformation.map((text) => (
+              <li key={text}>
+                <svg aria-hidden="true">
+                  <use href="#i-check" />
+                </svg>
+                <span>{text}</span>
+              </li>
+            ))}
+          </ul>{" "}
           <Reveal className="section-foot">
             <Link className="btn btn--primary" href="/pages/contact-us">
               Still have a question? Contact us{" "}

@@ -48,7 +48,7 @@ export default async function ClassesPage() {
               Find your <em>practice</em>
             </h1>{" "}
             <p className="lead">
-              We offer 4 levels of study and 20 classes a week for a comprehensive yoga education. Students of all levels of
+              We offer 3 levels of study and 24 classes a week for a comprehensive yoga education. Students of all levels of
               experience can benefit from the classes we teach.
             </p>{" "}
             <div className="page-hero__actions">
@@ -98,11 +98,16 @@ export default async function ClassesPage() {
           <Reveal className="section-head section-head--center">
             <p className="eyebrow">Your path</p>
             <h2 id="path-title">
-              Four levels, <em>one journey</em>
+              Three levels, <em>one journey</em>
             </h2>
             <p className="lead">Move up whenever you feel ready, or stay at a level for as long as you like.</p>
+            <p className="lead">
+              KNOFF YOGA CLASS LEVELS (KF) - A traditional and systematic approach to yoga, combining precise alignment,
+              movement and breath. Classes follow a progressive level system developed through decades of teaching and
+              practice.
+            </p>
           </Reveal>{" "}
-          <Reveal className="path">
+          <Reveal className="path path--3">
             {" "}
             <a href={levelHref(1)}>
               <b>1</b>
@@ -118,11 +123,6 @@ export default async function ClassesPage() {
               <b>3</b>
               <span>Deepening</span>
               <small>More demanding postures and skill</small>
-            </a>{" "}
-            <a href={levelHref(4)}>
-              <b>4</b>
-              <span>Advanced</span>
-              <small>Inversions and stronger Asana groups</small>
             </a>{" "}
           </Reveal>{" "}
         </div>{" "}

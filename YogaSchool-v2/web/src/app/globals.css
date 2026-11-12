@@ -3279,6 +3279,13 @@ body {
   border-radius: 50%;
   background: var(--c-secondary);
 }
+/* Brochure "Important Information": a plain list, two columns once there is room */
+@media (min-width: 768px) {
+  .pass-terms ul.pass-terms__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--s-4);
+  }
+}
 .plus {
   position: relative;
   width: 22px;
@@ -5233,6 +5240,11 @@ body::after {
 @media (min-width: 768px) {
   .path {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  .path.path--3 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 .path a {

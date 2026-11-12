@@ -8,6 +8,7 @@ import { Wave } from "@/components/Wave";
 import { seo } from "@/lib/seo";
 import { getMemberships, getPasses } from "@/lib/data";
 import { MEMBERSHIP_TERMS_PDF } from "@/lib/site";
+import { importantInformation } from "@/data/important-information";
 
 export default async function PricesPage() {
   const [memberships, passes] = await Promise.all([getMemberships(), getPasses()]);
@@ -162,9 +163,20 @@ export default async function PricesPage() {
           </Reveal>{" "}
           <PassesList groups={passes}>
             <Reveal className="pass-terms">
-              <header className="pass-terms__head">
+              <header className="pass-terms__head" id="important-information">
                 <TileIcon className="pass-terms__ic" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 8v5m0-8h.01" />
                 <h3>Important Information</h3>
+              </header>
+              <ul className="pass-terms__list">
+                {importantInformation.map((text) => (
+                  <li key={text}>{text}</li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal className="pass-terms">
+              <header className="pass-terms__head">
+                <TileIcon className="pass-terms__ic" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 8v5m0-8h.01" />
+                <h3>Terms &amp; Conditions</h3>
               </header>
               <div className="pass-terms__groups">
                 <div className="pass-terms__group">

@@ -6,7 +6,6 @@ const ENQUIRIES = [
   "Level 1 (Introduction to Yoga)",
   "Level 2",
   "Level 3",
-  "Level 4",
   "All Levels / Combined",
   "Yin Yoga",
   "Chair Yoga",

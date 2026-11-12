@@ -89,6 +89,17 @@ export default function AboutPage() {
           </Reveal>{" "}
           <ul className="did">
             <Reveal as="li">
+              <p>The Yoga School has a strong foundation in traditional yoga, with experienced teachers who bring a depth of knowledge to their teaching.</p>
+            </Reveal>
+            <Reveal as="li">
+              <p>Our Knoff-trained teachers were taught by Master Teachers Nicky and James Knoff, carrying forward the knowledge and traditions developed through their many years of teaching.</p>
+            </Reveal>
+            <Reveal as="li">
+              <p>We offer a range of yoga styles and classes, with an emphasis on quality teaching, sound principles and practices that have stood the test of time.</p>
+            </Reveal>
+          </ul>{" "}
+          <ul className="did" style={{ marginTop: "var(--s-3)" }}>
+            <Reveal as="li">
               <strong>We are the only yoga school in Cairns to have true Master Teachers</strong>
               <p>Our school is steeped in authenticity and knowledge of traditional yoga.</p>
             </Reveal>
@@ -114,11 +125,11 @@ export default function AboutPage() {
           <div className="stats-row">
             {" "}
             <Reveal className="tile stat stat--navy">
-              <p className="stat__value">20</p>
+              <p className="stat__value">24</p>
               <p className="stat__label">Classes every week</p>
             </Reveal>{" "}
             <Reveal delay={1} className="tile stat stat--teal">
-              <p className="stat__value">4</p>
+              <p className="stat__value">3</p>
               <p className="stat__label">Levels of study, plus Yin, Chair, Strength & Mobility</p>
             </Reveal>{" "}
             <Reveal delay={2} className="tile stat stat--pink">

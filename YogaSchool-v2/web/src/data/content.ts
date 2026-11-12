@@ -692,12 +692,12 @@ export const siteEvents: SiteEvent[] = [
 export const classes: ClassItem[] = [
   {
     slug: "l1",
-    name: "Level 1",
+    name: "Knoff Level 1",
     level: "Beginners",
     duration: "60–75 min",
-    summary: "Introduction to Yoga. Perfect for absolute beginners and anyone wanting a slower practice.",
+    summary: "The perfect way to start yoga, this entry level class is suitable for absolute beginners and anyone wanting a slower practice with time to explore the postures and foundations of yoga in detail.",
     description: [
-      "The perfect way to start yoga, this entry level class is suitable for absolute beginners and anyone wanting a slower practice with time to explore the postures and foundations of yoga in detail.  Move up to the higher levels whenever you feel ready, or stay here for as long as you like.  You will often see some regulars and more advanced yogis in this class, as coming back to the fundamentals of this practice is essential for progression.",
+      "The perfect way to start yoga, this entry level class is suitable for absolute beginners and anyone wanting a slower practice with time to explore the postures and foundations of yoga in detail.",
     ],
     tag: "Start here",
     image: {
@@ -709,12 +709,12 @@ export const classes: ClassItem[] = [
   },
   {
     slug: "l2",
-    name: "Level 2",
+    name: "Knoff Level 2",
     level: "Some experience",
     duration: "60–75 min",
-    summary: "A quicker pace using Vinyasa to build upper-body strength, create heat and focus the mind.",
+    summary: "A quicker-paced practice incorporating Vinyasa to build strength, create heat and improve focus. Stronger postures are introduced, with modifications available.",
     description: [
-      "These classes move at a quicker pace than level 1 and expand on the use of Vinyasa (linking techniques) to build upper body strength, create heat and improve mental focus.  We introduce some stronger postures but you are welcome to modify when you need to, students at this level need to be able to self regulate and some experience of yoga is recommend.",
+      "A quicker-paced practice incorporating Vinyasa to build strength, create heat and improve focus. Stronger postures are introduced, with modifications available.",
     ],
     tag: null,
     image: {
@@ -726,12 +726,12 @@ export const classes: ClassItem[] = [
   },
   {
     slug: "l3",
-    name: "Level 3",
+    name: "Knoff Level 3",
     level: "Intermediate",
     duration: "90 min",
-    summary: "More demanding postures to increase your proficiency and skill in every area of practice.",
+    summary: "A more challenging practice with increasingly demanding postures. Recommended for students comfortable with Level 2 and ready to progress.",
     description: [
-      "As you progress, the postures become more demanding. This level is recommended when you are comfortable with the level 2 classes and feel ready to challenge yourself. Here you will learn how to increase your proficiency and skill in all areas of your yoga practice.",
+      "A more challenging practice with increasingly demanding postures. Recommended for students comfortable with Level 2 and ready to progress.",
     ],
     tag: null,
     image: {
@@ -742,33 +742,34 @@ export const classes: ClassItem[] = [
     },
   },
   {
-    slug: "l4",
-    name: "Level 4",
-    level: "Advanced",
-    duration: null,
-    summary: "Inversions and stronger versions of the other Asana groups. Level 3 competency recommended.",
+    slug: "all",
+    name: "Knoff All Levels & Combined",
+    level: "All levels",
+    duration: "60–75 min",
+    summary: "ALL LEVEL CLASSES Suitable for all levels, including beginners. Easier postures are offered first, with more challenging options for experienced students. COMBINED LEVEL CLASSES Predominantly taught at the lower level, with higher-level postures offered as options for experienced students and those wishing to progress.",
     description: [
-      "At this level we study a number of inversions as well as stronger versions of the other Asana groups.  Competency with Level 3 is recommended before attending.",
+      "ALL LEVEL CLASSES Suitable for all levels, including beginners. Easier postures are offered first, with more challenging options for experienced students.",
+      "COMBINED LEVEL CLASSES Predominantly taught at the lower level, with higher-level postures offered as options for experienced students and those wishing to progress.",
     ],
-    tag: null,
+    tag: "Everyone welcome",
     image: {
-      src: "/images/gallery/DSC00075edit.jpg",
-      alt: "Students practising headstands and other inversions",
-      width: 3677,
-      height: 2626,
+      src: "/images/gallery/DSC00131.jpg",
+      alt: "A mixed class of students in warrior and triangle poses",
+      width: 2308,
+      height: 1299,
     },
   },
   {
-    slug: "all",
-    name: "All Levels & Combined",
-    level: "All levels",
+    slug: "general",
+    name: "General Yoga",
+    level: "All levels & beginners",
     duration: "60–75 min",
-    summary: "Easier Asanas first, with more challenging options. Practise at the level that suits you today.",
+    summary: "GENERAL YOGA - ALL LEVELS A balanced practice suitable for all levels, with options to adapt postures and movement to suit your experience. GENERAL YOGA - BEGINNERS An introduction to yoga, exploring foundational postures, movement and breath in a supportive and accessible practice.",
     description: [
-      "Designed to accommodate different levels of yoga experience and all students (including beginners) are welcome. Easier Asanas and vinyasas will be given first with more challenging options offered for more experienced students.  You are invited to practice at a level that suits your ability and energy level on any given day.",
-      "Combined level classes: Blends the two levels together, the class is predominantly taught at the lower level but we introduce some higher level postures as an option for more experienced students and those wishing to progress.",
+      "GENERAL YOGA - ALL LEVELS A balanced practice suitable for all levels, with options to adapt postures and movement to suit your experience.",
+      "GENERAL YOGA - BEGINNERS An introduction to yoga, exploring foundational postures, movement and breath in a supportive and accessible practice.",
     ],
-    tag: "Everyone welcome",
+    tag: null,
     image: {
       src: "/images/gallery/DSC00131.jpg",
       alt: "A mixed class of students in warrior and triangle poses",
@@ -781,9 +782,9 @@ export const classes: ClassItem[] = [
     name: "Yin Yoga",
     level: "All levels",
     duration: "60 min",
-    summary: "A quiet, passive practice targeting deep connective tissues, fascia, joints and bones.",
+    summary: "Targeting deep connective tissues, fascia, ligaments, joints and bones. Slow and meditative, allowing time and space to turn inwards.",
     description: [
-      "Yin Yoga is a quiet and passive practice. Targeting deep connective tissues, fascia, ligaments, joints and bones.  It’s slow and meditative, allowing you time and space to turn inwards and tune into both your mind and the physical sensations of your body.",
+      "Targeting deep connective tissues, fascia, ligaments, joints and bones. Slow and meditative, allowing time and space to turn inwards.",
     ],
     tag: null,
     image: {
@@ -798,9 +799,9 @@ export const classes: ClassItem[] = [
     name: "Chair Yoga",
     level: "Gentle",
     duration: null,
-    summary: "For seniors and students with limited mobility, balance or joint challenges, or in recovery.",
+    summary: "For seniors and those with disabilities, or recovering from illness, injury or surgery.",
     description: [
-      "For seniors and physically challenged students with disabilities, lack of mobility, balance problems, joint challenges, recovering from illness, accidents and operations. As you build up your strength, stamina and balance, progression to our general mat classes can sometimes become and option.",
+      "For seniors and those with disabilities, or recovering from illness, injury or surgery.",
     ],
     tag: null,
     image: {
@@ -815,9 +816,10 @@ export const classes: ClassItem[] = [
     name: "Shoshin Strength & Mobility",
     level: "All levels",
     duration: "60 min",
-    summary: "Strength classes and mobility classes, included in Shoshin Only and Everything memberships.",
+    summary: "STRENGTH Become a stronger, fitter and more agile version of yourself. Our strength classes teach you how to control your body using a mixture of calisthenics strength skills, weighted exercises, ground movement and fun group challenges. These classes will take you through a mix of upper-body, lower-body and core strength exercises to help build your base of strength. MOBILITY Be like bamboo: be able to bend, but not break. Our mobility classes aim to create a supple yet resilient body through an approach that covers flexibility, joint mobility and stability, and (p)rehab. These classes will prepare the body for the rigours of daily movement and are a perfect supplement to your strength training, or as a stretching practice on their own.",
     description: [
-      "Shoshin strength and mobility classes run alongside our yoga timetable. Unlimited access is included in the Shoshin Only ($80 per fortnight) and Everything ($98 per fortnight) memberships, and in the 180- and 365-day unlimited passes.",
+      "STRENGTH Become a stronger, fitter and more agile version of yourself. Our strength classes teach you how to control your body using a mixture of calisthenics strength skills, weighted exercises, ground movement and fun group challenges. These classes will take you through a mix of upper-body, lower-body and core strength exercises to help build your base of strength.",
+      "MOBILITY Be like bamboo: be able to bend, but not break. Our mobility classes aim to create a supple yet resilient body through an approach that covers flexibility, joint mobility and stability, and (p)rehab. These classes will prepare the body for the rigours of daily movement and are a perfect supplement to your strength training, or as a stretching practice on their own.",
     ],
     tag: "New",
     image: {
@@ -985,6 +987,18 @@ export const sliderTestimonials: ShortTestimonial[] = [
       "I never knew how little of a lung capacity I had until now and it also continues to expand further. Every week I am noticing a little extra with my breathing.",
     name: "Adam Phillips",
     role: "Teacher training graduate",
+  },
+  {
+    quote:
+      "I’ve spent years working in a physically demanding job, and over time my body had started to feel the effects. The yoga, strength and mobility classes at The Yoga School have helped me feel stronger, move more freely and feel comfortable in my body again.",
+    name: "Dave",
+    role: "Student",
+  },
+  {
+    quote:
+      "The Yoga School is a wonderful place to practise, with knowledgeable teachers, a welcoming community and classes that leave you feeling great.",
+    name: "Helen",
+    role: "Student",
   },
 ];
 
@@ -1191,8 +1205,9 @@ export const memberships: Membership[] = [
     features: [
       "Knoff Yoga, Yin Yoga & Chair Yoga",
       "Monthly Sunday Sessions",
-      "10% off retail · $10 child’s passes",
-      "1 free pass a month for a friend or family member",
+      "10% off retail shop",
+      "1 free guest pass per month",
+      "$10 kids class passes",
     ],
     badge: null,
     featured: false,
@@ -1209,8 +1224,9 @@ export const memberships: Membership[] = [
     features: [
       "Unlimited yoga & Shoshin classes",
       "Monthly Sunday Sessions",
-      "10% off retail · $10 child’s passes",
-      "1 free pass a month for a friend or family member",
+      "10% off retail shop",
+      "1 free guest pass per month",
+      "$10 kids class passes",
     ],
     badge: "All access",
     featured: true,
@@ -1226,9 +1242,9 @@ export const memberships: Membership[] = [
     terms: "Minimum 12-week commitment",
     features: [
       "All Shoshin strength & mobility classes",
-      "10% off retail",
-      "$10 child’s passes",
-      "1 free pass a month for a friend or family member",
+      "10% off retail shop",
+      "1 free guest pass per month",
+      "$10 kids class passes",
     ],
     badge: null,
     featured: false,
