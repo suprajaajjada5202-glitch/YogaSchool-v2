@@ -2981,9 +2981,15 @@ body {
   gap: var(--s-3);
   margin-top: var(--s-5);
 }
+/* New-student offer, Membership Benefits and Gift vouchers in one row; each card stacks its picture/icon above its text */
 @media (min-width: 900px) {
   .promo {
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .promo .promo__card {
+    grid-template-columns: 1fr;
+    align-content: start;
   }
 }
 .promo__card {
@@ -3027,6 +3033,33 @@ body {
   color: var(--c-accent-ink);
   display: grid;
   place-items: center;
+}
+/* Membership Benefits: same dashed card as the new-student offer, a star where the offer has its banner */
+.promo__benefits {
+  grid-template-columns: 1fr !important;
+  align-content: start;
+}
+.promo__benefits .gift-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--c-accent-100);
+  color: var(--c-accent-ink);
+  display: grid;
+  place-items: center;
+}
+.promo__benefits .gift-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.promo__list {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+  color: var(--c-ink-soft);
+}
+.promo__list li + li {
+  margin-top: 4px;
 }
 .promo__gift .gift-icon svg {
   width: 26px;

@@ -125,7 +125,30 @@ export default async function PricesPage() {
                 </a>{" "}
               </div>{" "}
             </Reveal>{" "}
-            <Reveal delay={1} className="promo__card promo__gift">
+            <Reveal delay={1} className="promo__card promo__benefits">
+              {" "}
+              <span className="gift-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                    d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8L12 3Z"
+                  />
+                </svg>
+              </span>{" "}
+              <div>
+                {" "}
+                <h3>Membership Benefits</h3>{" "}
+                <ul className="promo__list">
+                  <li>10% off retail shop</li>
+                  <li>1 free guest pass per month</li>
+                  <li>$10 kids class passes</li>
+                </ul>
+              </div>{" "}
+            </Reveal>{" "}
+            <Reveal delay={2} className="promo__card promo__gift">
               {" "}
               <span className="gift-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
