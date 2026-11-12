@@ -3,6 +3,18 @@ import type { ClassItem, Modality } from "@/lib/types";
 import { Use } from "./Icons";
 import { Reveal } from "./Reveal";
 
+/** A paragraph that opens with a heading in capitals, as in the brochure ("GENERAL YOGA - ALL LEVELS A balanced
+    practice…"), split into that heading and the rest, so the heading can be shown in bold. A lone capital word such
+    as "A" just before the sentence starts belongs to the sentence. Returns ["", text] when there is no such heading. */
+function splitLead(text: string): [string, string] {
+  const words = text.split(" ");
+  let k = words.findIndex((w) => /[a-z]/.test(w));
+  if (k < 0) return ["", text];
+  while (k > 0 && /^[A-Z]$/.test(words[k - 1])) k--;
+  const lead = words.slice(0, k).join(" ").trim();
+  return (lead.match(/[A-Z]/g)?.length ?? 0) >= 2 ? [lead, words.slice(k).join(" ")] : ["", text];
+}
+
 /** Full class sections on /pages/classes (Supabase "classes" table, or the built-in list). A class that a home page
     modality card links to shows that card's photo, so the visitor lands on the same picture they clicked
     (Shoshin, matched by both Strength and Mobility, shows the first: Strength). */
@@ -52,9 +64,15 @@ export function ClassRows({ classes, modalities = [] }: { classes: ClassItem[]; 
               )}
             </div>
             <div className="prose">
-              {c.description.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
+              {c.description.map((p, i) => {
+                const [lead, rest] = splitLead(p);
+                return (
+                  <p key={i}>
+                    {lead && <strong className="row__lead">{lead}</strong>}
+                    {lead ? ` ${rest}` : p}
+                  </p>
+                );
+              })}
             </div>
             <div className="row__actions">
               {c.slug === "private" ? (

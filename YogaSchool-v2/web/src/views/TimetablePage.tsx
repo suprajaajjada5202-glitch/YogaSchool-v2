@@ -1,15 +1,14 @@
 /* Converted from the static page; interactive parts are React components. */
-import { MomenceWidget } from "@/components/MomenceWidget";
 import { Reveal } from "@/components/Reveal";
-import { ScheduleMotion } from "@/components/ScheduleMotion";
 import { Timetable } from "@/components/Timetable";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
 import { getTimetable } from "@/lib/data";
+import { withLiveBookLinks } from "@/lib/momence";
 
 export default async function TimetablePage() {
-  const [timetable] = await Promise.all([getTimetable()]);
+  const timetable = await withLiveBookLinks(await getTimetable());
   return (
     <>
       {" "}
@@ -72,16 +71,8 @@ export default async function TimetablePage() {
         <div className="container">
           {" "}
           <Timetable rows={timetable} />{" "}
-          <Reveal className="schedule" id="book" tabIndex={0} role="region" aria-label="Live class timetable, scrollable">
-            {" "}
-            <MomenceWidget />
-            <ScheduleMotion />{" "}
-            <noscript>
-              <p>The live timetable needs JavaScript. Please call 0412 499 700.</p>
-            </noscript>{" "}
-          </Reveal>{" "}
           <Reveal as="p" className="schedule__help">
-            Timetable not loading? Call <a href="tel:+61412499700">0412 499 700</a> and we’ll book you in.
+            Trouble booking? Call <a href="tel:+61412499700">0412 499 700</a> and we’ll book you in.
           </Reveal>{" "}
           <div className="info-cards tt-cards">
             {" "}

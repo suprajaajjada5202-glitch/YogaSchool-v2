@@ -4149,15 +4149,16 @@ details[open] > summary .plus::after {
     color var(--t),
     opacity var(--t);
 }
+/* WhatsApp's own green, so it reads as WhatsApp at a glance and stands apart from the site's navy Book buttons */
 .fab__wa {
   width: 60px;
   height: 60px;
-  background: var(--c-secondary);
-  color: var(--c-primary);
+  background: #25d366;
+  color: var(--c-white);
 }
 .fab__wa:hover {
   transform: scale(1.08);
-  background: var(--c-fill);
+  background: #128c7e;
   color: var(--c-white);
 }
 .fab__wa svg {
@@ -5336,6 +5337,12 @@ body::after {
 .row h2 {
   font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
 }
+/* Capitalised heading opening a class paragraph ("GENERAL YOGA - ALL LEVELS"), bold as in the printed brochure */
+.row__lead {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--c-ink, inherit);
+}
 .row .card__meta {
   margin: var(--s-2) 0 var(--s-3);
 }
@@ -6093,9 +6100,28 @@ main > section {
 .tt__empty {
   color: var(--c-ink-soft);
 }
+/* Price, then the Book button (navy, so it no longer matches the teal WhatsApp button beside it) */
+.tt__book {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.tt__price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--c-heading);
+  font-variant-numeric: tabular-nums;
+}
 @media (max-width: 520px) {
   .tt__row {
     grid-template-columns: 1fr auto;
+  }
+  .tt__book {
+    gap: var(--s-1);
+  }
+  .tt__price {
+    font-size: 1rem;
   }
   .tt__time {
     grid-column: 1 / -1;

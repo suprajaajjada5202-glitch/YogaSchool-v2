@@ -14,6 +14,9 @@ export const MEMBERSHIP_TERMS_PDF =
 /** The Momence online shop: the menu's and the footer's "Shop" (as on the live site), in a new tab */
 export const MOMENCE_SHOP_URL = "https://momence.com/The-Yoga-School/products/23652";
 
+/** The studio's own Momence page (every upcoming class): the timetable's Book button when a class has no live session */
+export const MOMENCE_STUDIO_URL = "https://momence.com/u/The-Yoga-School";
+
 /** "Book a Class" (header bar and the phone menu) */
 export const BOOK_URL = "/pages/timetable";
 

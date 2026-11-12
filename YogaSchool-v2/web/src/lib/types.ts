@@ -75,6 +75,8 @@ export type TimetableRow = {
   level: string | null;
   notes: string | null;
   bookUrl: string | null;
+  /** Drop-in price of the next live Momence session (set on the timetable page); null when unknown */
+  price?: number | null;
 };
 
 export type EventItem = {

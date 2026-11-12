@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { TimetableRow } from "@/lib/types";
+import { MOMENCE_STUDIO_URL } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -84,15 +85,21 @@ export function Timetable({ rows }: { rows: TimetableRow[] }) {
                         <p>{[r.teacher, r.level].filter(Boolean).join(" · ")}</p>
                         {r.notes && <p className="tt__note">{r.notes}</p>}
                       </div>
-                      {r.bookUrl ? (
-                        <a className="btn btn--teal btn--sm" href={r.bookUrl} target="_blank" rel="noopener">
-                          Book
+                      <div className="tt__book">
+                        {r.price != null && (
+                          <p className="tt__price">
+                            {r.price ? `$${r.price % 1 ? r.price.toFixed(2) : r.price}` : "Free"}
+                          </p>
+                        )}
+                        <a
+                          className="btn btn--primary btn--sm"
+                          href={r.bookUrl || MOMENCE_STUDIO_URL}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          Book<span className="sr-only">: {r.className} (opens in a new tab)</span>
                         </a>
-                      ) : (
-                        <a className="btn btn--teal btn--sm" href="#book">
-                          Book
-                        </a>
-                      )}
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -103,9 +110,6 @@ export function Timetable({ rows }: { rows: TimetableRow[] }) {
           ))}
         </Reveal>
       </div>
-      <Reveal as="h2" className="book-head">
-        Book online
-      </Reveal>
     </>
   );
 }

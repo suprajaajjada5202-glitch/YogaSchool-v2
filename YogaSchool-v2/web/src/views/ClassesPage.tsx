@@ -8,9 +8,22 @@ import { Wave } from "@/components/Wave";
 import { seo } from "@/lib/seo";
 import { getClasses } from "@/lib/data";
 import { modalities } from "@/data/content";
+import type { ClassItem } from "@/lib/types";
 
 export default async function ClassesPage() {
-  const [classes] = await Promise.all([getClasses()]);
+  const [all] = await Promise.all([getClasses()]);
+  // Brochure order, matched by class name so it holds whatever sort numbers or web addresses /admin has.
+  // Knoff Yoga levels first; everything else goes under "Other styles of yoga" (unlisted classes keep /admin order).
+  const KF = [/^level 1\b/i, /^level 2\b/i, /^level 3\b/i, /^all level/i, /^combined/i, /^chair/i];
+  const OTHER = [/^general yoga\b(?!.*beginner)/i, /^general yoga\b.*beginner/i, /^yin\b/i];
+  const rank = (list: RegExp[], name: string) => {
+    const i = list.findIndex((re) => re.test(name));
+    return i < 0 ? list.length : i;
+  };
+  const byRank = (list: RegExp[]) => (a: ClassItem, b: ClassItem) => rank(list, a.name) - rank(list, b.name);
+  const kfClasses = all.filter((c) => rank(KF, c.name) < KF.length).sort(byRank(KF));
+  const otherClasses = all.filter((c) => rank(KF, c.name) === KF.length).sort(byRank(OTHER));
+  const classes = [...kfClasses, ...otherClasses];
   // "Level N" class section, whatever web address name it was given in /admin
   const levelHref = (n: number) =>
     `#class-${classes.find((c) => new RegExp(`^level ${n}\\b`, "i").test(c.name))?.slug ?? `l${n}`}`;
@@ -98,13 +111,10 @@ export default async function ClassesPage() {
           <Reveal className="section-head section-head--center">
             <p className="eyebrow">Your path</p>
             <h2 id="path-title">
-              Three levels, <em>one journey</em>
+              KNOFF YOGA CLASS LEVELS <em>(KF)</em>
             </h2>
-            <p className="lead">Move up whenever you feel ready, or stay at a level for as long as you like.</p>
-            <p className="lead">
-              KNOFF YOGA CLASS LEVELS (KF) - A traditional and systematic approach to yoga, combining precise alignment,
-              movement and breath. Classes follow a progressive level system developed through decades of teaching and
-              practice.
+            <p className="lead">A traditional and systematic approach to yoga, combining precise alignment, movement and breath.
+            Classes follow a progressive level system developed through decades of teaching and practice.
             </p>
           </Reveal>{" "}
           <Reveal className="path path--3">
@@ -131,7 +141,18 @@ export default async function ClassesPage() {
         {" "}
         <div className="container">
           {" "}
-          <ClassJump classes={classes} /> <ClassRows classes={classes} modalities={modalities} />
+          <ClassJump classes={classes} /> <ClassRows classes={kfClasses} modalities={modalities} />
+          {otherClasses.length > 0 && (
+            <>
+              <Reveal className="section-head section-head--center" style={{ marginTop: "var(--s-10)" }}>
+                <p className="eyebrow">More ways to practise</p>
+                <h2 id="other-title">
+                  OTHER STYLES <em>OF YOGA</em>
+                </h2>
+              </Reveal>
+              <ClassRows classes={otherClasses} modalities={modalities} />
+            </>
+          )}
           <Tilt selector=".row__media .arch" />{" "}
         </div>{" "}
       </section>{" "}

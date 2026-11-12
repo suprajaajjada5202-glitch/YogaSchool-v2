@@ -106,6 +106,29 @@ export async function getUpcomingClasses(limit = 12): Promise<UpcomingClass[]> {
   }
 }
 
+/** Weekly timetable rows store a link to ONE dated Momence session, which goes stale ("This class has already
+    passed") once that date is gone. Point each row at the next live session on the same weekday and start time
+    (Cairns time, UTC+10, no daylight saving), and take that session's drop-in price. A stale Momence session link
+    with no live match becomes null, so the Book button falls back to the studio's Momence page; other links (not a
+    Momence session) are kept. */
+export async function withLiveBookLinks<
+  T extends { day: number; start: string; bookUrl: string | null; price?: number | null },
+>(rows: T[]): Promise<T[]> {
+  if (!rows.length) return rows;
+  const upcoming = await getUpcomingClasses(200);
+  const next = new Map<string, UpcomingClass>();
+  for (const c of upcoming) {
+    const local = new Date(new Date(c.startsAt).getTime() + 10 * 36e5);
+    const key = `${local.getUTCDay() || 7}|${String(local.getUTCHours()).padStart(2, "0")}:${String(local.getUTCMinutes()).padStart(2, "0")}`;
+    if (!next.has(key)) next.set(key, c); // list is sorted, so the first match is the soonest
+  }
+  return rows.map((r) => {
+    const live = next.get(`${r.day}|${r.start}`);
+    if (live) return { ...r, bookUrl: live.bookUrl, price: live.price };
+    return momenceSessionId(r.bookUrl) ? { ...r, bookUrl: null } : r;
+  });
+}
+
 type MomenceProduct = {
   id: number;
   name: string;
