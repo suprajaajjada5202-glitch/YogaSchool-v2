@@ -98,7 +98,7 @@ export default function AboutPage() {
               <p>We offer a range of yoga styles and classes, with an emphasis on quality teaching, sound principles and practices that have stood the test of time.</p>
             </Reveal>
           </ul>{" "}
-          <ul className="did" style={{ marginTop: "var(--s-3)" }}>
+          <ul className="did" style={{ marginTop: "var(--s-3)", counterReset: "did 3" }}>
             <Reveal as="li">
               <strong>We are the only yoga school in Cairns to have true Master Teachers</strong>
               <p>Our school is steeped in authenticity and knowledge of traditional yoga.</p>

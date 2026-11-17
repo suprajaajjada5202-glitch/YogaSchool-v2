@@ -4664,14 +4664,14 @@ details[open] > summary .plus::after {
 .offer:focus-visible {
   outline: none;
 }
-/* A quiet close: soft navy tint, slim X that turns on hover. It sits on the banner's white band (white in dark mode
-   too), so it keeps light-mode colours. */
+/* A quiet close: white disc with a slim X that turns on hover. On phones it sits over the photo, so it keeps
+   light-mode colours. */
 .offer__close {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 24px;
+  right: 24px;
   z-index: 1;
-  background: rgba(14, 50, 103, 0.06);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: none;
   box-shadow: none;
   color: var(--c-primary);
@@ -4696,43 +4696,185 @@ details[open] > summary .plus::after {
   width: 18px;
   height: 18px;
 }
-/* The banner artwork has black text, so it always sits on white (dark mode too). Its photos run to the top corner,
-   so it starts below the close button rather than under it. */
-.offer__banner {
-  display: block;
-  padding: 64px var(--s-2) 0;
-  background: #ffffff;
+/* Photo (in the site's arch frame) beside the offer on wider screens; a short photo band above it on phones */
+.offer {
+  width: min(760px, 100% - 32px);
 }
-.offer__banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.offer__body {
-  padding: var(--s-3);
-  text-align: center;
-  border-top: 1px solid var(--c-line);
-}
-@media (min-width: 640px) {
-  .offer__body {
-    padding: var(--s-4) var(--s-5);
+@media (min-width: 700px) {
+  .offer[open] {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
   }
 }
-.offer__body h2 {
-  font-size: var(--fs-xl);
-  margin-bottom: 6px;
+.offer__media {
+  position: relative;
+  margin: 0;
+  padding: var(--s-2) var(--s-2) 0;
 }
-.offer__body p {
-  margin: 0 auto var(--s-3);
-  max-width: 44ch;
-  font-size: var(--fs-sm);
+@media (min-width: 700px) {
+  .offer__media {
+    padding: var(--s-2);
+  }
+}
+.offer__media img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: var(--radius) var(--radius) var(--radius-sm) var(--radius-sm);
+}
+@media (min-width: 700px) {
+  .offer__media img {
+    height: 100%;
+    min-height: 420px;
+    border-radius: 999px 999px var(--radius) var(--radius); /* arch, as on the class photos */
+  }
+}
+/* Price badge on the photo, the site's pill-badge look */
+.offer__badge {
+  position: absolute;
+  left: calc(var(--s-2) + 14px);
+  bottom: 14px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(7, 26, 56, 0.35);
+  line-height: 1;
+  text-align: center;
+  border: 3px solid #ffffff;
+}
+@media (max-width: 699px) {
+  .offer__badge {
+    width: 76px;
+    height: 76px;
+  }
+  .offer__badge b {
+    font-size: 1.4rem;
+  }
+}
+@media (min-width: 700px) {
+  .offer__badge {
+    bottom: calc(var(--s-2) + 18px);
+  }
+}
+.offer__badge b {
+  display: block;
+  font-family: var(--f-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.offer__badge span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-secondary-300);
+}
+.offer__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--s-3) var(--s-3) var(--s-4);
+}
+@media (min-width: 700px) {
+  .offer__body {
+    padding: var(--s-6) var(--s-5) var(--s-5) var(--s-3);
+  }
+}
+/* School logo beside the "Introductory offer" label */
+.offer__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--s-2);
+}
+.offer__brand img {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(14, 50, 103, 0.18);
+}
+.offer__brand .eyebrow {
+  margin: 0;
+}
+/* the logo already marks the brand, so the label drops its om icon */
+.offer__brand .eyebrow::before {
+  display: none;
+}
+.offer__body h2 {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+  line-height: 1.1;
+  margin: 0 0 var(--s-2);
+}
+.offer__lead {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md, 1.0625rem);
   color: var(--c-ink-soft);
+}
+/* The class styles included, as quiet pills */
+.offer__styles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+.offer__styles li {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--c-secondary-100);
+  color: var(--c-primary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--c-secondary) 25%, transparent);
 }
 .offer__actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+  align-items: center;
+  gap: var(--s-1) var(--s-3);
+}
+/* "Maybe later" as a quiet text link, so "Claim offer" is the one clear choice */
+.offer__later {
+  padding: 10px 4px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color var(--t), text-decoration-color var(--t);
+}
+.offer__later:hover {
+  color: var(--c-primary);
+  text-decoration-color: currentColor;
+}
+.offer__later:focus-visible {
+  outline: 2px solid var(--c-secondary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.offer__terms {
+  margin: var(--s-2) 0 0;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-soft);
+  opacity: 0.85;
 }
 
 /* =====================================================================

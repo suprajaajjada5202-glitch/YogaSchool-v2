@@ -2,9 +2,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
-import { OFFER_URL } from "@/lib/site";
+import { LOGO, OFFER_URL } from "@/lib/site";
 
-const BANNER = "/images/offer-banner.png";
+const PHOTO = "/images/gallery/DSC00131.jpg";
 const SEEN_KEY = "tys-offer-seen";
 const DELAY_MS = 1500;
 // The home page waits until its hero has built in, so the popup doesn't cover the entrance
@@ -26,14 +26,15 @@ export function OfferPopup() {
       /* storage blocked: still show it, it just can't be remembered */
     }
     let live = true;
-    // Open once the delay has passed and the banner has loaded (or failed), so it never appears half-drawn
-    const img = new Image();
-    const banner = new Promise<void>((resolve) => {
-      img.onload = img.onerror = () => resolve();
-    });
-    img.src = BANNER;
+    // Open once the delay has passed and the photo and logo have loaded (or failed), so it never appears half-drawn
+    const preload = (src: string) =>
+      new Promise<void>((resolve) => {
+        const img = new Image();
+        img.onload = img.onerror = () => resolve();
+        img.src = src;
+      });
     const delay = new Promise<void>((resolve) => setTimeout(resolve, delayMs));
-    Promise.all([banner, delay]).then(() => {
+    Promise.all([preload(PHOTO), preload(LOGO), delay]).then(() => {
       if (!live) return;
       setOpen(true);
       try {
@@ -73,13 +74,28 @@ export function OfferPopup() {
           <use href="#i-close" />
         </svg>
       </button>
-      {/* The banner repeats the text below, so it's a mouse shortcut only */}
-      <a className="offer__banner" href={OFFER_URL} target="_blank" rel="noopener" tabIndex={-1} aria-hidden="true" onClick={close}>
-        <img src={BANNER} alt="" width={708} height={263} />
-      </a>
+      {/* Studio photo in the site's arch frame, with the price on a badge */}
+      <div className="offer__media" aria-hidden="true">
+        <img src={PHOTO} alt="" width={960} height={1200} />
+        <p className="offer__badge">
+          <b>$99</b>
+          <span>30 days</span>
+        </p>
+      </div>
       <div className="offer__body">
-        <h2 id="offer-title">New to The Yoga School?</h2>
-        <p>30 days of unlimited classes for $99 across Knoff, Yin, Chair, Strength and Mobility. Conditions apply.</p>
+        <div className="offer__brand">
+          <img src={LOGO} alt="The Yoga School logo" width={180} height={180} />
+          <p className="eyebrow">Introductory offer</p>
+        </div>
+        <h2 id="offer-title">
+          New to <em>The Yoga School?</em>
+        </h2>
+        <p className="offer__lead">30 days of unlimited classes for $99.</p>
+        <ul className="offer__styles" aria-label="Included classes">
+          {["Knoff", "Yin", "Chair", "Strength", "Mobility"].map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
         <div className="offer__actions">
           <a className="btn btn--primary" href={OFFER_URL} target="_blank" rel="noopener" onClick={close}>
             Claim offer
@@ -87,10 +103,11 @@ export function OfferPopup() {
               <use href="#i-arrow" />
             </svg>
           </a>
-          <button type="button" className="btn btn--outline" onClick={close}>
+          <button type="button" className="offer__later" onClick={close}>
             Maybe later
           </button>
         </div>
+        <p className="offer__terms">Conditions apply.</p>
       </div>
     </dialog>
   );
