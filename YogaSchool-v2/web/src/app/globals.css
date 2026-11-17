@@ -5554,6 +5554,15 @@ body::after {
 .jump::-webkit-scrollbar {
   display: none;
 }
+/* Tablets and desktops: every class chip shows in full, wrapping onto a second centred line when they don't fit
+   (phones keep the swipeable single row) */
+@media (min-width: 768px) {
+  .jump {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+  }
+}
 .jump a {
   flex: none;
   padding: 8px 16px;
