@@ -141,7 +141,12 @@ export default async function ClassesPage() {
         {" "}
         <div className="container">
           {" "}
-          <ClassJump classes={classes} /> <ClassRows classes={kfClasses} modalities={modalities} />
+          <ClassJump
+            groups={[
+              { label: "Knoff Yoga levels", classes: kfClasses },
+              { label: "Other styles of yoga", classes: otherClasses },
+            ]}
+          /> <ClassRows classes={kfClasses} modalities={modalities} />
           {otherClasses.length > 0 && (
             <>
               <Reveal className="section-head section-head--center" style={{ marginTop: "var(--s-10)" }}>

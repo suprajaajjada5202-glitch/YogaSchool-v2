@@ -198,7 +198,7 @@ export function Motion() {
         el.querySelectorAll<HTMLElement>(PHOTOS).forEach((p) => p.setAttribute("data-cm-photo", ""));
         if (el.matches(PHOTOS)) el.setAttribute("data-cm-photo", "");
         if (el.matches(GROUPS))
-          el.querySelectorAll<HTMLElement>(":scope > a").forEach((a, i) => a.style.setProperty("--cm-i", String(Math.min(i, 8))));
+          el.querySelectorAll<HTMLElement>(":scope a").forEach((a, i) => a.style.setProperty("--cm-i", String(Math.min(i, 8))));
         const b = el.getBoundingClientRect();
         const onScreen = b.bottom > 0 && b.top < vh;
         set(el, !onScreen ? (b.bottom <= 0 ? "above" : "below") : el.hasAttribute("data-cm-intro") ? "below" : "shown");
@@ -235,7 +235,7 @@ export function Motion() {
         el.style.removeProperty("--cm-i");
         el.style.removeProperty("--cm-p");
       });
-      document.querySelectorAll<HTMLElement>(".jump > a").forEach((a) => a.style.removeProperty("--cm-i"));
+      document.querySelectorAll<HTMLElement>(".jump a").forEach((a) => a.style.removeProperty("--cm-i"));
     };
   }, [pathname]);
 

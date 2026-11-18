@@ -74,9 +74,10 @@ export function OfferPopup() {
           <use href="#i-close" />
         </svg>
       </button>
-      {/* Studio photo in the site's arch frame, with the price on a badge */}
-      <div className="offer__media" aria-hidden="true">
-        <img src={PHOTO} alt="" width={960} height={1200} />
+      {/* Studio photo, clear at the top, with a navy gradient rising from the bottom; the price sits in a circle in the
+          bottom corner */}
+      <div className="offer__price">
+        <img className="offer__price-bg" src={PHOTO} alt="" width={960} height={1200} aria-hidden="true" />
         <p className="offer__badge">
           <b>$99</b>
           <span>30 days</span>
@@ -90,7 +91,7 @@ export function OfferPopup() {
         <h2 id="offer-title">
           New to <em>The Yoga School?</em>
         </h2>
-        <p className="offer__lead">30 days of unlimited classes for $99.</p>
+        <p className="offer__lead">Unlimited classes for 30 days, across:</p>
         <ul className="offer__styles" aria-label="Included classes">
           {["Knoff", "Yin", "Chair", "Strength", "Mobility"].map((s) => (
             <li key={s}>{s}</li>

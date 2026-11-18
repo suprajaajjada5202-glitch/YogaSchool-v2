@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ClassItem, Modality } from "@/lib/types";
 import { Use } from "./Icons";
+import { JumpLink } from "./JumpLink";
 import { Reveal } from "./Reveal";
 
 /** A paragraph that opens with a heading in capitals, as in the brochure ("GENERAL YOGA - ALL LEVELS A balanced
@@ -177,14 +178,31 @@ export function ModalityCards({ modalities, classes }: { modalities: Modality[];
   );
 }
 
-export function ClassJump({ classes }: { classes: ClassItem[] }) {
+/* Short button label: "ALL LEVEL CLASSES" -> "All Levels", "COMBINED LEVEL CLASSES" -> "Combined Levels" */
+function jumpLabel(name: string) {
+  let s = name === name.toUpperCase() ? name.toLowerCase().replace(/\b\w/g, (ch) => ch.toUpperCase()) : name;
+  s = s.replace(/\s+classes?$/i, "");
+  return s.replace(/\bLevel$/, "Levels");
+}
+
+/* One card per group (side by side on desktop, stacked on phones); the scroll motion staggers every ".jump a" */
+export function ClassJump({ groups }: { groups: { label: string; classes: ClassItem[] }[] }) {
   return (
     <Reveal as="nav" className="jump" aria-label="Jump to a class">
-      {classes.map((c) => (
-        <a key={c.slug} href={`#class-${c.slug}`}>
-          {c.name}
-        </a>
-      ))}
+      {groups
+        .filter((g) => g.classes.length > 0)
+        .map((g) => (
+          <div key={g.label} className="jump__group">
+            <p className="jump__label">{g.label}</p>
+            <div className="jump__links">
+              {g.classes.map((c) => (
+                <JumpLink key={c.slug} href={`#class-${c.slug}`}>
+                  {jumpLabel(c.name)}
+                </JumpLink>
+              ))}
+            </div>
+          </div>
+        ))}
     </Reveal>
   );
 }

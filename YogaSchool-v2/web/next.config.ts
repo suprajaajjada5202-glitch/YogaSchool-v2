@@ -81,9 +81,10 @@ const nextConfig: NextConfig = {
   // Keep the live URLs exactly: /pages/home, /pages/classes … (no trailing slash, no .html)
   trailingSlash: false,
   // Allow live reload when opening the dev server from another device / the network address (dev only)
-  allowedDevOrigins: ["192.168.1.*"],
-  // This folder is the app root (the parent folder only has a shortcut package.json)
-  turbopack: { root: path.join(__dirname) },
+  allowedDevOrigins: ["192.168.0.*", "192.168.1.*"],
+  // This folder is the app root (the parent folder only has a shortcut package.json). process.cwd(), not
+  // __dirname: npm scripts run here, and __dirname is undefined when the config is loaded as an ES module.
+  turbopack: { root: path.resolve(process.cwd()) },
   async redirects() {
     return SEO_REDIRECTS.map(([source, destination]) => ({ source, destination, statusCode: 301 as const }));
   },
